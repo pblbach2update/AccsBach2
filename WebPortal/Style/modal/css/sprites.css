@@ -1,0 +1,1092 @@
+.sprite
+{
+    width: 16px;
+    height: 16px;
+    background-image: url(../images/sprites/sprites.png);
+    -background-image: url(../images/sprites/sprites-ie6.png);
+    background-repeat: no-repeat;
+}
+.s_folder_add_blue
+{
+    background-position: left -1260px;
+}
+.s_checkbox
+{
+    background-position: left -560px;
+}
+.s_help
+{
+    background-position: left -1795px;
+}
+.s_weather_clouds_white
+{
+    background-position: left -3956px;
+}
+.s_money
+{
+    background-position: left -2035px;
+}
+.s_time_go_blue
+{
+    background-position: left -3700px;
+}
+.s_page_white_cplusplus
+{
+    background-position: left -2483px;
+}
+.s_table_multiple
+{
+    background-position: left -3556px;
+}
+.s_user_delete_blue
+{
+    background-position: left -3828px;
+}
+.s_bullet_toggle_minus
+{
+    background-position: left -400px;
+}
+.s_world
+{
+    background-position: left -3988px;
+}
+.s_page_white_delete_blue
+{
+    background-position: left -2547px;
+}
+.s_link_break
+{
+    background-position: left -1891px;
+}
+.s_page_white_delete
+{
+    background-position: left -2531px;
+}
+.s_email_go
+{
+    background-position: left -1083px;
+}
+.s_group
+{
+    background-position: left -1715px;
+}
+.s_computer_add
+{
+    background-position: left -720px;
+}
+.s_share_arrow
+{
+    background-position: left -3389px;
+    width: 15px;
+    height: 15px;
+}
+.s_checkbox_checked
+{
+    background-position: left -576px;
+}
+.s_basket_remove
+{
+    background-position: left -336px;
+}
+.s_sort-uptick-off
+{
+    background-position: left -3456px;
+    width: 11px;
+    height: 10px;
+}
+.s_camera_blue
+{
+    background-position: left -480px;
+}
+.s_time_back_blue
+{
+    background-position: left -3620px;
+}
+.s_photo_blue
+{
+    background-position: left -3235px;
+}
+.s_add
+{
+    background-position: left -16px;
+}
+.s_user_delete
+{
+    background-position: left -3812px;
+}
+.s_photo
+{
+    background-position: left -3219px;
+}
+.s_events_bubble_right
+{
+    background-position: left -1161px;
+    width: 2px;
+    height: 14px;
+}
+.s_folder_photos_blue
+{
+    background-position: left -1452px;
+}
+.s_folder
+{
+    background-position: left -1228px;
+}
+.s_application_go
+{
+    background-position: left -176px;
+}
+.s_dropbox_blue
+{
+    background-position: left -939px;
+}
+.s_folder_public_blue
+{
+    background-position: left -1484px;
+}
+.s_drive_delete
+{
+    background-position: left -907px;
+}
+.s_page_white_sound_blue
+{
+    background-position: left -3011px;
+}
+.s_application_link
+{
+    background-position: left -208px;
+}
+.s_page_white_gear
+{
+    background-position: left -2691px;
+}
+.s_folder_gray
+{
+    background-position: left -1388px;
+}
+.s_facebook
+{
+    background-position: left -1180px;
+}
+.s_creditcards
+{
+    background-position: left -816px;
+}
+.s_user_add_blue
+{
+    background-position: left -3764px;
+}
+.s_tick
+{
+    background-position: left -3572px;
+}
+.s_page_white_word_blue
+{
+    background-position: left -3171px;
+}
+.s_show_del_blue
+{
+    background-position: left -3420px;
+}
+.s_download_arrow_blue
+{
+    background-position: left -864px;
+}
+.s_page_white_paint_blue
+{
+    background-position: left -2835px;
+}
+.s_gift
+{
+    background-position: left -1660px;
+}
+.s_page_white_excel
+{
+    background-position: left -2627px;
+}
+.s_page_white_compressed
+{
+    background-position: left -2419px;
+}
+.s_page_white_go
+{
+    background-position: left -2755px;
+}
+.s_email_delete
+{
+    background-position: left -1051px;
+}
+.s_feed
+{
+    background-position: left -1196px;
+}
+.s_application_go_blue
+{
+    background-position: left -192px;
+}
+.s_application_double
+{
+    background-position: left -112px;
+}
+.s_x
+{
+    background-position: left -4084px;
+    width: 8px;
+    height: 8px;
+}
+.s_package_add
+{
+    background-position: left -2099px;
+}
+.s_page_white_gear_blue
+{
+    background-position: left -2707px;
+}
+.s_page_white_php_blue
+{
+    background-position: left -2867px;
+}
+.s_application_delete_blue
+{
+    background-position: left -96px;
+}
+.s_newspaper
+{
+    background-position: left -2067px;
+}
+.s_cake_blue
+{
+    background-position: left -448px;
+}
+.s_lock_blue
+{
+    background-position: left -1955px;
+}
+.s_picture
+{
+    background-position: left -3251px;
+}
+.s_twitter
+{
+    background-position: left -3716px;
+    width: 13px;
+    height: 16px;
+}
+.s_linux
+{
+    background-position: left -1923px;
+}
+.s_picture_save_gray
+{
+    background-position: left -3283px;
+}
+.s_page_white_put_blue
+{
+    background-position: left -2963px;
+}
+.s_gavel
+{
+    background-position: left -1644px;
+}
+.s_package_delete_blue
+{
+    background-position: left -2163px;
+}
+.s_computer
+{
+    background-position: left -704px;
+}
+.s_dropdown_arrow_small2
+{
+    background-position: left -971px;
+}
+.s_page_white_edit
+{
+    background-position: left -2595px;
+}
+.s_package_go_blue
+{
+    background-position: left -2211px;
+}
+.s_page_white_picture_blue
+{
+    background-position: left -2899px;
+}
+.s_star
+{
+    background-position: left -3492px;
+}
+.s_page_white_csharp
+{
+    background-position: left -2499px;
+}
+.s_page_white_acrobat
+{
+    background-position: left -2275px;
+}
+.s_gmail
+{
+    background-position: left -1676px;
+}
+.s_arrow_turn_up
+{
+    background-position: left -320px;
+}
+.s_world_blue
+{
+    background-position: left -4004px;
+}
+.s_user_add
+{
+    background-position: left -3748px;
+}
+.s_page_white_php
+{
+    background-position: left -2851px;
+}
+.s_windows
+{
+    background-position: left -3972px;
+}
+.s_clock
+{
+    background-position: left -592px;
+}
+.s_page_white_c_blue
+{
+    background-position: left -2371px;
+}
+.s_page_white_flash_blue
+{
+    background-position: left -2675px;
+}
+.s_folder_go_blue
+{
+    background-position: left -1372px;
+}
+.s_comments
+{
+    background-position: left -688px;
+}
+.s_arrow_turn_left
+{
+    background-position: left -304px;
+}
+.s_user_edit_blue
+{
+    background-position: left -3860px;
+}
+.s_page_white_actionscript_blue
+{
+    background-position: left -2323px;
+}
+.s_page_white_excel_blue
+{
+    background-position: left -2643px;
+}
+.s_medal_gold_3
+{
+    background-position: left -2003px;
+}
+.s_page_white_visualstudio_blue
+{
+    background-position: left -3139px;
+}
+.s_email
+{
+    background-position: left -987px;
+}
+.s_computer_go_blue
+{
+    background-position: left -800px;
+}
+.s_folder_user_add_blue
+{
+    background-position: left -1548px;
+}
+.s_hide_del
+{
+    background-position: left -1827px;
+}
+.s_dropdown_arrow_small
+{
+    background-position: left -955px;
+}
+.s_page_white_actionscript
+{
+    background-position: left -2307px;
+}
+.s_weather_clouds
+{
+    background-position: left -3924px;
+}
+.s_time_delete_blue
+{
+    background-position: left -3668px;
+}
+.s_packrat
+{
+    background-position: left -2227px;
+}
+.s_page_white_powerpoint
+{
+    background-position: left -2915px;
+}
+.s_page_white_compressed_blue
+{
+    background-position: left -2435px;
+}
+.s_table_edit
+{
+    background-position: left -3540px;
+}
+.s_sort-downtick-on
+{
+    background-position: left -3446px;
+    width: 11px;
+    height: 10px;
+}
+.s_folder_photos
+{
+    background-position: left -1436px;
+}
+.s_green_close
+{
+    background-position: left -1699px;
+}
+.s_page_white_magnify
+{
+    background-position: left -2787px;
+}
+.s_pictures_blue
+{
+    background-position: left -3315px;
+}
+.s_key
+{
+    background-position: left -1875px;
+}
+.s_arrow_refresh_small
+{
+    background-position: left -288px;
+}
+.s_package
+{
+    background-position: left -2083px;
+}
+.s_group_add_blue
+{
+    background-position: left -1747px;
+}
+.s_pictures
+{
+    background-position: left -3299px;
+}
+.s_page_white_magnify_blue
+{
+    background-position: left -2803px;
+}
+.s_big-dropdown_blue
+{
+    background-position: left -384px;
+}
+.s_page_white_tux
+{
+    background-position: left -3091px;
+}
+.s_plus
+{
+    background-position: left -3331px;
+}
+.s_email_blue
+{
+    background-position: left -1035px;
+}
+.s_cog
+{
+    background-position: left -608px;
+}
+.s_page_white_blue
+{
+    background-position: left -2339px;
+}
+.s_wand_blue
+{
+    background-position: left -3908px;
+}
+.s_page_white_get_blue
+{
+    background-position: left -2739px;
+}
+.s_comment
+{
+    background-position: left -656px;
+}
+.s_page_white_vector
+{
+    background-position: left -3107px;
+}
+.s_page_white_dvd
+{
+    background-position: left -2563px;
+}
+.s_heart
+{
+    background-position: left -1779px;
+}
+.s_email_delete_blue
+{
+    background-position: left -1067px;
+}
+.s_folder_star
+{
+    background-position: left -1500px;
+}
+.s_page_white_code
+{
+    background-position: left -2387px;
+}
+.s_rounded_tr
+{
+    background-position: left -3384px;
+    width: 5px;
+    height: 5px;
+}
+.s_page_white_copy
+{
+    background-position: left -2451px;
+}
+.s_wrench_blue
+{
+    background-position: left -4068px;
+}
+.s_application_add_blue
+{
+    background-position: left -64px;
+}
+.s_page_white_text_blue
+{
+    background-position: left -3075px;
+}
+.s_page_white_sound
+{
+    background-position: left -2995px;
+}
+.s_coins_add
+{
+    background-position: left -640px;
+}
+.s_cancel
+{
+    background-position: left -496px;
+}
+.s_table
+{
+    background-position: left -3524px;
+}
+.s_package_blue
+{
+    background-position: left -2131px;
+}
+.s_page_white_text
+{
+    background-position: left -3059px;
+}
+.s_computer_add_blue
+{
+    background-position: left -736px;
+}
+.s_page_white_copy_blue
+{
+    background-position: left -2467px;
+}
+.s_folder_add
+{
+    background-position: left -1244px;
+}
+.s_wand
+{
+    background-position: left -3892px;
+}
+.s_folder_wrench
+{
+    background-position: left -1628px;
+}
+.s_coins
+{
+    background-position: left -624px;
+}
+.s_page_white_acrobat_blue
+{
+    background-position: left -2291px;
+}
+.s_folder_page
+{
+    background-position: left -1404px;
+}
+.s_folder_delete
+{
+    background-position: left -1292px;
+}
+.s_folder_user_delete_blue
+{
+    background-position: left -1596px;
+}
+.s_page_white_ruby
+{
+    background-position: left -2979px;
+}
+.s_camera
+{
+    background-position: left -464px;
+}
+.s_page_white_stack_blue
+{
+    background-position: left -3043px;
+}
+.s_time
+{
+    background-position: left -3588px;
+}
+.s_package_delete
+{
+    background-position: left -2147px;
+}
+.s_time_delete
+{
+    background-position: left -3652px;
+}
+.s_page_white_dvd_blue
+{
+    background-position: left -2579px;
+}
+.s_world_link_blue
+{
+    background-position: left -4036px;
+}
+.s_arrow_refresh
+{
+    background-position: left -256px;
+}
+.s_user_comment_blue
+{
+    background-position: left -3796px;
+}
+.s_folder_blue
+{
+    background-position: left -1276px;
+}
+.s_pencil
+{
+    background-position: left -3187px;
+}
+.s_rounded_tl
+{
+    background-position: left -3379px;
+    width: 5px;
+    height: 5px;
+}
+.s_folder_delete_blue
+{
+    background-position: left -1308px;
+}
+.s_page_white_edit_blue
+{
+    background-position: left -2611px;
+}
+.s_basket_remove_blue
+{
+    background-position: left -352px;
+}
+.s_time_go
+{
+    background-position: left -3684px;
+}
+.s_yahoo
+{
+    background-position: left -4100px;
+}
+.s_computer_delete
+{
+    background-position: left -752px;
+}
+.s_group_blue
+{
+    background-position: left -1763px;
+}
+.s_application_edit
+{
+    background-position: left -144px;
+}
+.s_application_double_blue
+{
+    background-position: left -128px;
+}
+.s_page_white_word
+{
+    background-position: left -3155px;
+}
+.s_sound
+{
+    background-position: left -3476px;
+}
+.s_weather_clouds_blue
+{
+    background-position: left -3940px;
+}
+.s_download_arrow
+{
+    background-position: left -848px;
+}
+.s_drive_add
+{
+    background-position: left -891px;
+}
+.s_downtick-spacer
+{
+    background-position: left -880px;
+    width: 11px;
+    height: 11px;
+}
+.s_page_white_flash
+{
+    background-position: left -2659px;
+}
+.s_email_open
+{
+    background-position: left -1099px;
+}
+.s_package_go
+{
+    background-position: left -2195px;
+}
+.s_purge_blue
+{
+    background-position: left -3363px;
+}
+.s_computer_edit
+{
+    background-position: left -768px;
+}
+.s_purge
+{
+    background-position: left -3347px;
+}
+.s_help_blue
+{
+    background-position: left -1811px;
+}
+.s_application_delete
+{
+    background-position: left -80px;
+}
+.s_arrow_refresh_blue
+{
+    background-position: left -272px;
+}
+.s_star_blue
+{
+    background-position: left -3508px;
+}
+.s_cake
+{
+    background-position: left -432px;
+}
+.s_email_open_blue
+{
+    background-position: left -1115px;
+}
+.s_package_edit
+{
+    background-position: left -2179px;
+}
+.s_minus
+{
+    background-position: left -2019px;
+}
+.s_events_bubble_left
+{
+    background-position: left -1147px;
+    width: 2px;
+    height: 14px;
+}
+.s_delete
+{
+    background-position: left -832px;
+}
+.s_page_white_code_blue
+{
+    background-position: left -2403px;
+}
+.s_folder_user
+{
+    background-position: left -1516px;
+}
+.s_folder_user_delete
+{
+    background-position: left -1580px;
+}
+.s_computer_go
+{
+    background-position: left -784px;
+}
+.s_page_white_go_blue
+{
+    background-position: left -2771px;
+}
+.s_page_white_stack
+{
+    background-position: left -3027px;
+}
+.s_user_comment
+{
+    background-position: left -3780px;
+}
+.s_big-dropdown
+{
+    background-position: left -368px;
+}
+.s_lock
+{
+    background-position: left -1939px;
+}
+.s_bullet_toggle_plus
+{
+    background-position: left -416px;
+}
+.s_accept
+{
+    background-position: left -0px;
+}
+.s_folder_page_blue
+{
+    background-position: left -1420px;
+}
+.s_email_add
+{
+    background-position: left -1003px;
+}
+.s_chart_bar_blue
+{
+    background-position: left -544px;
+}
+.s_folder_public
+{
+    background-position: left -1468px;
+}
+.s_page_white_paint
+{
+    background-position: left -2819px;
+}
+.s_hide_del_blue
+{
+    background-position: left -1843px;
+}
+.s_film
+{
+    background-position: left -1212px;
+}
+.s_time_blue
+{
+    background-position: left -3636px;
+}
+.s_information
+{
+    background-position: left -1859px;
+}
+.s_package_add_blue
+{
+    background-position: left -2115px;
+}
+.s_application_pencil
+{
+    background-position: left -224px;
+}
+.s_time_back
+{
+    background-position: left -3604px;
+}
+.s_page_white_cup
+{
+    background-position: left -2515px;
+}
+.s_folder_edit
+{
+    background-position: left -1324px;
+}
+.s_folder_user_add
+{
+    background-position: left -1532px;
+}
+.s_events_bubble_tail
+{
+    background-position: left -1175px;
+    width: 4px;
+    height: 5px;
+}
+.s_money_blue
+{
+    background-position: left -2051px;
+}
+.s_page_white_put
+{
+    background-position: left -2947px;
+}
+.s_comment_blue
+{
+    background-position: left -672px;
+}
+.s_graynotch
+{
+    background-position: left -1692px;
+    width: 3px;
+    height: 7px;
+}
+.s_page_white_picture
+{
+    background-position: left -2883px;
+}
+.s_folder_user_blue
+{
+    background-position: left -1564px;
+}
+.s_arrow_highlight
+{
+    background-position: left -240px;
+}
+.s_application_edit_blue
+{
+    background-position: left -160px;
+}
+.s_x_green
+{
+    background-position: left -4092px;
+    width: 8px;
+    height: 8px;
+}
+.s_page_white_get
+{
+    background-position: left -2723px;
+}
+.s_aol
+{
+    background-position: left -32px;
+}
+.s_page_white_c
+{
+    background-position: left -2355px;
+}
+.s_mac
+{
+    background-position: left -1971px;
+}
+.s_emoticon_unhappy
+{
+    background-position: left -1131px;
+}
+.s_user
+{
+    background-position: left -3732px;
+}
+.s_magnifier
+{
+    background-position: left -1987px;
+}
+.s_folder_user_gray
+{
+    background-position: left -1612px;
+}
+.s_dropbox
+{
+    background-position: left -923px;
+}
+.s_sort-uptick-on
+{
+    background-position: left -3466px;
+    width: 11px;
+    height: 10px;
+}
+.s_user_gray
+{
+    background-position: left -3876px;
+}
+.s_show_del
+{
+    background-position: left -3404px;
+}
+.s_folder_edit_blue
+{
+    background-position: left -1340px;
+}
+.s_email_add_blue
+{
+    background-position: left -1019px;
+}
+.s_phone
+{
+    background-position: left -3203px;
+}
+.s_link_break_blue
+{
+    background-position: left -1907px;
+}
+.s_page_white
+{
+    background-position: left -2259px;
+}
+.s_world_link
+{
+    background-position: left -4020px;
+}
+.s_picture_blue
+{
+    background-position: left -3267px;
+}
+.s_user_edit
+{
+    background-position: left -3844px;
+}
+.s_cancel_blue
+{
+    background-position: left -512px;
+}
+.s_page_white_visualstudio
+{
+    background-position: left -3123px;
+}
+.s_wrench
+{
+    background-position: left -4052px;
+}
+.s_chart_bar
+{
+    background-position: left -528px;
+}
+.s_packrat_leave
+{
+    background-position: left -2243px;
+    width: 32px;
+    height: 16px;
+}
+.s_folder_go
+{
+    background-position: left -1356px;
+}
+.s_page_white_powerpoint_blue
+{
+    background-position: left -2931px;
+}
+.s_sort-downtick-off
+{
+    background-position: left -3436px;
+    width: 11px;
+    height: 10px;
+}
+.s_group_add
+{
+    background-position: left -1731px;
+}
+.s_application_add
+{
+    background-position: left -48px;
+}

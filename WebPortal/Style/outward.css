@@ -1,0 +1,345 @@
+﻿.hidden
+{
+	display: none;
+}
+
+.optiontable
+{
+	width: 820px;
+}
+.grouptitle
+{
+	padding-top: 10px;
+	font-weight: bold;
+	font-size: 10pt;
+}
+.textitem
+{
+	width: 100%;
+}
+.imagecell
+{
+	padding: 0;
+	margin: 0;
+	width: 410px;
+}
+
+/*****/
+
+.topBar
+{
+	background: #fff url(/media/outward/topBarbg.png) repeat-x;
+	line-height: 25px;
+	color: #15428B;
+	font-size: 11px;
+	margin: 0; /*width: 889px;*/
+	padding-left: 5px;
+	text-align: left;
+	border: 0 solid #99BBE8;
+}
+
+
+p, h1, form, button
+{
+	border: 0;
+	margin: 0;
+	padding: 0;
+}
+.spacer
+{
+	clear: both;
+	height: 1px;
+}
+#data_entry_dialog
+{
+	display: none;
+	/*width: 894px;*/
+	/*height: 500px;*/
+	background: #ebf4fb;
+	text-align: left;
+	cursor: default;
+}
+#rejection_dialog
+{
+	display: none;
+	width: 260px;
+	padding: 0;
+	background: #ebf4fb;
+	text-align: left;
+	cursor: default;
+}
+
+#rejection textarea
+{
+	border: solid 1px #b7ddf2;
+}
+
+#rejection
+{
+	margin: 0 auto;
+	height: 100px;
+	width: 240px;
+	padding: 10px;
+	background: #ebf4fb;
+}
+
+#stylized
+{
+	margin: 0 auto;
+	width: 325px;
+	padding: 10px 10px 0 10px;
+/*	border: solid 2px #b7ddf2;*/
+	background: #ebf4fb;
+}
+
+.outward_form h1
+{
+	font-size: 14px;
+	font-weight: bold;
+	margin-bottom: 2px;
+}
+.outward_form p
+{
+	font-size: 11px;
+	color: #666666;
+	margin-bottom: 5px;
+	border-bottom: solid 1px #b7ddf2;
+	padding-bottom: 2px;
+}
+.outward_form label
+{
+	display: block;
+	font-weight: bold;
+	text-align: right;
+	width: 100px;
+	float: left;
+}
+.outward_form .small
+{
+	color: #666666;
+	display: block;
+	font-size: 11px;
+	font-weight: normal;
+	text-align: right;
+	width: 100px;
+}
+.outward_form input
+{
+	float: left;
+	font-size: 14px;
+	padding: 2px;
+	border: solid 1px #aacfe4;
+	width: 200px;
+	margin: 2px 0 2px 5px;
+}
+.outward_form a
+{
+	float: left;
+	font-size: 12px;
+	padding: 2px;
+	margin: 2px 0 2px 5px;
+}
+.outward_form .text_label
+{
+	display: block;
+	font-weight: bold;
+	text-align: right;
+	width: 10px;
+	/*float: left;*/
+	border: 0;
+	margin-right: 0;
+	padding: 0;
+}
+.outward_form input.check_label
+{
+	display: block;
+	font-weight: bold;
+	text-align: right;
+	width: auto;
+	float: right;
+	border: 0;
+	margin: 0;
+	padding: 0;
+}
+.outward_form .text_input
+{
+	display: block;
+	float: left;
+	font-size: 14px;
+	padding: 2px;
+	border: solid 1px #aacfe4;
+	width: 200px;
+	margin: 2px 0 2px 5px;
+}
+
+.outward_form .image_input
+{
+	display: block;
+	float: left;
+	font-size: 14px;
+	padding: 2px;
+	/*border: solid 1px #aacfe4;*/
+	width: 200px;
+	margin: 2px 0 2px 5px;
+}
+/*
+.outward_form button
+{
+	clear: both;
+	margin-left: 150px;
+	width: 125px;
+	height: 31px;
+	background: #666666 url(img/button.png) no-repeat;
+	text-align: center;
+	line-height: 31px;
+	color: #FFFFFF;
+	font-size: 11px;
+	font-weight: bold;
+}
+*/
+.outward_form .dummy
+{
+	float: left;
+	font-size: 12px;
+	display: block;
+	font-weight: bold;
+	text-align: right;
+	float: left;
+	border: 0;
+	margin: 0;
+	padding: 0;
+	width: 300px;
+	height: 29px;
+}
+#outward_right
+{
+	margin: 0 auto;
+	width: 210px;
+	padding: 10px 5px 10px 5px;
+	border: solid 0px #b7ddf2;
+	background: #ebf4fb;
+}
+#outward_right h1
+{
+	font-size: 14px;
+	font-weight: bold;
+	margin-bottom: 2px;
+}
+#outward_right p
+{
+	font-size: 11px;
+	color: #666666;
+	margin-bottom: 5px;
+	border-bottom: solid 1px #b7ddf2;
+	padding-bottom: 2px;
+}
+#outward_right label
+{
+	display: block;
+	font-weight: bold;
+	text-align: left;
+	width: 100px;
+	margin-top: 5px;
+	float: left;
+}
+#outward_right .text_label
+{
+	display: block;
+	font-weight: bold;
+	text-align: right;
+	width: 100px;
+	float: left;
+	border: 0;
+	margin: 0px 0px 5px 0px;
+	padding: 0;
+}
+#outward_right .text_input
+{
+	display: block;
+	float: left;
+	font-size: 14px;
+	padding: 2px 2px;
+	border: solid 1px #aacfe4;
+	width: 200px;
+	margin: 0;
+}
+#tbl_cheque, #tbl_cheque td
+{
+	border-color: #600;
+	border-style: solid;
+}
+.clearboth
+{
+	clear: both;
+}
+.noborder
+{
+	border: 0;
+}
+.hidden
+{
+	display: none;
+}
+#tbl_cheque
+{
+	border-width: 0 0 1px 1px;
+	border-spacing: 0;
+	border-collapse: collapse;
+}
+#tbl_cheque td
+{
+	margin: 0;
+	padding: 1px;
+	border-width: 1px 1px 0 0;
+	background-color: rgb(255, 247, 192);
+}
+
+
+div.growlUI
+{
+	background: url(check48.png) no-repeat 10px 10px;
+}
+div.growlUI h1, div.growlUI h2
+{
+	color: white;
+	padding: 5px 5px 5px 75px;
+	text-align: left;
+}
+
+.no_notification
+{
+    padding:1px 2px 1px 1px;
+    /*background-color:#fffbe2;*/
+    float:left;
+    /*width: 315px;*/
+}
+
+
+.notification {
+	background:#FFFBE2 none repeat scroll 0;
+	border:1px solid #FFE222;
+	padding:0px 1px 0px 0px;
+	font-weight:bold;
+	float:left;
+}
+
+.correct_box {
+	background:#CCF4D0 none repeat scroll 0;
+	border:1px solid #02550C;
+	padding:0px 1px 0px 0px;
+	font-weight:bold;
+	float:left;
+}
+
+.error_box {
+	background:#FFEBE8 none repeat scroll 0;
+	border:1px solid #DD3C10;
+	padding:0px 1px 0px 0px;
+	font-weight:bold;
+	float:left;
+}
+
+.ajax__calendar_container
+{
+	z-index:100;
+}

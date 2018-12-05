@@ -1,0 +1,190 @@
+﻿body
+{
+	font-family: Trebuchet MS,Verdana,sans-serif;/*Arial,Helvetica,Sans-Serif;*/
+    color:#333333;
+    font-size:12px;
+    margin-left:0px;
+    margin-top:0px;
+}
+
+#headerM
+{
+	background: #f0f0f0 url(../media/images/logobg.png) repeat-x;/*#5D7B9D*/
+	color:#fff;
+	height:70px;
+	font-size:12px;
+}
+#loginInfo
+{
+	float:right;
+	font-size:12px;
+	margin:10px 50px 0 0;
+	color:#fff;
+	
+}
+#logo
+{
+	text-align:center;
+	height:45px;
+	font-size: 24px;
+	padding:10px 0 0 15px;
+	color:#fff;	
+	float:left;
+	margin-left:35px;
+	
+}
+#logo2
+{
+	text-align:center;
+	height:45px;
+	font-size: 18px;
+	padding:0px 200px 0 0px;
+	color:#fff;	
+	float:left;
+}
+
+#ContentPlaceHolder1
+{
+	min-height:400px;
+}
+
+#Content2
+{
+	font-size:12px;
+}
+
+.glossymenu{
+	position: relative;
+	padding: 0px 130px 0 0px;
+	margin: 0 ;
+	background:#f0f0f0 url(/media/images/topMenuBack.png) repeat-x scroll 0px 0px;
+	
+	border-bottom: solid 1px #aaa;
+	
+	background-color:#f6f6f6;
+	height: 30px;
+	list-style: none;
+	
+}
+
+.glossymenu li{
+	float:right;
+	/*border-left: solid 1px #aaa;
+	border-right: solid 1px #888;*/
+}
+
+.glossymenu li a{
+	display: block;
+	color:#334;
+	text-decoration: none;
+	
+	font-size: 12px;
+	
+	padding: 4px 24px 0 24px; 
+	
+	/*height: 20px;*/
+	line-height: 26px;
+	vertical-align:middle;
+	text-align: center;
+	cursor: pointer;
+	border-left:solid 1px #dddddd;	
+	background-repeat:no-repeat;
+}
+
+/*.glossymenu li a b{
+	display: block;
+	padding: 0 24px 0 8px; /*Padding of menu items
+}
+*/
+.glossymenu li.current a, .glossymenu li a:hover{
+	color: #000;
+	
+	background-position: left;
+	background:#f0f0f0 url(/media/images/topMenu.png) repeat-x scroll 0 0px;
+}
+
+/*.glossymenu li.current a b, .glossymenu li a:hover b{
+	color: #777;
+	text-decoration:underline;
+}*/
+
+#footer
+{
+	background:#ffffff;
+	font-size:11px;	
+	text-align:center;
+	padding-top:5px;
+	color:#125;
+	clear:both;
+	border-top:solid 1px #e5e5e5;	
+}
+
+.messageLabelError
+{
+	border:solid 1px #d61;
+	color:#d21;
+	
+	background-color:#fff;
+	font-weight:bold;
+	
+	line-height:20px;
+	padding-left:10px;
+	margin:0;
+	width:90%;
+	display:block;
+}
+.messageLabel
+{
+	border:solid 1px #271;
+	color:#271;
+	
+	background-color:#fff;
+	font-weight:bold;
+	
+	line-height:20px;
+	padding-left:10px;
+	margin:0;
+	width:90%;
+	display:block;
+}
+
+#passChange
+{
+	width:374px;
+	height:252px;
+	margin:10px 0 125px 200px;
+	/*font-family:Arial;*/
+	background:#ffffff url(../media/images/passChange.png) no-repeat;
+	color:#fff;
+	font-size:11px;	
+}
+
+#chPassTable 
+{	
+	padding-top:70px;
+	margin:70px 0 0 30px;
+}
+#passChangeError
+{
+	margin:40px 0 0px 250px;
+	min-height:30px;
+}
+
+.menuItem
+{
+	line-height:30px;
+	background:#fff url(/media/images/menuHead.png) repeat-x;
+	font-size:13px;
+	font-weight:bold;
+	color: #374344;
+	display: block;
+	width:120px;
+	padding: 0px 0 0 30px;
+}
+
+
+.menuItem a:hover
+{
+	background-image:none;
+	background-color:White;
+}

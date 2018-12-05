@@ -1,0 +1,245 @@
+﻿*
+{
+    cursor: auto;
+}
+
+a, a *
+{
+    cursor: pointer;
+    outline: none;
+}
+p, h1, h2, h3, h4, h5
+{
+    /*margin: 0 0 1em 0;     line-height: 1.5em;*/
+    color: #222222;
+}
+
+wbr:after
+{
+    content: "\00200B";
+}
+form
+{
+    padding: 0;
+    margin: 0;
+}
+
+.textinput
+{
+    background: #fff url('../images/topfade.gif') repeat-x 50% top;
+    vertical-align: middle;
+    border: 1px solid #aaa;
+    padding: 4px;
+    color: #555;
+    width: 160px;
+    margin: 0;
+}
+
+
+
+#modal-content h5
+{
+    font-size: 11px;
+}
+
+
+#modal-box
+{
+    border: 1px solid #7ad;
+    background-color: #fff;
+    padding: 10px;
+    height: 100%;
+}
+
+.modal_box_header
+{
+    -moz-background-clip: border;
+    -moz-background-inline-policy: continuous;
+    -moz-background-origin: padding;
+    background: transparent url(../images/dots.gif) repeat-x scroll center bottom;
+    font-size: 10pt;
+    margin-bottom: 4px;
+    padding-bottom: 10px;
+    padding-top: 3px;
+    padding-left: 10px; /*margin-top: 8px;*/
+    margin-bottom: 6px;
+    font-size: 14px;
+}
+
+div#modal-content
+{
+    line-height: 1.5em;
+    padding: 10px;
+    font-size: 8pt;
+    background-color: #fff;
+}
+
+/*
+#modal-behind
+{
+	z-index: 400;
+	width: 520px;
+	position: absolute;
+	left: 50%;
+	margin: 0 0 0 0px;
+	margin-left: -260px;
+	border: 0;
+	background-color: #000;
+}*/
+
+
+
+#modal-content ol
+{
+    margin: 0;
+    padding: 0;
+}
+#modal-content ol li
+{
+    margin: 0 0 1.5em 20px;
+    padding: 0;
+}
+#modal-progress-overlay
+{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #fff;
+    text-align: center;
+    color: #616161;
+    z-index: 95;
+}
+#modal-progress-content
+{
+    position: absolute;
+    left: 50%;
+    top: 150px;
+    margin: -42px 0 0 -102px;
+    _top: 20%;
+    background: #fff;
+    z-index: 96;
+    text-align: center;
+    border: 1px solid #7ad;
+    padding: 18px 25px 14px 25px;
+}
+#modal-progress-text
+{
+    margin-top: 5px;
+}
+.suggestion-input
+{
+    color: #999;
+}
+.suggestion-input-unfaded
+{
+    color: #555;
+}
+.modal-textarea-parent
+{
+    position: relative;
+}
+.modal-h-img
+{
+    margin-bottom: -2px;
+    padding-right: 6px;
+}
+#modal .link-img
+{
+    margin-bottom: -1px;
+}
+
+
+#modal-behind-test
+{
+    z-index: 400;
+    width: 520px;
+    position: fixed;
+    left: 50%;
+    margin: 0;
+    margin-left: -260px;
+    border: 0;
+    background-color: #000;
+    top: 50px;
+}
+
+
+.ModalCenter
+{
+    z-index: 202;
+    position: fixed;
+    margin: 0;
+    border: 0;
+    top: 50%;
+    left: 50%; /*     width: 400px;     height: 200px;     margin-left: -200px;     margin-top: -100px;     */
+}
+
+.ModalBackground
+{
+    z-index: 200;
+    background-color: #000;
+    opacity: 0.2;
+    filter: alpha(opacity=20); 
+    ZOOM: 1;
+    position: fixed;
+    margin: 0;
+    border: 0;
+    top: 50%;
+    left: 50%;
+}
+
+#divModalDialogBackground
+{
+    z-index: 600;
+    background-color: #000;
+    width: 520px;
+    height: 66px;
+    margin-left: -260px;
+    margin-top: -32px;
+}
+
+#divOWEditorBackground
+{
+    z-index: 200;
+    width: 960px;
+    height: 570px;
+    margin-top: -280px;
+    margin-left: -480px;
+    background: #000000 none repeat scroll 0 0;
+    border: 0px;
+}
+
+#divOWEditorContent
+{
+    z-index: 201;
+    width: 940px;
+    height: 550px;
+    margin-top: -270px;
+    margin-left: -470px;
+    background: #EBF4FB none repeat scroll 0 0;
+    border: 0px solid #99BBE8;
+}
+
+#divModalDialogContent
+{
+    z-index: 601;
+    background-color: #fff;
+    width: 500px;
+    height: 44px;
+    margin-left: -250px;
+    margin-top: -22px;
+}
+
+#modal-overlay
+{
+    position: fixed !important; /* ie6 doesn't like this. */
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 100;
+    background: transparent url('../images/pattern.png') repeat scroll left top;
+    background-color: #eee;
+}

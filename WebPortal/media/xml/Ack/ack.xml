@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Acknowledgement>
+	<Status>0</Status>
+	<Description>ok</Description>
+	<Totals>		
+		<Accepted>
+			<ItemCount>3</ItemCount>
+			<TotalAmount>30000</TotalAmount>
+		</Accepted>
+		<Presented>
+			<ItemCount>3</ItemCount>
+			<TotalAmount>30000</TotalAmount>
+		</Presented>
+	</Totals>
+	<SettlementDate>20090716</SettlementDate>
+	<SettlementTime>0959</SettlementTime>
+	<RejectedItems>
+			<Items>
+			<seqnum>30000019</seqnum>
+			<amount>10000</amount>
+			<reason>Duplicate Presentment</reason>
+		</Items>
+	</RejectedItems>
+</Acknowledgement>

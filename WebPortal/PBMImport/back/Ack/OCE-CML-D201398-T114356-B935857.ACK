@@ -1,0 +1,28 @@
+<Acknowledgement>
+  <Status>2</Status>
+  <Description>Too many item errors</Description>
+  <Totals>
+    <Presented>
+      <ItemCount>2</ItemCount>
+      <TotalAmount>2275775</TotalAmount>
+    </Presented>
+    <Accepted>
+      <ItemCount>0</ItemCount>
+      <TotalAmount>0</TotalAmount>
+    </Accepted>
+  </Totals>
+  <SettlementDate></SettlementDate>
+  <SettlementTime></SettlementTime>
+  <RejectedItems>
+    <Items>
+      <seqnum>09857905</seqnum>
+      <amount>774775</amount>
+      <reason>IQA Failed: F[maximum width] R[maximum width]</reason>
+    </Items>
+    <Items>
+      <seqnum>09857906</seqnum>
+      <amount>1501000</amount>
+      <reason>IQA Failed: F[maximum width] R[maximum width]</reason>
+    </Items>
+  </RejectedItems>
+</Acknowledgement>

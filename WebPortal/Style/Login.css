@@ -1,0 +1,75 @@
+﻿body
+{
+	font-family:"Trebuchet MS",Verdana,sans-serif;
+}
+
+#logoLogin
+{
+	background: #54769B url(../media/images/loginlogobg.png) repeat-x;/*#5D7B9D*/
+	height:70px;
+	/*font-family:Arial;*/
+	font-size: 24px;
+	padding:8px 0 0 30px;
+	color:#fff;	
+	margin: 0px ;
+	visibility:hidden;
+	
+}
+
+#loginBox
+{
+	width:300px;
+	height:200px;
+	margin:0px 0 120px 0px;
+	
+	background:#fff url(../media/images/login.png) no-repeat;
+	/*color:#667788;*/
+	font-size:11px;
+}
+
+#loginError
+{
+	/*margin:80px 0 5px 320px;*/
+	margin:3px 0 3px 0px;
+	height:20px;
+	font-size:12px;
+}
+
+#loginTable 
+{
+	margin:65px 0 0 0px;
+    padding-top: 60px;
+}
+#loginTable td
+{
+	color:#fff;
+	font-size:11px;
+}
+
+#loginfooter
+{
+	background-color:#f0f0f0 ;
+	font-size:11px;
+	/*height:22px;*/
+	
+	text-align:center;
+	margin:0px 0 0 0px;
+	padding:5px 0 5px 0px;
+	color:#126;
+	clear:both;
+/*	border-top:solid 1px #fff;*/
+	/*border-top:solid 1px #568;*/
+}
+
+.commlink a
+{
+	font-size:16px;
+	text-decoration:none;
+	color:#126;
+}
+.commlink a:hover
+{
+	
+	text-decoration:none;
+	color:#334;
+}

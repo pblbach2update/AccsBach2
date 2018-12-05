@@ -1,0 +1,16 @@
+<Acknowledgement>
+  <Status>0</Status>
+  <Description>ok</Description>
+  <Totals>
+    <Presented>
+      <ItemCount>1</ItemCount>
+      <TotalAmount>10000000</TotalAmount>
+    </Presented>
+    <Accepted>
+      <ItemCount>1</ItemCount>
+      <TotalAmount>10000000</TotalAmount>
+    </Accepted>
+  </Totals>
+  <SettlementDate>20180121</SettlementDate>
+  <SettlementTime>1700</SettlementTime>
+</Acknowledgement>

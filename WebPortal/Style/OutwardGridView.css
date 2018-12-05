@@ -1,0 +1,224 @@
+﻿/*GridViewCSS Soft Grey Style*/
+.GridViewStyle
+{
+	font-family: Arial, Sans-Serif;
+	font-size: small;
+	table-layout: auto;
+	border-collapse: collapse;
+	border: #91a7b4 1px solid;
+}
+/*Header and Pager styles*/
+.HeaderStyle, .PagerStyle /*Common Styles*/
+{
+	/*background-image: url(Sprite.gif); 	background-position: top; 	background-repeat: repeat-x;		*/
+	background-color: #d1dbe0;
+}
+.HeaderStyle th
+{
+	padding: 5px;
+	color: #16387c;
+}
+.HeaderStyle a
+{
+	text-decoration: none;
+	color: #16387c;
+	display: block;
+	text-align: left;
+	font-weight: normal;
+}
+.PagerStyle table
+{
+	text-align: center;
+	margin: auto;
+}
+.PagerStyle table td
+{
+	border: 0px;
+	padding: 5px;
+}
+.PagerStyle td
+{
+	border-top: #91a7b4 1px solid;
+}
+.PagerStyle a
+{
+	color: #16387c;
+	text-decoration: none;
+	padding: 2px 10px 2px 10px;
+	border-top: solid 1px #fff;
+	border-right: solid 1px #91a7b4;
+	border-bottom: solid 1px #91a7b4;
+	border-left: solid 1px #fff;
+}
+.PagerStyle span
+{
+	font-weight: bold;
+	color: #16387c;
+	text-decoration: none;
+	padding: 2px 10px 2px 10px;
+}
+/*RowStyles*/
+.RowStyle td, .AltRowStyle td, .SelectedRowStyle td, .EditRowStyle td, .AcceptedRowStyle td, .RejectedRowStyle td /*Common Styles*/
+{
+	padding: 5px;
+	border-right: solid 1px #91a7b4;
+}
+.RowStyle td
+{
+	background-color: #f1f5f6;
+}
+.RowStyle
+{
+	background-color: #f1f5f6;
+}
+.RowStyle:hover
+{
+	background-color: #fcb814;
+}
+.AltRowStyle td
+{
+	background-color: #9ab2ca; /*background-image: url(Sprite.gif);*/
+	background-position: 0 -80px;
+	background-repeat: repeat-x;
+}
+.SelectedRowStyle td
+{
+	background-color: #fcb814; /*background-image: url(Sprite.gif);*/
+	background-position: center;
+	background-repeat: repeat-x;
+}
+
+.RejectedRowStyle td
+{
+	background-color: #FFD7D7; /*background-image: url(Sprite.gif);*/
+	background-position: center -312px;
+	background-repeat: repeat-x;
+}
+
+.AcceptedRowStyle td
+{
+	background-color: #BCEAC2; /*background-image: url(Sprite.gif);*/
+	background-position: center -244px;
+	background-repeat: repeat-x;
+}
+
+
+
+
+/*GridViewCSS Soft Grey Style*/
+.OW_GridViewStyle
+{
+	border: 0px; /*font-family: Arial, Sans-Serif; 	font-size: small;*/ /*table-layout: auto;*/ /*border-collapse: collapse;*/ /*border: #91a7b4 1px solid;*/
+}
+.OW_GridViewStyle td, .OW_GridViewStyle th
+{
+	border: 0px;
+}
+/*Header and Pager styles*/
+.OW_HeaderStyle, .OW_PagerStyle /*Common Styles*/
+{
+	/*background-image: url(Sprite.gif); 	background-position: top; 	background-repeat: repeat;*/
+	background-color: #e0e0e0;
+	border-top: solid 1px #eeeeee;
+	border-bottom: solid 1px #eeeeee;
+}
+.OW_HeaderStyle th
+{
+	padding: 5px;
+	color: #444444;
+	border-right: solid 1px #eeeeee;
+}
+.OW_HeaderStyle a
+{
+	text-decoration: none;
+	color: #16387c;
+	display: block;
+	text-align: left;
+	font-weight: normal;
+}
+.OW_PagerStyle table
+{
+	text-align: center;
+	margin: auto;
+}
+.OW_PagerStyle table td
+{
+	border: 0px;
+	padding: 5px;
+}
+.OW_PagerStyle td
+{
+	/*border-top: #91a7b4 1px solid;*/
+}
+.OW_PagerStyle a
+{
+	color: #16387c;
+	text-decoration: none;
+	padding: 2px 10px 2px 10px;
+	border-top: solid 1px #fff;
+	border-right: solid 1px #91a7b4;
+	border-bottom: solid 1px #91a7b4;
+	border-left: solid 1px #fff;
+}
+.OW_PagerStyle span
+{
+	font-weight: bold;
+	color: #16387c;
+	text-decoration: none;
+	padding: 2px 10px 2px 10px;
+}
+/*RowStyles*/
+.OW_RowStyle
+{
+	/*border-bottom: solid 1px #eeeeee;*/
+}
+
+.OW_AltRowStyle
+{
+	/*border-bottom: solid 1px #eeeeee;*/
+}
+
+.OW_SelectedRowStyle
+{
+	/*border-bottom: solid 1px Gold;*/
+}
+
+.OW_RejectedRowStyle
+{
+	/*border-bottom: solid 1px #dfdfdf;*/
+}
+
+.OW_AcceptedRowStyle
+{
+	/*border-bottom: solid 1px Green;*/
+}
+
+.OW_RowStyle td, .OW_AltRowStyle td, .OW_SelectedRowStyle td, .OW_EditRowStyle td, .OW_AcceptedRowStyle td, .OW_RejectedRowStyle td /*Common Styles*/
+{
+	padding: 5px;
+	/*border-right: solid 1px #eee;*/
+}
+.OW_RowStyle td
+{
+	background-color: #F6F6F6;
+	color: #222222;
+}
+
+.OW_AltRowStyle td
+{
+	background-color: #fff; /*background-image: url(Sprite.gif); 	background-position: 0 -80px; 	background-repeat: repeat-x;								*/
+}
+.OW_SelectedRowStyle td
+{
+	background-color: #FFFFCC; /*background-image: url(Sprite.gif); 	background-position: center; 	background-repeat: repeat-x;*/
+}
+
+.OW_RejectedRowStyle td
+{
+	background-color: #FFD7D7; /*background-image: url(Sprite.gif); 	background-position: center -312px; 	background-repeat: repeat-x;  */
+}
+
+.OW_AcceptedRowStyle td
+{
+	background-color: #BCEAC2; /*background-image: url(Sprite.gif); 	background-position: center -244px; 	background-repeat: repeat-x;*/
+}

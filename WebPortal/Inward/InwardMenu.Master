@@ -1,0 +1,31 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="InwardMenu.Master.cs"
+    Inherits="Accs.Web.Inward.InwardMenu" MasterPageFile="~/master.Master" %>
+
+<asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
+
+    <link type="text/css" href="/Style/Menu.css" rel="Stylesheet" />
+    <link href="/Style/admin.css" rel="stylesheet" type="text/css" />
+    <asp:ContentPlaceHolder ID="headInward" runat="server">
+    </asp:ContentPlaceHolder>
+</asp:Content>
+<asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
+    <div style="font-size: 12px;">
+        <table style="width: 100%" cellpadding="0" cellspacing="0">
+            <tr>
+                <td valign="top" style="padding: 0; width: 150px; height: 450px; border-right: solid 1px #efefef;
+                    border-bottom: none; background-color: #ffffff;">
+                    <div id="menuHead">
+                        Inward Process
+                    </div>
+                    <div id="menu9">
+                        <%getLeftMenuString(); %>
+                    </div>
+                </td>
+                <td valign="top" style="padding: 10px 0 0 2px;">
+                    <asp:ContentPlaceHolder ID="ContentPlaceHolder3" runat="server">
+                    </asp:ContentPlaceHolder>
+                </td>
+            </tr>
+        </table>
+    </div>
+</asp:Content>

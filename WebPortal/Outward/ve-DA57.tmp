@@ -1,0 +1,444 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.Web.UI;
+using System.Web.UI.WebControls;
+using ACCS.DAL.Handler;
+using ACCS.Common;
+using ACCS.DAL.Entities;
+using ACCS.DAL;
+using ACCS.Common.Enum;
+
+namespace ACCS.Outward
+{
+    public partial class OutwardMaker2 : System.Web.UI.Page
+    {
+        private List<ChequeInfo> dataStore;
+        private string ids = "";
+        private bool batchSelected = false;
+
+        protected string branchName = "";
+        protected string routingNo = "";
+
+
+        branch presenting = null;
+        //batch oBatch;
+
+        long userId = -1;
+        string username = "";
+
+        long batchId = -1;
+        string batchNo = "";
+
+        SessionEntity session = null;
+
+        public string benifAccLength = "13";
+
+
+        protected void Page_Load(object sender, EventArgs e)
+        {
+            //this.KeepMeAlive();
+            session = SessionController.checkSession(Session, Response, Page.ToString());
+
+            //Repopulate ACCS Entities
+            Session["em"] = null;
+
+            benifAccLength = SettingsController.getAppSettings("BenifAccLength");
+
+            userId = session.UserId;//Convert.ToInt64(Session["userid"]);
+            username = session.Username;
+
+            Response.Cache.SetNoStore();
+            TimeOfRefresh.Text = "Available Batches";
+
+
+
+            try
+            {
+                presenting = UserController.getFullBranchByUser(userId);
+                username = Session["usename"] as string;
+
+                branchName = presenting.branch_name;
+                routingNo = presenting.bank.bank_code + presenting.district.district_code + presenting.branch_code + presenting.check_digit;
+            }
+            catch { return; }
+
+            if (!IsPostBack)
+            {
+                getLockedBatch();
+            }
+
+            chkScanned.BackColor = chkScanned.Checked ? System.Drawing.Color.FromArgb(255, 255, 202) : System.Drawing.Color.Empty;
+            chkMakerAccept.BackColor = chkMakerAccept.Checked ? System.Drawing.Color.FromArgb(188, 234, 194) : System.Drawing.Color.Empty;
+            chkMakerReject.BackColor = chkMakerReject.Checked ? System.Drawing.Color.FromArgb(255, 215, 215) : System.Drawing.Color.Empty;
+        }
+
+        protected void getLockedBatch()
+        {
+            try
+            {
+                batch oBatch = BatchController.getOutwardMakerUserLockedBatch(presenting.branch_id, username);
+
+                if (oBatch != null)
+                {
+                    batchId = oBatch.batch_id;
+                    batchNo = oBatch.batch_number;
+
+                    batchSelected = true;
+                    loadChequesByBatch();
+                }
+                else
+                {
+                    loadBatchList();
+                }
+            }
+            catch
+            {
+            }
+        }
+
+
+        protected void loadBatchList()
+        {
+            TimeOfRefresh.Text = "Available Batches at " + DateTime.Now.ToShortTimeString();
+            List<BatchEntity> lstBatch = BatchController.getBatchesForOutwardMaker(presenting.branch_id, Locked.unlocked, "");
+            divChequeList.Visible = false;
+
+            if (lstBatch == null || lstBatch.Count == 0)
+            {
+                gvBatchList.Visible = false;
+                divNobatch.Visible = true;
+            }
+            else
+            {
+                gvBatchList.Visible = true;
+                divNobatch.Visible = false;
+                gvBatchList.DataSource = lstBatch;
+                gvBatchList.DataBind();
+            }
+
+            divBatchSelection.Visible = true;
+            divNoCheques.Visible = false;
+            divProcessingBatch.Visible = false;
+            GridView1.Visible = false;
+        }
+
+
+        protected void loadChequesByBatch()
+        {
+            TimeOfRefresh.Text = "Working on Batch " + batchNo;
+            divChequeList.Visible = true;
+
+            lblBatchNo.Text = batchNo;
+            lblBatchNo.ToolTip = batchId + "";
+
+
+
+            divBatchSelection.Visible = false;
+            divProcessingBatch.Visible = true;
+
+
+            if (batchSelected && !BatchController.isAccessibleByUser(batchId, username))
+                batchSelected = false;
+
+            if (batchSelected)
+            {
+                string currBatch = lblBatchNo.Text;
+                if (currBatch != null)
+                {
+                    List<ChequeStatus> lstStatus = new List<ChequeStatus>();
+
+
+                    if (chkScanned.Checked)
+                    {
+                        lstStatus.Add(ChequeStatus.scanned);
+                        lstStatus.Add(ChequeStatus.outward_remake);
+                    }
+                    if (chkMakerAccept.Checked)
+                    {
+                        lstStatus.Add(ChequeStatus.outward_maker_accept);
+                    }
+                    if (chkMakerReject.Checked)
+                    {
+                        lstStatus.Add(ChequeStatus.outward_maker_reject);
+                    }
+
+
+                    BatchEntity beMine = BatchController.getChequeCount(batchId, UserType.maker, username);
+                    BatchEntity beAny = BatchController.getChequeCount(batchId, UserType.none, "");
+
+                    labelUnprocessed.Text = (beAny.Scanned + beAny.MakerRemake) + "";
+                    labelMeAccepted.Text = beMine.MakerAccept + "";
+                    labelAnyAccepted.Text = beAny.MakerAccept + "";
+                    labelMeRejected.Text = beMine.MakerReject + "";
+                    labelAnyRejected.Text = beAny.MakerReject + "";
+
+                    labelTotalCheques.Text = beMine.Total + "";
+
+                    lblClearingType.Text = beAny.ClearingType;
+
+
+                    dataStore = ChequeInfoController.getOutwardMakerCheques(batchId, username, lstStatus);
+
+                    GridView1.DataSource = dataStore;
+                    GridView1.DataBind();
+                }
+
+                if (dataStore == null || dataStore.Count == 0)
+                {
+                    labelTotalCheques.Text = "0";
+                    labelTotalAmount.Text = "0 Tk.";
+
+                    GridView1.Visible = false;
+                    divNoCheques.Visible = true;
+                }
+                else
+                {
+                    double amount = 0;
+                    for (int i = 0; i < dataStore.Count; i++)
+                    {
+                        ids += "chqid.push(" + dataStore[i].ChequeID + ");";
+                        amount += dataStore[i].Amount;
+                    }
+
+                    GridView1.Visible = true;
+                    divNoCheques.Visible = false;
+
+                    labelTotalCheques.Text = dataStore.Count + "";
+                    labelTotalAmount.Text = amount + " Tk.";
+                }
+            }
+            else
+            {
+                labelTotalCheques.Text = "0";
+                labelTotalAmount.Text = "0 Tk.";
+
+                GridView1.Visible = false;
+                divNoCheques.Visible = true;
+            }
+        }
+
+        protected void GridView1_RowDataBound(object sender, GridViewRowEventArgs e)
+        {
+            if (e.Row.RowType == DataControlRowType.DataRow)
+            {
+                ChequeInfo data = (ChequeInfo)e.Row.DataItem;
+                switch ((ChequeStatus)data.StatusCode)
+                {
+                    case ChequeStatus.outward_maker_accept:
+                        e.Row.Cells[6].Text = "Accepted";
+                        e.Row.CssClass = "OW_AcceptedRowStyle";
+                        break;
+                    case ChequeStatus.outward_maker_reject:
+                        e.Row.Cells[6].Text = "Rejected";
+                        e.Row.CssClass = "OW_RejectedRowStyle";
+                        break;
+                    case ChequeStatus.scanned:
+                    case ChequeStatus.outward_remake:
+                        e.Row.Cells[6].Text = "Unprocessed";
+                        break;
+                    default:
+                        break;
+                }
+            }
+        }
+
+        protected void btnUpdateData_Click(object sender, EventArgs e)
+        {
+            getLockedBatch();
+        }
+
+        protected void GridView1_PageIndexChanging(object sender, GridViewPageEventArgs e)
+        {
+            batchSelected = true;
+            loadChequesByBatch();
+            GridView1.PageIndex = e.NewPageIndex;
+            GridView1.DataBind();
+        }
+
+        protected void generateListId()
+        {
+            Response.Write("var chqid=Array();" + ids);
+        }
+
+        protected void selectBatch_Click(object sender, EventArgs e)
+        {
+            lblBatchNo.Text = "";
+            lblBatchNo.ToolTip = "";
+
+            //if (BatchController.getLockStatus(ddBatches.SelectedValue, Utilities.getUserFromSession().Username, BatchController.usertype.maker))
+            if (BatchController.isAccessibleByUser(batchId, username))
+            {
+                batch oBatch = BatchController.lockBatch(batchId, Utilities.getUserFromSession().Username, LockActionType.maker_lock);
+
+                if (oBatch == null)
+                {
+                    batchSelected = false;
+                    Alert.Show("Already Assigned. Refreshing list.");
+                }
+                else
+                {
+                    //rashed
+                    Utilities.addUserLog(Convert.ToInt64(Session["userid"]),
+                        "Outward Maker Locked Batch: " + oBatch.batch_number);
+
+
+                    batchId = oBatch.batch_id;
+                    batchNo = oBatch.batch_number;
+
+                    batchSelected = true;
+                    lblBatchNo.Text = batchNo;
+                    lblBatchNo.ToolTip = batchId + "";
+                }
+            }
+            else
+            {
+                batchSelected = false;
+                Alert.Show("Already Assigned. Refreshing list.");
+            }
+
+            if (batchSelected)
+            {
+                loadChequesByBatch();
+            }
+            else
+            {
+                loadBatchList();
+            }
+        }
+
+        ////////
+        protected string generateJSClientId()
+        {
+            string strControlIds = "";
+            strControlIds += "var cu_dateId='" + cu_date.ClientID + "';";
+            strControlIds += "var btnUnlock='" + btnUnlock.ClientID + "';";
+            strControlIds += "var btnUpdate='" + btnUpdateData.ClientID + "';";
+            return strControlIds;
+        }
+
+        protected void btnUnlock_Click(object sender, EventArgs e)
+        {
+            //if (BatchController.getLockStatus(ddBatches.SelectedValue, Utilities.getUserFromSession().Username, BatchController.usertype.maker))
+            if (BatchController.isAccessibleByUser(Convert.ToInt64(lblBatchNo.ToolTip), username))
+            {
+                bool ret = BatchController.unlockBatch(Convert.ToInt64(lblBatchNo.ToolTip), LockActionType.maker_unlock);
+                if (ret)
+                {                    
+                    //rashed
+                    Utilities.addUserLog(Convert.ToInt64(Session["userid"]), "Outward Maker Unlocked Batch: " + 
+                        BatchController.getBatchNoFromID(Convert.ToInt64(lblBatchNo.ToolTip)));
+                }
+            }
+
+            batchSelected = false;
+            loadBatchList();
+        }
+
+        protected void gvBatchList_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            int index = gvBatchList.SelectedIndex;
+
+            batchId = Convert.ToInt64(gvBatchList.DataKeys[index].Value);
+            batchNo = gvBatchList.SelectedRow.Cells[0].Text;
+
+            lblBatchNo.Text = batchNo;
+            lblBatchNo.ToolTip = batchId + "";
+
+            //if (BatchController.getLockStatus(ddBatches.SelectedValue, Utilities.getUserFromSession().Username, BatchController.usertype.maker))
+            if (BatchController.isAccessibleByUser(batchId, username))
+            {
+                batch oBatch = BatchController.lockBatch(batchId, Utilities.getUserFromSession().Username, LockActionType.maker_lock);
+
+                if (oBatch == null)
+                {
+                    batchSelected = false;
+                    Alert.Show("Already Assigned. Refreshing list.");
+                }
+                else
+                {
+                    //rashed
+                    Utilities.addUserLog(Convert.ToInt64(Session["userid"]),
+                        "Outward Maker Locked Batch: " + oBatch.batch_number);
+
+                    batchId = oBatch.batch_id;
+                    batchNo = oBatch.batch_number;
+
+                    batchSelected = true;
+                    lblBatchNo.Text = batchNo;
+                    lblBatchNo.ToolTip = batchId + "";
+                }
+            }
+            else
+            {
+                batchSelected = false;
+                Alert.Show("Already Assigned. Refreshing list.");
+            }
+
+            if (batchSelected)
+            {
+                loadChequesByBatch();
+            }
+            else
+            {
+                loadBatchList();
+            }
+        }
+
+        protected void gvBatchList_RowDataBound(object sender, GridViewRowEventArgs e)
+        {
+
+            if (e.Row.RowType == DataControlRowType.DataRow)
+            {
+                BatchEntity data = (BatchEntity)e.Row.DataItem;
+                switch ((BatchStatus)data.BatchStatusCode)
+                {
+                    case BatchStatus.outward_maker_ready:
+                        e.Row.Cells[2].Text = "Fresh";
+                        break;
+                    case BatchStatus.outward_maker_remake:
+                        e.Row.Cells[2].Text = "Remake";
+                        break;
+                }
+                e.Row.Cells[5].Text = "" + (data.Scanned + data.MakerRemake);
+            }
+        }
+
+        private void KeepMeAlive()
+        {
+            int int_MilliSecondsTimeOut = (this.Session.Timeout * 60000) - 30000;
+            string str_Script = @"<script type='text/javascript'>
+                    //Number of Reconnects
+                    var count=0;
+                    //Maximum reconnects setting
+                    //var max = 5;
+                    function Reconnect(){
+                        count++;
+                        //if (count < max)
+                        //{
+                            window.status = 'Link to Server Refreshed ' + count.toString()+' time(s)' ;
+                            //var img = new Image(1,1);
+                            ACCS.Outward.OutwardService.KeepAlive(function(){},function(){});
+                            //img.src = 'Reconnect.aspx';
+                        //}
+                    }
+                    window.setInterval('Reconnect()'," + int_MilliSecondsTimeOut.ToString() + @"); //Set to length required
+                    </script>";
+            this.Page.RegisterClientScriptBlock("Reconnect", str_Script);
+        }
+
+        protected void btnShowAll_Click(object sender, EventArgs e)
+        {
+            chkScanned.Checked = true;
+            chkMakerAccept.Checked = true;
+            chkMakerReject.Checked = true;
+
+            chkScanned.BackColor = chkScanned.Checked ? System.Drawing.Color.FromArgb(255, 255, 202) : System.Drawing.Color.Empty;
+            chkMakerAccept.BackColor = chkMakerAccept.Checked ? System.Drawing.Color.FromArgb(188, 234, 194) : System.Drawing.Color.Empty;
+            chkMakerReject.BackColor = chkMakerReject.Checked ? System.Drawing.Color.FromArgb(255, 215, 215) : System.Drawing.Color.Empty;
+
+            getLockedBatch();
+        }
+    }
+}

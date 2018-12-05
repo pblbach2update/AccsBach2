@@ -1,0 +1,589 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.Web.UI;
+using System.Web.UI.WebControls;
+using ACCS.DAL.Handler;
+using ACCS.Common;
+using ACCS.DAL.Entities;
+using ACCS.Common.Enum;
+using ACCS.DAL;
+using ACCS.XMLProcessor.XMLEntity;
+using ACCS.XMLProcessor;
+using System.Reflection;
+using ACCS.XMLProcessor.XMLLibrary;
+using FTPDaemon.Library;
+using System.IO;
+using System.Drawing;
+using System.Text;
+
+
+namespace ACCS.Outward
+{
+    public partial class OutwardSend : System.Web.UI.Page
+    {
+        string xmlPath = "";
+        //private static string xmlPathCBS = "";
+        private static string xmlPathOCE = SettingsController.getSettingsValue("oce_path");
+
+        //private static string xmlPathOCEHV = xmlPathOCE+"HV";
+
+        private static string rootPath = System.Web.HttpContext.Current.Server.MapPath("~");
+
+        private static string ackPathLocal = rootPath + SettingsController.getSettingsValue("ack_path");
+        private static string OCEPath { get { return rootPath + xmlPathOCE; } }
+        //private static string OCEPathHV { get { return rootPath + xmlPathOCEHV; } }
+
+        private static string ftpUploadPath;
+
+        private static string fileName = "";
+        private static string hv = "";
+        private static string stIP;
+        private static string stName;
+        private static string stPass;
+        private static bool bSecured;
+
+        SessionEntity session = null;
+
+        protected void Page_Load(object sender, EventArgs e)
+        {
+            session = SessionController.checkSession(Session, Response, Page.ToString());
+
+            //SettlementController.settlementOutward(DateTime.Now);
+
+            if (!Page.IsPostBack)
+            {
+                //XmlController.generateCashLetterNumber();
+
+                Response.Cache.SetNoStore();
+                //loadGridView();
+
+                ddlSource.DataSource = BankController.getOwnPBMBranchList();
+                ddlSource.DataBind();
+
+                ddlDestination.DataSource = BankController.getBangladeshBank();
+                ddlDestination.DataBind();
+
+                ddlClearType.DataSource = Utilities.getNameFromECEType(typeof(ECEType), true);
+                ddlClearType.DataBind();
+
+                batchDate.Text = System.DateTime.Now.Day + "/" + System.DateTime.Now.Month + "/" + System.DateTime.Now.Year;
+                if (SettingsController.getSettingsValue("StopSendOce") == "1")
+                {
+
+                    btnGenerateXml.Enabled = false;
+                }
+                
+
+                //loadFTPSettings();
+            }
+
+        }
+
+        protected void chkSelectAll_CheckedChanged(object sender, EventArgs e)
+        {
+            CheckBox chkAll = (CheckBox)gvSendList.HeaderRow.FindControl("chkSelectAll");
+            if (chkAll.Checked == true)
+            {
+                foreach (GridViewRow gvRow in gvSendList.Rows)
+                {
+                    CheckBox chkSel =
+                         (CheckBox)gvRow.FindControl("chkbox");
+                    chkSel.Checked = true;
+                }
+            }
+            else
+            {
+                foreach (GridViewRow gvRow in gvSendList.Rows)
+                {
+                    CheckBox chkSel = (CheckBox)gvRow.FindControl("chkbox");
+                    chkSel.Checked = false;
+                }
+            }
+        }
+
+        protected void loadFTPSettings()
+        {
+            ftp f = SettingsController.getFtpSettings();
+            stIP = f.ipaddress;
+            stName = f.username;
+            stPass = f.password;
+            bSecured = (f.sftp == true) ? true : false;
+            ftpUploadPath = f.upload;
+        }
+
+        protected void loadGridView(int clrType)
+        {
+            Session["em"] = null;
+
+            gvSendList.DataSource = null;
+            gvSendList.DataBind();
+            gvOCEList.DataSource = null;
+            gvOCEList.DataBind();
+
+            lbNoBatch.Visible = true;
+
+
+            if (clrType == -1)
+                return;
+
+            DateTime _date = Utilities.getDateFromString(batchDate.Text);
+            if (_date == DateTime.MinValue)
+                return;
+
+            List<BatchEntity> lb = BatchController.getBatchesForOceSend(Utilities.getBranchFromSession().branch_id, Locked.all, "", clrType, _date);
+            if (lb.Count == 0)
+            {
+                gvSendList.Visible = false;
+                lbNoBatch.Text = "No Batch";
+            }
+            else
+            {
+                lbNoBatch.Text = lb.Count() + " Batches";
+
+                gvSendList.Visible = true;
+                gvSendList.DataSource = lb;
+                gvSendList.DataBind();
+                foreach (GridViewRow row in gvSendList.Rows)
+                {
+                    string c = row.Cells[3].Text;
+
+                    if (c == "Sent to PBM")
+                        row.Cells[1].BackColor = Color.FromArgb(220, 240, 220);
+                    else
+                    {
+                        string f = row.Cells[7].Text;
+                        if (f != "Null")
+                            row.Cells[1].BackColor = Color.FromArgb(240, 220, 220);
+                    }
+
+                    var chkBox = (CheckBox)row.FindControl("chkbox");
+                    chkBox.Checked = false;
+                }
+            }
+
+            loadOCEList();
+        }
+
+        protected void loadOCEList()
+        {
+            hv = isHV();
+            if (hv == "")
+                return;
+
+            List<FileInfo> files = XmlController.FilesInDir(OCEPath + hv, "*.xml", DateTime.Now);
+
+            if (null == files || files.Count() == 0)
+            {
+                lbOCECount.Text = "No File Found in " + OCEPath + hv;
+                gvOCEList.DataSource = null;
+                gvOCEList.DataBind();
+            }
+            else
+            {
+
+                if (Convert.ToInt32(SettingsController.getOwnBankName()) == (int)OwnBank.ShahjalalBank)
+                {
+                    lbOCECount.Text = files.Count + " XML File(s) Found in " + OCEPath + hv;
+                    gvOCEList.DataSource = files;
+                    gvOCEList.DataBind();
+                }
+                else
+                {
+                    List<string> oces = new List<string>();
+
+                    foreach (GridViewRow row in gvSendList.Rows)
+                    {
+                        HiddenField _OCE = (HiddenField)row.FindControl("hidOCEName");
+                        if (_OCE.Value.ToLower() != "null")
+                            oces.Add(_OCE.Value);
+                    }
+                    List<FileInfo> final = new List<FileInfo>();
+                    if (oces != null && oces.Count() > 0)
+                    {
+                        foreach (FileInfo f in files)
+                        {
+                            if (oces.Contains(f.Name.Substring(0, f.Name.LastIndexOf('.'))))
+                                final.Add(f);
+                        }
+                    }
+
+                    if (final.Count() > 0)
+                    {
+                        lbOCECount.Text = final.Count + " XML File(s) Found in " + OCEPath + hv;
+                    }
+                    else
+                    {
+                        lbOCECount.Text = "No File Found in " + OCEPath + hv;
+                    }
+
+                    gvOCEList.DataSource = final;
+                    gvOCEList.DataBind();
+
+
+                }
+            }
+        }
+
+        protected string isHV()
+        {
+            string type = ddlClearType.SelectedItem.ToString();
+
+            if (type == ECEType.High_Valued_Item.ToString())
+                return "HV\\";
+            else if (type == ECEType.Express.ToString())
+                return "EXP\\";
+            else if (type == ECEType.Normal.ToString())
+                return "\\";
+            else
+                return "";
+        }
+
+        protected void btnGenerateXml_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                lbGenResult.Text = "";
+                lblUploadMessage.Text = "";
+
+                
+                
+                if (!(ddlClearType.SelectedItem.ToString() == ECEType.Normal.ToString() || ddlClearType.SelectedItem.ToString() == ECEType.High_Valued_Item.ToString()))
+                {
+                    lbGenResult.Text = "Invalid Type";
+                    return;
+                }
+                
+                long batchID=0;
+                string xmlFileName="";
+
+                int chkCount = 0;
+
+                foreach (GridViewRow row in gvSendList.Rows)
+                {
+
+                    CheckBox chkBox = (CheckBox)row.FindControl("chkbox");
+                    
+                    if (chkBox.Checked)
+                    {
+                        HiddenField _bid = (HiddenField)row.FindControl("hidbatchid");
+                        chkCount = Convert.ToInt32(((HiddenField)row.FindControl("hidchqCount")).Value);
+                        batchID = Convert.ToInt64(_bid.Value);
+                        xmlFileName = row.Cells[7].Text;
+                        break;
+                    }
+                }
+
+                if (batchID>0 )
+                {
+
+                    string xmlName =xmlFileName;
+                    hv = isHV();
+                    if (xmlName!="Null")
+                    {
+                        string filePath = OCEPath + hv + "Processed\\" + xmlName + ".xml";
+                        if (File.Exists(filePath))
+                        {
+                            lbGenResult.Text = "You have already sent this batch.Please download acknoledgement.";
+                            return;
+                        }
+                    }
+
+                    List<ChequeStatus> lstatus = new List<ChequeStatus>() { ChequeStatus.outward_checker_accept };
+
+                   
+                                       
+                    
+                    if (chkCount < 1)
+                    {
+                        
+                        lbGenResult.Text = "No Cheques.";
+                        return;
+                    }
+                    lbGenResult.Text = "Total Cheques : " + chkCount;
+
+                    string temp_cash_letter_id = XmlController.generateCashLetterNumber();
+                                      
+                    
+                    branch destinationBank = BankController.getBranchEntity(Convert.ToInt64(ddlDestination.SelectedValue));
+                    branch returnBank;
+                    branch eceInstitutionBank = returnBank= BankController.getBranchEntity(Convert.ToInt64(ddlSource.SelectedValue));
+                    
+
+                                      
+                    
+
+                    
+
+                    var etype = (ECEType)(Convert.ToInt32(ddlClearType.SelectedValue));
+                    
+                    
+
+                    // file name
+                    fileName ="OCE-CML-D" + DateTime.Now.Year + DateTime.Now.Month + DateTime.Now.Day +
+                                        "-T" + DateTime.Now.Hour + DateTime.Now.Minute + DateTime.Now.Second+"-B"+batchID;
+
+                    hv = isHV();
+                    if (hv != "\\")
+                        fileName += "-" + hv.Replace("\\", "");
+                    
+                    
+                    
+                    XMLBase oce = new XMLBase(
+                        ENV_TYPE.OCE, OCEPath + hv + fileName, (int)etype, eceInstitutionBank, destinationBank, temp_cash_letter_id,batchID,b.creation_date);
+
+                    oce.buildnew();
+                    
+
+                    lbGenResult.Text = "Successful : " + fileName + ".xml";
+
+                    Utilities.addUserLog(Convert.ToInt64(Session["userid"]), "Generate File: " + fileName + " .xml and .img");
+                    batch b = XmlController.getBatchEntity(batchID);
+                    b.XmlFileName = fileName;
+                    BaseController.saveChanges();
+                    
+                    loadGridView(Convert.ToInt32(ddlClearType.SelectedValue));
+                }
+                else
+                {
+                    lbGenResult.Text = "You can't  generate xml from more than one batch";
+                }
+            }
+            catch
+            {
+                lbGenResult.Text = "Failure";
+            }
+
+        }
+
+        protected void ddlClearType_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            int oceType = Convert.ToInt32(ddlClearType.SelectedValue);
+            loadGridView(oceType);
+        }
+
+        protected void sendOCEToPBM(object sender, EventArgs e)
+        {
+            try
+            {
+                hv = isHV();
+                if (hv == "")
+                {
+                    return;
+                }
+
+                LinkButton lb = (LinkButton)sender;
+                HiddenField hfFile = (HiddenField)lb.Parent.FindControl("fileName");
+                string onlyName = hfFile.Value.Substring(0, hfFile.Value.Length - 4);
+
+
+                loadFTPSettings();
+
+
+                FTP f = new FTP("ftp://" + stIP + "/" + ftpUploadPath, stName, stPass);//txtPassword.Value);
+                f.UseSSL = bSecured;
+
+                FileInfo fimg = XmlController.getFileInfo(OCEPath + hv, onlyName + ".img");
+                bool retimg = f.UploadFile(fimg);
+
+                FileInfo fxml = XmlController.getFileInfo(OCEPath + hv, onlyName + ".xml");
+                bool retxml = f.UploadFile(fxml);
+
+                if (retimg && retxml)
+                {
+                    lblUploadMessage.Text = "Successfully Sent " + onlyName + ".xml";
+                    Utilities.addUserLog(Convert.ToInt64(Session["userid"]), "Sent to PBM: " + onlyName + " .xml and .img");
+
+                    lb.BackColor = Color.FromArgb(206, 233, 205);
+                    try
+                    {
+                        File.Move(OCEPath + hv + onlyName + ".xml", OCEPath + hv + "Processed\\" + onlyName + ".xml");
+                        File.Move(OCEPath + hv + onlyName + ".img", OCEPath + hv + "Processed\\" + onlyName + ".img");
+                    }
+                    catch
+                    {
+                    }
+
+                    loadOCEList();
+                }
+                else
+                {
+                    lblUploadMessage.Text = "Error. No File or FTP Connection Error.";
+                    lb.BackColor = Color.FromArgb(255, 200, 200);
+                }
+
+
+
+            }
+            catch (Exception ex)
+            {
+            }
+        }
+
+
+        protected void loadACKListNew()
+        {
+            // ack list
+
+            hv = isHV();
+            if (hv == "")
+                return;
+
+            List<FileInfo> files = XmlController.FilesInDirStart(ackPathLocal, "*.ack", "OCE");
+
+            //List<FileInfo> files = XmlController.FilesInDirStart(OCEPath + hv, "*.ack", "OCE",hv+".ack", DateTime.Now);
+
+            if (null == files || files.Count() == 0)
+            {
+                lblAckCount.Text = "No File for today in " + ackPathLocal;
+                gvAckList.DataSource = null;
+                gvAckList.DataBind();
+            }
+            else
+            {
+                List<string> oces = new List<string>();
+
+                foreach (GridViewRow row in gvSendList.Rows)
+                {
+                    HiddenField _OCE = (HiddenField)row.FindControl("hidOCEName");
+                    if (_OCE.Value.ToLower() != "null")
+                        oces.Add(_OCE.Value);
+                }
+                List<FileInfo> final = new List<FileInfo>();
+                if (oces != null && oces.Count() > 0)
+                {
+                    foreach (FileInfo f in files)
+                    {
+                        if (oces.Contains(f.Name.Substring(0, f.Name.LastIndexOf('.'))))
+                            final.Add(f);
+                    }
+                }
+                lblAckCount.Text = final.Count() + " File(s) for current OCEs " + ackPathLocal;
+                gvAckList.DataSource = final;
+                gvAckList.DataBind();
+            }
+            linkAckTxt.Visible = false;
+
+
+        }
+
+        protected void btnAck_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                hv = isHV();
+                if (hv == "")
+                    return;
+
+
+                loadACKListNew();
+
+
+            }
+            catch (Exception ex)
+            {
+                lblAckCount.Text = "Permission Error.";
+            }
+
+        }
+
+       
+        protected void processACKFile(object sender, EventArgs e)
+        {
+            linkAckTxt.Visible = true;
+            try
+            {
+                hv = isHV();
+                if (hv == "")
+                {
+                    lblAckResult.Text = "Select Type";
+                    return;
+                }
+
+                LinkButton lb = (LinkButton)sender;
+                HiddenField hfFile = (HiddenField)lb.Parent.FindControl("fileName");
+
+                if (File.Exists(ackPathLocal + hfFile.Value))
+                {
+                    // update batch to oce sent - settlement date and time -
+
+                    List<long> lbid = new List<long>();   //batch id list in that file
+                    List<ChequeStatus> statList = new List<ChequeStatus>() { ChequeStatus.outward_checker_accept };
+                    int count = 0;
+                    string btNum = "";
+                    foreach (GridViewRow row in gvSendList.Rows)
+                    {
+                        HiddenField _OCE = (HiddenField)row.FindControl("hidOCEName");
+                        HiddenField _bid = (HiddenField)row.FindControl("hidbatchid");
+
+                        if (_OCE.Value == hfFile.Value.Substring(0, hfFile.Value.Length - 4))
+                        {
+                            btNum = row.Cells[1].Text;
+                            lbid.Add(Convert.ToInt64(_bid.Value));
+                            count++;
+                        }
+                    }
+
+                    lblAckResult.Text = "File :" + ackPathLocal + hfFile.Value;
+                    lblAckResult.Text += "\n" + XMLDBLib.processACK(XmlController.schemaPath + "BBSchema_IRE.xsd",
+                        ackPathLocal + hfFile.Value, lbid, true);
+
+
+                    lblAckResult.Text += "\n\nBatch:<b> " + btNum + "</b> updated for " + hfFile.Value;
+
+                    //save as text file
+                    try
+                    {
+                        File.WriteAllBytes(rootPath + "media/temp/" + hfFile.Value + ".txt", Encoding.ASCII.GetBytes(lblAckResult.Text));
+                        linkAckTxt.NavigateUrl = "~/media/temp/" + hfFile.Value + ".txt";
+                    }
+                    catch
+                    {
+                        linkAckTxt.NavigateUrl = "#";
+                    }
+                    ////
+
+                    lblAckResult.Text = lblAckResult.Text.Replace("\n", "<br>");
+                    lb.BackColor = Color.FromArgb(206, 233, 205);
+
+                    Utilities.addUserLog(Convert.ToInt64(Session["userid"]),
+                        "ACK Processed: " + hfFile.Value);
+
+                    try
+                    {
+                        File.Move(ackPathLocal + hfFile.Value, ackPathLocal + "processed\\" + hfFile.Value);
+                    }
+                    catch (Exception ex)
+                    {
+                    }
+
+                    // refresh
+
+                    int oceType = Convert.ToInt32(ddlClearType.SelectedValue);
+                    loadGridView(oceType);
+
+                }
+                else
+                {
+                    lblAckResult.Text = "Not Found";
+                    lb.BackColor = Color.FromArgb(255, 200, 200);
+                }
+            }
+            catch (Exception ex)
+            {
+                lblAckResult.Text = "Error.";
+            }
+
+        }
+               
+        
+        protected void batchDate_TextChanged(object sender, EventArgs e)
+        {
+            int oceType = Convert.ToInt32(ddlClearType.SelectedValue);
+            loadGridView(oceType);
+        }
+    }
+
+
+}
