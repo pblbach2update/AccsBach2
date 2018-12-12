@@ -1,0 +1,487 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XMLSpy v2009 (http://www.altova.com) by Administrator (EMBRACE) -->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<xs:element name="ICL">
+		<xs:annotation>
+			<xs:documentation>Contains data about total Cheque. It may contain data of many cheques also.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="FileHeader"/>
+				<xs:element name="CashLetter">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element ref="CashLetterHeader"/>
+							<xs:element name="Bundle" maxOccurs="unbounded">
+								<xs:complexType>
+									<xs:group ref="ReturnBundle"/>
+								</xs:complexType>
+							</xs:element>
+							<xs:element ref="CashLetterControl"/>
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+				<xs:element ref="FileControl"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:simpleType name="PresentingBankItemSeqType">
+		<xs:restriction base="xs:positiveInteger">
+			<xs:totalDigits value="15"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="TruncationIndType">
+		<xs:restriction base="xs:string">
+			<xs:length value="1"/>
+			<xs:enumeration value="Y"/>
+			<xs:enumeration value="N"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="ConversionIndType">
+		<xs:restriction base="xs:string">
+			<xs:length value="1"/>
+			<xs:enumeration value="2"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="CorrectionIndType">
+		<xs:restriction base="xs:nonNegativeInteger">
+			<xs:totalDigits value="1"/>
+			<xs:enumeration value="0"/>
+			<xs:enumeration value="1"/>
+			<xs:enumeration value="2"/>
+			<xs:enumeration value="3"/>
+			<xs:enumeration value="4"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="StartofProtectedDataType">
+		<xs:restriction base="xs:nonNegativeInteger">
+			<xs:totalDigits value="7"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="CoordinateType">
+		<xs:restriction base="xs:nonNegativeInteger">
+			<xs:totalDigits value="4"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="QualityUsabilityMeasure">
+		<xs:restriction base="xs:nonNegativeInteger">
+			<xs:totalDigits value="1"/>
+			<xs:enumeration value="0"/>
+			<xs:enumeration value="1"/>
+			<xs:enumeration value="2"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="ChequeSequenceNo">
+		<xs:restriction base="xs:nonNegativeInteger">
+			<xs:totalDigits value="7"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:element name="Acknowledgement">
+		<xs:annotation>
+			<xs:documentation>Acknowledgement for all OCE and ICE RCE envelop</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="Status" type="xs:string"/>
+				<xs:element name="Description" type="xs:string"/>
+				<xs:element name="Totals">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="Accepted">
+								<xs:complexType>
+									<xs:sequence>
+										<xs:element name="ItemCount" type="xs:string"/>
+										<xs:element name="TotalAmount" type="xs:string"/>
+									</xs:sequence>
+								</xs:complexType>
+							</xs:element>
+							<xs:element name="Presented">
+								<xs:complexType>
+									<xs:sequence>
+										<xs:element name="ItemCount" type="xs:string"/>
+										<xs:element name="TotalAmount" type="xs:string"/>
+									</xs:sequence>
+								</xs:complexType>
+							</xs:element>
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+				<xs:element name="SettlementDate" type="xs:string"/>
+				<xs:element name="SettlementTime" type="xs:string"/>
+				<xs:element name="RejectedItems" minOccurs="0">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="Items" maxOccurs="unbounded">
+								<xs:complexType>
+									<xs:sequence>
+										<xs:element name="seqnum" type="xs:string"/>
+										<xs:element name="amount" type="xs:string"/>
+										<xs:element name="reason" type="xs:string"/>
+									</xs:sequence>
+								</xs:complexType>
+							</xs:element>
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="ECESettlementDate" type="xs:string"/>
+	<xs:element name="ECESessionTime" type="xs:string"/>
+	<xs:element name="ECESettlementTime" type="xs:string"/>
+	<xs:element name="FileHeader">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="StandardLevel" type="xs:string"/>
+				<xs:element name="TestFileIndicator" block="restriction">
+					<xs:simpleType>
+						<xs:restriction base="xs:string">
+							<xs:length value="1"/>
+							<xs:enumeration value="P"/>
+							<xs:enumeration value="T"/>
+						</xs:restriction>
+					</xs:simpleType>
+				</xs:element>
+				<xs:element name="ImmediateDestRoutingNumber" type="xs:string"/>
+				<xs:element name="ImmediateOriginRoutingNumber" type="xs:string"/>
+				<xs:element name="FileCreationDate" type="xs:string"/>
+				<xs:element name="FileCreationTime" type="xs:string"/>
+				<xs:element name="ResendIndicator">
+					<xs:simpleType>
+						<xs:restriction base="xs:string">
+							<xs:length value="1"/>
+							<xs:enumeration value="Y"/>
+							<xs:enumeration value="N"/>
+						</xs:restriction>
+					</xs:simpleType>
+				</xs:element>
+				<xs:element ref="ECESettlementDate"/>
+				<xs:element ref="ECESessionTime"/>
+				<xs:element ref="ECESettlementTime"/>
+				<xs:element name="ECEType" type="xs:string"/>
+				<xs:element name="FileIDModifier" minOccurs="0"/>
+				<xs:element name="CountryCode">
+					<xs:simpleType>
+						<xs:restriction base="xs:string">
+							<xs:length value="2"/>
+							<xs:enumeration value="BD"/>
+						</xs:restriction>
+					</xs:simpleType>
+				</xs:element>
+				<xs:element name="OffsetofCertificate" type="xs:integer" nillable="true" minOccurs="0"/>
+				<xs:element name="UserField" type="xs:string" minOccurs="0"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="CashLetterHeader">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="CashLetterBusinessDate" type="xs:string"/>
+				<xs:element name="CashLetterCreationDate" type="xs:string"/>
+				<xs:element name="CashLetterCreationTime" type="xs:string"/>
+				<xs:element name="CashLetterRecordTypeIndicator">
+					<xs:simpleType>
+						<xs:restriction base="xs:string">
+							<xs:length value="1"/>
+							<xs:enumeration value="I"/>
+							<xs:enumeration value="E"/>
+							<xs:enumeration value="N"/>
+						</xs:restriction>
+					</xs:simpleType>
+				</xs:element>
+				<xs:element name="CashLetterDocumentationTypeIndicator">
+					<xs:simpleType>
+						<xs:restriction base="xs:string">
+							<xs:length value="1"/>
+							<xs:enumeration value="G"/>
+							<xs:enumeration value="I"/>
+							<xs:enumeration value="K"/>
+						</xs:restriction>
+					</xs:simpleType>
+				</xs:element>
+				<xs:element name="CashLetterID" type="xs:string"/>
+				<xs:element name="OriginatorContactName" type="xs:string"/>
+				<xs:element name="OriginatorContactPhoneNumber" type="xs:string"/>
+				<xs:element name="UserField" type="xs:string" minOccurs="0"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="BundleHeader">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="CollectionTypeIndicator" type="xs:string"/>
+				<xs:element name="DestRoutingNumber" type="xs:string"/>
+				<xs:element name="ECEInstitutionRoutingNumber" type="xs:string"/>
+				<xs:element name="BundleBusinessDate" type="xs:string"/>
+				<xs:element name="BundleCreationDate" type="xs:string"/>
+				<xs:element name="BundleID" type="xs:string"/>
+				<xs:element name="BundleSequenceNumber" type="xs:string"/>
+				<xs:element name="CycleNumber" type="xs:string" minOccurs="0"/>
+				<xs:element name="ReturnLocationRoutingNumber" type="xs:string"/>
+				<xs:element name="UserField" type="xs:string" minOccurs="0"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="BundleControl">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="ItemsWithinBundleCount" type="xs:string"/>
+				<xs:element name="BundleTotalAmount" type="xs:string"/>
+				<xs:element name="MICRValidTotalAmount" type="xs:string"/>
+				<xs:element ref="ImagesWithinBundleCount" minOccurs="0"/>
+				<xs:element name="UserField" type="xs:string" minOccurs="0"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="CashLetterControl">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="BundleCount" type="xs:string"/>
+				<xs:element name="ItemsWithinCashLetterCount" type="xs:string"/>
+				<xs:element name="CashLetterTotalAmount" type="xs:string"/>
+				<xs:element name="ImagesWithinCashLetterCount" type="xs:string"/>
+				<xs:element name="ECEInstitutionName" type="xs:string" minOccurs="0"/>
+				<xs:element name="SettlementDate" type="xs:string" minOccurs="0"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="FileControl">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="CashLetterCount" type="xs:string"/>
+				<xs:element name="TotalRecordCount" type="xs:string"/>
+				<xs:element name="TotalItemCount" type="xs:string"/>
+				<xs:element name="FileTotalAmount" type="xs:string"/>
+				<xs:element name="ImmediateOriginContactName" type="xs:string"/>
+				<xs:element name="ImmediateOriginContactPhoneNumber" type="xs:string"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="CheckDetail">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="ECESettlementDate"/>
+				<xs:element ref="ECESessionTime"/>
+				<xs:element ref="ECESettlementTime"/>
+				<xs:element name="ECEItemType">
+					<xs:simpleType>
+						<xs:restriction base="xs:string">
+							<xs:length value="1"/>
+							<xs:enumeration value="N"/>
+							<xs:enumeration value="R"/>
+						</xs:restriction>
+					</xs:simpleType>
+				</xs:element>
+				<xs:element name="ExternalProcessingCode">
+					<xs:simpleType>
+						<xs:restriction base="xs:string">
+							<xs:length value="1"/>
+						</xs:restriction>
+					</xs:simpleType>
+				</xs:element>
+				<xs:element name="IssuingBranchRoutingNumber" type="xs:string"/>
+				<xs:element name="AccountNumber" type="xs:string"/>
+				<xs:element name="ChequeSequenceNumber" type="xs:string"/>
+				<xs:element name="ItemAmount" type="xs:string"/>
+				<xs:element name="ECEInstitutionItemSequenceNumber" type="xs:string"/>
+				<xs:element name="DocumentationTypeIndicator">
+					<xs:simpleType>
+						<xs:restriction base="xs:string">
+							<xs:length value="1"/>
+							<xs:enumeration value="I"/>
+						</xs:restriction>
+					</xs:simpleType>
+				</xs:element>
+				<xs:element name="ReturnAcceptanceIndicator">
+					<xs:simpleType>
+						<xs:restriction base="xs:string">
+							<xs:length value="1"/>
+							<xs:enumeration value="0"/>
+							<xs:enumeration value="1"/>
+							<xs:enumeration value="2"/>
+							<xs:enumeration value="3"/>
+							<xs:enumeration value="4"/>
+							<xs:enumeration value="5"/>
+							<xs:enumeration value="6"/>
+						</xs:restriction>
+					</xs:simpleType>
+				</xs:element>
+				<xs:element name="MICRValidIndicator" type="xs:string"/>
+				<xs:element name="BOFDIndicator">
+					<xs:simpleType>
+						<xs:restriction base="xs:string">
+							<xs:length value="1"/>
+							<xs:enumeration value="Y"/>
+							<xs:enumeration value="N"/>
+							<xs:enumeration value="U"/>
+						</xs:restriction>
+					</xs:simpleType>
+				</xs:element>
+				<xs:element name="CheckDetailRecordAddendumCount" type="xs:string" minOccurs="0"/>
+				<xs:element name="CorrectionIndicator" type="xs:string"/>
+				<xs:element name="RepresentmentIndicator">
+					<xs:simpleType>
+						<xs:restriction base="xs:string">
+							<xs:enumeration value="0"/>
+							<xs:enumeration value="1"/>
+							<xs:enumeration value="2"/>
+						</xs:restriction>
+					</xs:simpleType>
+				</xs:element>
+				<xs:element name="ArchiveTypeIndicator">
+					<xs:simpleType>
+						<xs:restriction base="xs:string">
+							<xs:length value="1"/>
+							<xs:enumeration value="B"/>
+							<xs:enumeration value="F"/>
+						</xs:restriction>
+					</xs:simpleType>
+				</xs:element>
+				<xs:element name="OffsetofDigitalSignature" type="xs:string"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="AddendumA">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="AddendumARecordNumber" type="xs:string"/>
+				<xs:element name="BOFDRoutingNumber" type="xs:string" minOccurs="0"/>
+				<xs:element name="BOFDBusinessEndorsementDate" type="xs:string" minOccurs="0"/>
+				<xs:element ref="BOFDItemSequenceNumber" minOccurs="0"/>
+				<xs:element name="DepositAccountNumberatBOFD" type="xs:string" minOccurs="0"/>
+				<xs:element name="BOFDDepositBranch" type="xs:string"/>
+				<xs:element name="PayeeName" type="xs:string" minOccurs="0"/>
+				<xs:element ref="TruncationIndicator"/>
+				<xs:element ref="BOFDConversionIndicator"/>
+				<xs:element ref="BOFDCorrectionIndicator"/>
+				<xs:element name="UserField" type="xs:string" minOccurs="0"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="AddendumC">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="AddendumCRecordNumber" type="xs:string"/>
+				<xs:element name="EndorsingBankRoutingNumber" type="xs:string"/>
+				<xs:element name="EndorsingBankEndorsementDate" type="xs:string"/>
+				<xs:element name="EndorsingBankItemSequenceNumber" type="xs:string"/>
+				<xs:element ref="TruncationIndicator"/>
+				<xs:element name="EndorsingBankConversionIndicator" type="xs:string"/>
+				<xs:element name="EndorsingBankCorrectionIndicator" type="xs:string"/>
+				<xs:element name="ReturnReason">
+					<xs:simpleType>
+						<xs:restriction base="xs:string">
+							<xs:length value="1"/>
+						</xs:restriction>
+					</xs:simpleType>
+				</xs:element>
+				<xs:element name="UserField" type="xs:string" minOccurs="0"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:group name="BundleGroup">
+		<xs:sequence>
+			<xs:element ref="BundleHeader"/>
+			<xs:element name="Item" maxOccurs="unbounded">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element ref="CheckDetail"/>
+						<xs:element ref="AddendumA" minOccurs="0"/>
+						<xs:element ref="AddendumC" minOccurs="0"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element ref="BundleControl"/>
+		</xs:sequence>
+	</xs:group>
+	<xs:group name="ReturnBundle">
+		<xs:sequence>
+			<xs:element ref="BundleHeader"/>
+			<xs:element name="Item" maxOccurs="1000">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="ReturnRecord">
+							<xs:complexType>
+								<xs:sequence>
+									<xs:element name="PayorBankRoutingNumber" type="xs:string"/>
+									<xs:element name="AccountNumber" type="xs:string"/>
+									<xs:element name="ChequeSequenceNumber" type="xs:string"/>
+									<xs:element name="BOFDRepresentmentIndicator" type="xs:string"/>
+									<xs:element name="ItemAmount" type="xs:string"/>
+									<xs:element name="ReturnReason" type="xs:string"/>
+									<xs:element name="ReturnReasonAddendumCount" type="xs:string"/>
+									<xs:element name="ReturnDocumentationTypeIndicator" type="xs:string"/>
+									<xs:element name="ForwardBundleDate" type="xs:string"/>
+									<xs:element name="ECEInstitutionItemSequenceNumber" type="xs:string"/>
+									<xs:element name="ExternalProcessingCode" type="xs:string"/>
+									<xs:element name="ReturnNotificationIndicator" type="xs:string"/>
+									<xs:element name="ReturnArchiveTypeIndicator" type="xs:string"/>
+									<xs:element name="OffsetofDigitalSignature" type="xs:string"/>
+								</xs:sequence>
+							</xs:complexType>
+						</xs:element>
+						<xs:element name="ReturnAddendumA" minOccurs="0">
+							<xs:complexType>
+								<xs:sequence>
+									<xs:element name="ReturnAddendumARecordNumber" type="xs:string"/>
+									<xs:element name="BOFDRoutingNumber" type="xs:string"/>
+									<xs:element name="BOFDBusinessEndorsementDate" type="xs:string"/>
+									<xs:element name="BOFDItemSequenceNumber" type="xs:string"/>
+									<xs:element name="DepositAccountNumberatBOFD" type="xs:string"/>
+									<xs:element name="BOFDDepositBranch" type="xs:string"/>
+									<xs:element name="PayeeName" type="xs:string"/>
+									<xs:element ref="TruncationIndicator"/>
+									<xs:element ref="BOFDConversionIndicator"/>
+									<xs:element ref="BOFDCorrectionIndicator"/>
+									<xs:element name="UserField" type="xs:string"/>
+								</xs:sequence>
+							</xs:complexType>
+						</xs:element>
+						<xs:element name="ReturnAddendumB" minOccurs="0">
+							<xs:complexType>
+								<xs:sequence>
+									<xs:element name="PayorBankName" type="xs:string"/>
+									<xs:element ref="ECESettlementDate"/>
+									<xs:element ref="ECESessionTime"/>
+									<xs:element name="ECESettlementTime" type="xs:string"/>
+									<xs:element name="ECEItemType" type="xs:string"/>
+									<xs:element name="PayorBankItemSequenceNumber" type="xs:string"/>
+									<xs:element name="PayorBankBusinessDate" type="xs:string"/>
+									<xs:element name="PayorAccountName" type="xs:string"/>
+								</xs:sequence>
+							</xs:complexType>
+						</xs:element>
+						<xs:element name="ReturnAddendumD" minOccurs="0">
+							<xs:complexType>
+								<xs:sequence>
+									<xs:element name="ReturnAddendumDRecordNumber" type="xs:string"/>
+									<xs:element name="EndorsingBankRoutingNumber" type="xs:string"/>
+									<xs:element name="EndorsingBankEndorsementDate" type="xs:string"/>
+									<xs:element name="EndorsingBankItemSequenceNumber" type="xs:string"/>
+									<xs:element ref="TruncationIndicator"/>
+									<xs:element name="EndorsingBankConversionIndicator" type="xs:string"/>
+									<xs:element name="EndorsingBankCorrectionIndicator" type="xs:string"/>
+									<xs:element name="ReturnReason" type="xs:string"/>
+									<xs:element name="UserField" type="xs:string" minOccurs="0"/>
+								</xs:sequence>
+							</xs:complexType>
+						</xs:element>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element ref="BundleControl"/>
+		</xs:sequence>
+	</xs:group>
+	<xs:element name="TruncationIndicator">
+		<xs:simpleType>
+			<xs:restriction base="xs:string">
+				<xs:enumeration value="Y"/>
+				<xs:enumeration value="N"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+	<xs:element name="BOFDConversionIndicator" type="xs:string"/>
+	<xs:element name="BOFDCorrectionIndicator" type="xs:string"/>
+	<xs:element name="BOFDItemSequenceNumber" type="xs:string"/>
+	<xs:element name="ImagesWithinBundleCount" type="xs:string"/>
+</xs:schema>
