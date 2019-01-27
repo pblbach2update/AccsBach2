@@ -101,6 +101,8 @@
     <FtpBackUpDir>Data/Common/Broadcast/Latest/Backup</FtpBackUpDir>
     <CommaSeparatedFileExt>.txt</CommaSeparatedFileExt>
     <JobName>Broadcast</JobName>
-    <PbmInwardFileType>1</PbmInwardFileType>	
+    <PbmInwardFileType>1</PbmInwardFileType>
+    <CommaSeparatedFileNamePattern>ReadMe</CommaSeparatedFileNamePattern>
+	
   </FtpDownloadSettings>
 </ArrayOfFtpDownloadSettings>
