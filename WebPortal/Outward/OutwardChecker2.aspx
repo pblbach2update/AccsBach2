@@ -116,6 +116,9 @@
                         <asp:PlaceHolder runat="server" ID="phbranchlist">
                             <uc:brlist ID="branchList" selectLoginBranch="True" runat="server" IsAdmin="True" AutoPostBackOnChange="true" OnOnAutoPostBackControl="selectedindexchanged" includeBureau="True" />
                         </asp:PlaceHolder>
+                        <asp:DropDownList runat="server" ID="ddlCurrency" AutoPostBack="true" OnSelectedIndexChanged="ddlCurrency_OnSelectedIndexChanged" AppendDataBoundItems="True">
+                            <asp:ListItem Text="All Currency"  Value="255"></asp:ListItem>
+                            </asp:DropDownList>
                     </td>
                 </tr>
                 <tr>
@@ -316,7 +319,8 @@
                 <div class="topBar" style="width: 930px;">
                     <div style="float: left; width: 200px;">
                         <label id="cheque_log_title">
-                            Cheque</label>
+                            Cheque-</label>
+                         <span id="divIssuingBank" style="font-weight: bold;"></span>
                     </div>
                     <div style="float: right; width: 600px; text-align: right;">
                         <%=UserProfile.BankCode%>,
@@ -343,7 +347,7 @@
                         </table>
                         <table id="table_body" style="width: 100%;" cellpadding="0" cellspacing="0" border="0">
                             <tr>
-                                <td class="dataEntry">
+                                <td class="dataEntry" style="width: 280px">
                                     <fieldset>
                                         <legend>Benficiary</legend>
                                         <div>
@@ -356,12 +360,14 @@
 
                                         </div>
                                         <div>
-                                            <span style="padding-right: 12px">Name :</span>
-                                            <input type="text" name="cu_account_holder_name" id="cu_payee" tabindex="1" value="" readonly="readonly" />
+                                            <span style="padding-right: 8px">Name :</span>
+                                            <!--<input type="text" name="cu_account_holder_name" id="cu_payee" tabindex="1" value="" readonly="readonly" />-->
+                                             <textarea name="cu_account_holder_name" id="cu_payee" tabindex="1"  
+                                                    style="width: 195px; vertical-align: top;overflow-x: hidden"  rows="2" readonly="readonly"></textarea>
                                         </div>
                                         <div>
                                             <span style="padding-right: 13px">Branch</span>
-                                            <asp:DropDownList runat="server" ID="ddlMPBranchList" Width="120px" ClientIDMode="Static">
+                                            <asp:DropDownList runat="server" ID="ddlMPBranchList" Width="190px" ClientIDMode="Static" Enabled="False">
                                             </asp:DropDownList>
                                         </div>
 
@@ -380,7 +386,7 @@
                                 </div>--%>
                                 </td>
                                 <td style="width: 5px;"></td>
-                                <td class="chkInfo" style="width: 400px">
+                                <td class="chkInfo" >
                                     <div id="grp_img_endorsement" class="no_notification">
                                         <label>
                                             <input class="check_label" id="benif_ac_usability" type="checkbox" checked="checked"
@@ -390,10 +396,18 @@
                                                 alt="User Endorsement" />
                                         </div>
                                     </div>
+                                    <div id="grp_img_payee" class="no_notification">
+                                        <label class="clearboth">
+                                            <input class="check_label" id="payee_usability" type="checkbox" tabindex="104" />
+                                        </label>
+                                        <div id="div_img_payee" class="image_input" style="">
+                                            <img class="chq" id="img_payee" src="" style="" alt="Payee Name" />
+                                        </div>
+                                    </div>
                                 </td>
                                 <td style="width: 5px;"></td>
-                                <td class="chkInfo2" rowspan="4">
-                                    <div>
+                                <td class="chkInfo2" rowspan="1">
+                                    <div style="display: none">
                                         <div style="float: right; width: 225px; padding: 2px; height: 100px;">
                                             <div id="iqaResult" style="width: 205px; height: 17px; border-bottom: 1px dashed #dda0dd; font-weight: bold; margin-bottom: 1px; text-align: center;">
                                                 Image Analysis
@@ -425,11 +439,11 @@
                                         </div>
                                     </div>
                                     <div>
-                                        <div style="float: right; width: 225px; padding: 5px; height: 87px;">
-                                            <div id="cheque_log_role" style="width: 225px; height: 17px; border-bottom: 1px dashed #dda0dd; margin-bottom: 3px; text-align: center;">
+                                        <div style="float: right; width: 175px; padding: 5px; height: 87px;">
+                                            <div id="cheque_log_role" style="width: 170px; height: 17px; border-bottom: 1px dashed #dda0dd; margin-bottom: 3px; text-align: center;">
                                                 Checker Log
                                             </div>
-                                            <div id="cheque_log_details" class="notification" style="width: 215px; height: 60px; padding: 5px; font-size: 12px; font-weight: normal;">
+                                            <div id="cheque_log_details" class="notification" style="width: 170px; height: 60px; padding: 5px; font-size: 12px; font-weight: normal;">
                                             </div>
                                         </div>
                                     </div>
@@ -557,14 +571,14 @@
                                 </td>
                                 <td></td>
                                 <td class="chkInfo">
-                                    <div id="grp_img_payee" class="no_notification">
+                                    <%--<div id="grp_img_payee" class="no_notification">
                                         <label class="clearboth">
                                             <input class="check_label" id="payee_usability" type="checkbox" checked tabindex="104" />
                                         </label>
                                         <div id="div_img_payee" class="image_input" style="">
                                             <img class="chq" id="img_payee" src="" style="" alt="Payee Name" />
                                         </div>
-                                    </div>
+                                    </div>--%>
                                 </td>
                             </tr>
                             <tr>
@@ -609,7 +623,7 @@
                                     </div>
                                 </td>
                                 <td></td>
-                                <td class="chkInfo2" rowspan="2">
+                                <td class="chkInfo2" rowspan="2" style="display: none">
                                     <div>
                                         <div style="float: right; width: 225px; padding: 5px; height: 87px;">
                                             <div style="width: 225px; height: 17px; border-bottom: 1px dashed #dda0dd; margin-bottom: 3px; text-align: center;">
@@ -621,8 +635,8 @@
                                                         <td align="right">Bank:
                                                         </td>
                                                         <td>
-                                                            <div id="divIssuingBank" style="font-weight: bold;">
-                                                            </div>
+                                                            <!--<div id="divIssuingBank" style="font-weight: bold;">
+                                                            </div>-->
                                                         </td>
                                                     </tr>
                                                     <%-- <tr>

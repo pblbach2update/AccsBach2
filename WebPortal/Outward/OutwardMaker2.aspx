@@ -127,6 +127,9 @@
                             <uc:brlist ID="branchList" runat="server" selectLoginBranch="True" AutoPostBackOnChange="true"
                                 OnOnAutoPostBackControl="selectedindexchanged" IsAdmin="True" includeBureau="True" />
                         </asp:PlaceHolder>
+                        <asp:DropDownList runat="server" ID="ddlCurrency" AutoPostBack="true" OnSelectedIndexChanged="ddlCurrency_OnSelectedIndexChanged" AppendDataBoundItems="True">
+                            <asp:ListItem Text="All Currency" Value="255"></asp:ListItem>
+                        </asp:DropDownList>
 
                     </td>
                 </tr>
@@ -324,7 +327,8 @@
                 <div class="topBar" style="width: 930px;">
                     <div style="float: left; width: 200px;">
                         <label id="cheque_log_title">
-                            Cheque</label>
+                            Cheque-</label>
+                        <span id="divIssuingBank" style="font-weight: bold;"></span>
                     </div>
                     <div style="float: right; width: 600px; text-align: right;">
                         <%=UserProfile.BranchRoutingNumber%>,
@@ -335,6 +339,7 @@
                 </label>
                 <input type="hidden" name="cu_dbid" id="cu_dbid" value="" tabindex="1000" />
                 <input type="hidden" name="cu_itemCurrency" id="cu_itemCurrency" value="" tabindex="1001" />
+                <input type="hidden" name="cu_itemSession" id="cu_itemSession" value="" tabindex="1001" />
                 <div style="width: 940px; height: 490px; float: left;">
                     <div id="stylized" class="outward_form" style="width: 930px;">
                         <table id="header_table" style="width: 100%;" cellpadding="0" cellspacing="0" border="0">
@@ -350,39 +355,48 @@
                         </table>
                         <table id="table_body" style="width: 100%;" cellpadding="0" cellspacing="0" border="0">
                             <tr>
-                                <td class="dataEntry">
-                                    <div id="grp_account" class="no_notification">
+                                <td class="dataEntry" valign="top">
+                                    <div id="grp_account" class="no_notification" style="width: 280px">
                                         <fieldset>
                                             <legend>Benficiary</legend>
                                             <div>
-                                                <span style="padding-right: 20px">A/C :</span>
-                                                <input type="text" name="cu_account" id="cu_account" tabindex="1" value="" />
+                                                <span style="padding-right: 18px">A/C :</span>
+                                                <input type="text" name="cu_account" id="cu_account" tabindex="1" value="" maxlength="<%= this.BenifAccountLength %>"/>
 
 
                                             </div>
                                             <div>
-                                                <span style="padding-right: 12px">Name :</span>
-                                                <input type="text" name="cu_account_holder_name" id="cu_payee" tabindex="1" value="" />
-                                            </div>
+                                                <span style="padding-right: 10px">Name :</span>
 
+                                                <%-- <input type="text" name="cu_account_holder_name" id="cu_payee" tabindex="1"  style="width: 195px" />--%>
+                                                <textarea name="cu_account_holder_name" id="cu_payee" tabindex="1"
+                                                    style="width: 195px; vertical-align: top; overflow-x: hidden" rows="2"></textarea>
+
+                                            </div>
+                                            <asp:PlaceHolder runat="server" ID="phCbsAdditionalInfo">
+                                            
+                                            </asp:PlaceHolder>
                                             <!-- Account No selection for Krishi Bank-->
                                             <select id="cu_BenifList" multiple="multiple" style="margin-left: 98px; height: 18px; display: none">
                                                 <option value="133/36 H">133/36 H</option>
                                             </select>
                                             <asp:HiddenField runat="server" ID="ownRoutingNumber" ClientIDMode="Static" />
+                                            <asp:HiddenField runat="server" ID="hvSelectedClearingType" ClientIDMode="Static" />
                                             <!--Beneficiary Branch Selection for Shahjalal Bank-->
                                             <div>
-                                                <span style="padding-right: 13px">Branch</span>
-                                                <asp:DropDownList runat="server" ID="ddlMPBranchList" Width="120px" ClientIDMode="Static">
+                                                <span style="padding-right: 10px">Branch</span>
+                                                <asp:DropDownList runat="server" ID="ddlMPBranchList" Width="190px" ClientIDMode="Static">
                                                 </asp:DropDownList>
                                             </div>
                                             <span id="cu_account_p" class="invalid_entry" style="display: none;">(Invalid Account
                                         No) </span>
+                                            
+
                                         </fieldset>
                                     </div>
                                 </td>
                                 <td style="width: 5px;"></td>
-                                <td class="chkInfo" style="width: 400px">
+                                <td class="chkInfo">
                                     <div id="grp_img_endorsement" class="no_notification">
                                         <label>
                                             <input class="check_label" id="benif_ac_usability" type="checkbox" checked="checked"
@@ -391,11 +405,20 @@
                                             <img class="chq" id="img_endorsement" src="" style="position: absolute; height: 100px; width: 256px"
                                                 alt="User Endorsement" />
                                         </div>
+
+                                    </div>
+                                    <div id="grp_img_payee" class="no_notification">
+                                        <label class="clearboth">
+                                            <input class="check_label" id="payee_usability" type="checkbox" tabindex="104" />
+                                        </label>
+                                        <div id="div_img_payee" class="image_input" style="">
+                                            <img class="chq" id="img_payee" src="" style="" alt="Payee Name" />
+                                        </div>
                                     </div>
                                 </td>
                                 <td style="width: 5px;"></td>
-                                <td class="chkInfo2" rowspan="4">
-                                    <div>
+                                <td class="chkInfo2" rowspan="1">
+                                    <div style="display: none">
                                         <div style="float: right; width: 225px; padding: 2px; height: 100px;">
                                             <div id="iqaResult" style="width: 205px; height: 17px; border-bottom: 1px dashed #dda0dd; font-weight: bold; margin-bottom: 1px; text-align: center;">
                                                 Image Analysis
@@ -427,11 +450,11 @@
                                         </div>
                                     </div>
                                     <div>
-                                        <div style="float: right; width: 225px; padding: 5px; height: 87px;">
-                                            <div id="cheque_log_role" style="width: 225px; height: 17px; border-bottom: 1px dashed #dda0dd; margin-bottom: 3px; text-align: center;">
+                                        <div style="width: 130px; padding: 5px;">
+                                            <div id="cheque_log_role" style="height: 17px; border-bottom: 1px dashed #dda0dd; margin-bottom: 3px; text-align: center;">
                                                 Maker Log
                                             </div>
-                                            <div id="cheque_log_details" class="notification" style="width: 215px; height: 60px; padding: 5px; font-size: 12px; font-weight: normal;">
+                                            <div id="cheque_log_details" class="notification" style="width: 110px; height: 30px; padding: 5px; font-size: 12px; font-weight: normal;">
                                             </div>
                                         </div>
                                     </div>
@@ -439,7 +462,7 @@
                             </tr>
                             <tr>
                                 <td class="dataEntry">
-                                    <div id="grp_amount" class="no_notification">
+                                    <div id="grp_amount" class="no_notification" style="width: 280px">
                                         <fieldset>
                                             <legend>Intrument</legend>
                                             <div>
@@ -467,7 +490,7 @@
 
                                             <div>
                                                 <span>Charge not Applicable</span>
-                                                <input type="checkbox" name="cu_chargeApplied" id="cu_chargeApplied" tabindex="4"
+                                                <input type="checkbox" name="cu_chargeApplied" id="cu_chargeApplied" tabindex="8"
                                                     style="width: 15px" />
                                             </div>
 
@@ -504,26 +527,12 @@
                                 </td>
                             </tr>
                             <tr>
-                                <td class="dataEntry">
-                                    <%--<div id="grp_date" class="no_notification">
-                                        <label for="cu_date">
-                                            Issue Date</label>
-                                        <asp:TextBox ID="cu_date" runat="server" EnableViewState="False" CssClass="cu_date"
-                                            Width="100px" TabIndex="3"></asp:TextBox>
-                                        <asp:Image CssClass="cu_date_img" ID="Image1" runat="server" ImageUrl="~/media/images/calendar.gif" />
-                                        <span style="color: Red; font-size: 24px;">*</span>
-                                        <cc1:CalendarExtender Format="dd/MM/yyyy" ID="CalendarExtender1" runat="server" TargetControlID="cu_date"
-                                            PopupButtonID="Image1">
-                                        </cc1:CalendarExtender>
-                                        <br />
-                                        <span id="cu_date_p" class="invalid_entry" style="display: none;">(Date Invalid)</span>
-                                    </div>--%>
-                                    &nbsp;
+                                <td class="dataEntry">&nbsp;
                                 </td>
                                 <td></td>
                                 <td class="chkInfo">
                                     <div id="grp_img_date" class="no_notification">
-                                        <label for="date_usability">
+                                        <label for="date_usability" class="clearboth">
                                             <input class="check_label" name="date_usability" id="date_usability" type="checkbox"
                                                 checked="checked" tabindex="103" />
                                         </label>
@@ -532,8 +541,10 @@
                                         </div>
                                     </div>
                                 </td>
+                                <td colspan="2"></td>
+
                             </tr>
-                            <tr>
+                            <tr style="display: none">
                                 <td class="dataEntry">
                                     <%--   <div id="grp_payee" class="no_notification" style="display: block;">
                                         <div id="Div1" class="no_notification" style="display: inline;">
@@ -548,14 +559,14 @@
                                 </td>
                                 <td></td>
                                 <td class="chkInfo">
-                                    <div id="grp_img_payee" class="no_notification">
+                                    <%--<div id="grp_img_payee" class="no_notification">
                                         <label class="clearboth">
-                                            <input class="check_label" id="payee_usability" type="checkbox" checked tabindex="104" />
+                                            <input class="check_label" id="payee_usability" type="checkbox"  tabindex="104" />
                                         </label>
                                         <div id="div_img_payee" class="image_input" style="">
                                             <img class="chq" id="img_payee" src="" style="" alt="Payee Name" />
                                         </div>
-                                    </div>
+                                    </div>--%>
                                 </td>
                             </tr>
                             <tr>
@@ -606,7 +617,7 @@
                                     </div>
                                 </td>
                                 <td></td>
-                                <td class="chkInfo2" rowspan="2">
+                                <td class="chkInfo2" rowspan="2" style="display: none">
                                     <div>
                                         <div style="float: right; width: 225px; padding: 5px; height: 87px;">
                                             <div style="width: 225px; height: 17px; border-bottom: 1px dashed #dda0dd; margin-bottom: 3px; text-align: center;">
@@ -618,8 +629,8 @@
                                                         <td align="right">Bank:
                                                         </td>
                                                         <td>
-                                                            <div id="divIssuingBank" style="font-weight: bold;">
-                                                            </div>
+                                                            <!--<div id="divIssuingBank" style="font-weight: bold;">
+                                                            </div>-->
                                                         </td>
                                                     </tr>
                                                     <%--<tr>
@@ -786,6 +797,8 @@
             <script type="text/javascript">
                 var benifAccLength = '<%= this.BenifAccountLength %>' | 0;
                 var useDefaultAccount = <%= PublicSettings.UseDefaultAccountNumberInOutwardMaker.ToString().ToLower() %>;
+                var defaultAccountPrefix = '<%= PublicSettings.DefaultAccountPrefix %>';
+                var futureBusinessDaysAllowed = <%= PublicSettings.FutureDayPermittedInDays %>;
                 <% generateListId(); %>
                 <%=generateJSClientId() %>
             </script>

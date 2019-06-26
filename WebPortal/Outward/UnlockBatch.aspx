@@ -91,7 +91,7 @@
             </tr>
             <tr>
                 <td>
-                    <div class="userBox" style="width: 800px;">
+                    <div class="userBox" >
                         <div id="divBatchSelection" runat="server">
                             <asp:GridView ID="gvBatchList" runat="server" AutoGenerateColumns="False" OnSelectedIndexChanged="gvBatchList_SelectedIndexChanged"
                                 DataKeyNames="BatchId" CellPadding="4" ForeColor="#333333" 

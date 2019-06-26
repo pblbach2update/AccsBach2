@@ -8,9 +8,9 @@
 <head runat="server">
     <title>View Group Item</title>
     <link rel="stylesheet" type="text/css" href="../Style/table.css" />
-    <script src="../Script/jquery-1.10.1.min.js" type="text/javascript"></script>
-    <link href="../Style/jquery.fancybox.css" rel="stylesheet" type="text/css" />
-    <script src="../Script/jquery.fancybox.js" type="text/javascript"></script>
+    <script src="/Script/jquery-1.10.1.min.js" type="text/javascript"></script>
+    <link href="/Style/jquery.fancybox.css" rel="stylesheet" type="text/css" />
+    <script src="/Script/jquery.fancybox.js" type="text/javascript"></script>
     <script>
 
         $(function () {

@@ -10,8 +10,42 @@
     <script src="/Script/jquery-1.10.1.min.js"></script>
     <script src="/Script/jquery-migrate-1.1.1.js"></script>
     <script src="/Script/3.6/bootstrap.min.js"></script>
-
     <link href="/Style/3.6/bootstrap.min.css" rel="stylesheet" />
+    <script src="/Script/jquery.loupe.min.js"></script>
+    <script src="/Script/jquery.zoom.min.js"></script>
+    <style>
+        .loupe {
+            background-color: #555;
+            z-index: 4;
+            border: 5px solid rgba(0, 0, 0, 0);
+            cursor: url(blank.png), url(blank.cur), none;
+        }
+
+        .zoom {
+            display: inline-block;
+            position: relative;
+        }
+
+            /* magnifying glass icon */
+            .zoom:after {
+                content: '';
+                display: block;
+                width: 33px;
+                height: 33px;
+                position: absolute;
+                top: 0;
+                right: 0;
+                background: url(icon.png);
+            }
+
+            .zoom img {
+                display: block;
+            }
+
+                .zoom img::selection {
+                    background-color: transparent;
+                }
+    </style>
     <script type="text/javascript">
 
 
@@ -29,6 +63,15 @@
         }
 
         $(function () {
+            //$("#chqfront").loupe();
+            //$("#chqrear").loupe();
+            //$("#cbsImage").loupe();
+            //$('#ex1').zoom({ on: 'click' });
+            $('#ex1').zoom();
+            $('#ex2').zoom();
+            $('#ex3').zoom();
+            $('#ex4').zoom();
+
 
             if ($("#chkrejsel").is(":checked")) {
                 $("#rrNumber").val($("#dropdownrreason").val());
@@ -39,19 +82,28 @@
             $("#nextSigCard").on("click", function (e) {
                 var curIndex = $("#curImgIndex").val();
 
-                curIndex = 1 + parseInt(curIndex);
+             
 
-                console.log(curIndex);
+                curIndex = 1 + parseInt(curIndex);
+               
+                
+
+                
                 var stringFormat = $("#hdImageUrlTemplate").val();
 
                 var imgUrl = String.format(stringFormat, curIndex);
                 $("#curImgIndex").val(curIndex);
-                console.log(imgUrl);
-
                 $("#cbsImage").attr("src", imgUrl);
+               
+               
                 e.preventDefault();
 
+
+
+
             });
+
+         
 
             $("#prevSigCard").on("click", function (e) {
                 var curIndex = $("#curImgIndex").val();
@@ -63,15 +115,27 @@
                     var stringFormat = $("#hdImageUrlTemplate").val();
 
                     var imgUrl = String.format(stringFormat, curIndex);
+
                     $("#curImgIndex").val(curIndex);
                     console.log(imgUrl);
 
                     $("#cbsImage").attr("src", imgUrl);
+                   
                 }
                 e.preventDefault();
 
             });
 
+            $("#cbsImage").bind("load", function () {
+                $('#ex3').trigger('zoom.destroy');
+                $('#ex3').zoom();
+                // do stuff
+            }).each(function () {
+                if (this.complete) {
+                    $(this).load(); // For jQuery < 3.0 
+                    // $(this).trigger('load'); // For jQuery >= 3.0 
+                }
+            });
 
             $("#rrNumber").keydown(function (event) {
                 var keyCode = event.which || event.keyCode;
@@ -139,7 +203,7 @@
                         <div class="panel-heading">Instument Detail</div>
                         <div class="panel-body">
 
-                            <table style="width: 100%; margin-bottom: 2px;" cellpadding="1">
+                            <table style="width: 100%; margin-bottom: 2px;"  class="table table-condensed">
                                 <tr>
                                     <td>Cheque No
                                     </td>
@@ -226,7 +290,7 @@
                     <div class="panel panel-default">
                         <div class="panel-heading">Customer Profile</div>
                         <div class="panel-body">
-                            <table width="100%">
+                            <table  class="table table-condensed">
                                 <tr>
                                     <td>Cbs Account No 
                                     </td>
@@ -260,9 +324,10 @@
                     <div class="panel panel-default">
                         <div class="panel-heading">Front</div>
                         <div class="panel-body">
-
-                            <asp:Image runat="server" ID="chqfront" AlternateText="No Front Image Found" ToolTip="Cheque Front Image"
-                                BorderColor="#3C516A" BorderStyle="Solid" BorderWidth="3px" Height="238px" Width="100%"></asp:Image>
+                            <span class='zoom' id='ex1'>
+                                <asp:Image runat="server" ID="chqfront" AlternateText="No Front Image Found" ToolTip="Cheque Front Image"
+                                    BorderColor="#3C516A" BorderStyle="Solid" BorderWidth="3px" Height="238px" Width="100%"></asp:Image>
+                            </span>
                         </div>
 
                     </div>
@@ -274,9 +339,10 @@
                     <div class="panel panel-default">
                         <div class="panel-heading">Back</div>
                         <div class="panel-body">
-
-                            <asp:Image runat="server" ID="chqrear" AlternateText="No Rear Image Found" ToolTip="Cheque Rear Image"
-                                BorderColor="#3C516A" BorderStyle="Solid" BorderWidth="3px" Height="238px" Width="100%"></asp:Image>
+                            <span class='zoom' id='ex2'>
+                                <asp:Image runat="server" ID="chqrear" AlternateText="No Rear Image Found" ToolTip="Cheque Rear Image"
+                                    BorderColor="#3C516A" BorderStyle="Solid" BorderWidth="3px" Height="238px" Width="100%"></asp:Image>
+                            </span>
                         </div>
 
                     </div>
@@ -291,8 +357,11 @@
                         <div class="panel-heading">CBS Card</div>
                         <div class="panel-body">
 
-                            <asp:Image runat="server" ID="cbsImage" AlternateText="Card Data not available" ToolTip="Cheque Front Image"
-                                BorderColor="#3C516A" BorderStyle="Solid" BorderWidth="3px" Height="238px" Width="100%"></asp:Image>
+                            <span class='zoom' id='ex3'>
+                                <asp:Image runat="server" ID="cbsImage" AlternateText="Card Data not available" ToolTip="Cheque Front Image"
+                                    BorderColor="#3C516A" BorderStyle="Solid" BorderWidth="3px" Height="238px" Width="100%"></asp:Image>
+                            </span>
+
                             <div>
                                 <a href="#" id="prevSigCard">Prev</a> <a href="#" id="nextSigCard" style="float: right">Next</a>
                                 <input type="hidden" id="curImgIndex" value="1" />
@@ -308,8 +377,10 @@
                     <div class="panel panel-default">
                         <div class="panel-heading">Customer Signature</div>
                         <div class="panel-body">
-                            <asp:Image runat="server" ID="imgsigInCheque" AlternateText="No Front Image Found" ToolTip="Cheque Front Image"
-                                BorderColor="#3C516A" BorderStyle="Solid" BorderWidth="3px" Height="238px" Width="100%"></asp:Image>
+                            <span class='zoom' id='ex4'>
+                                <asp:Image runat="server" ID="imgsigInCheque" AlternateText="No Front Image Found" ToolTip="Cheque Front Image"
+                                    BorderColor="#3C516A" BorderStyle="Solid" BorderWidth="3px" Height="238px" Width="100%" ></asp:Image>
+                            </span>
                         </div>
 
                     </div>
@@ -318,17 +389,17 @@
 
             </div>
             <div class="row">
-               <div class="col-md-10">
-                   User Action
-                <hr style="border: 1px solid darkgray"/>
-               </div>
-                
+                <div class="col-md-10">
+                    User Action
+                <hr style="border: 1px solid darkgray" />
+                </div>
+
             </div>
             <div class="row">
                 <div class="col-md-5 col-md-offset-3">
                     <table>
-                        <tr >
-                            <td >Debit Instruction</td>
+                        <tr>
+                            <td>Debit Instruction</td>
                             <td style="padding-left: 20px">
                                 <asp:TextBox runat="server" ID="tbDebitInstruction" Columns="30"></asp:TextBox>
                             </td>
@@ -362,7 +433,7 @@
                 <div class="col-md-5 col-md-offset-3">
                     <asp:Button ID="accept" runat="server" Text="Honour" OnClick="OnInwardMakerAcceptClicked" />
                     <asp:Button ID="reject" runat="server" Text="Dishonour" OnClick="OnInwardMakerRejectClicked" Enabled="False" OnClientClick='return  true;' TabIndex="1" />
-                   <asp:Button ID="closewin" runat="server" Text="Close" OnClick="BackToListPage" />
+                    <asp:Button ID="closewin" runat="server" Text="Close" OnClick="BackToListPage" />
                 </div>
             </div>
         </div>

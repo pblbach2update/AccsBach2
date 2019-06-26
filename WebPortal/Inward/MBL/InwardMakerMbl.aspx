@@ -18,12 +18,12 @@
     <asp:Panel ID="Panel1" runat="server" HorizontalAlign="Center">
         <asp:Label ID="errormsg" runat="server" Text="Label" Visible="False" Font-Size="12px"
             ForeColor="Red"></asp:Label></asp:Panel>
-    <div class="userBox" style="width: 800px">
+    <div class="userBox" style="width: 1000px">
         &nbsp;&nbsp;&nbsp;
         <asp:TextBox ID="batchDate" runat="server" BorderColor="#888888" BorderStyle="Solid"
             BorderWidth="1px" Width="100px" Font-Names="Trebuchet MS" Font-Size="12px" Visible="false"></asp:TextBox>
        
-       &nbsp;&nbsp; Clearing Type&nbsp;&nbsp;
+       Clearing Type&nbsp;
         <asp:DropDownList ID="ddlClearType" runat="server" AppendDataBoundItems="True" Font-Names="Trebuchet MS" Font-Size="10pt">
             <asp:ListItem Text="All" Value="0"></asp:ListItem>
         </asp:DropDownList>
@@ -36,8 +36,15 @@
             <uc:brlist ID="branchList" runat="server" AutoPostBackOnChange="True" IsAdmin="True"
                 OnOnAutoPostBackControl="selectedindexchanged" includeBureau="True" selectLoginBranch="True" />
         </asp:PlaceHolder>
+        
+        <asp:DropDownList runat="server" ID="ddlItemFilter" AutoPostBack="True" OnSelectedIndexChanged="ddlItemFilter_OnSelectedIndexChanged">
+            <asp:ListItem Value="0" Text="All Item"></asp:ListItem>
+            <asp:ListItem Value="1" Text="Unprocessed" Selected="True" ></asp:ListItem>
+            <asp:ListItem Value="2" Text="Processed"></asp:ListItem>
+        </asp:DropDownList>
+
         <asp:Button ID="btnGetBatch" class="afprocess" runat="server" Text="Get Cheques" OnClick="btnGetBatch_Click" />
-        <a href="/Admin/ViewGroupItemBranch.aspx?bid=<%= UserProfile.BranchId %>" target="_blank">Return Marked</a>
+        
         
     </div>
     <%--</ContentTemplate>

@@ -12,6 +12,7 @@
     <div>
         Net Settlement <uc:clrTypeInfo ID="netClrType" runat="server" AutoPostBackOnChange="True" Type="0"
                     OndropDownChanging="loadinfo"></uc:clrTypeInfo>
+        CurrencyType : <asp:DropDownList runat="server" ID="ddlCurrencyType" Font-Names="Trebuchet MS" Font-Size="9pt" AutoPostBack="True" OnSelectedIndexChanged="FilterCurrencyInNetSettlement"/>
         
         <hr />
     </div>

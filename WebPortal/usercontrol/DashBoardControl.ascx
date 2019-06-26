@@ -1,5 +1,5 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="DashBoardControl.ascx.cs"
-    Inherits="Accs.Web.usercontrol.DashBoardControl" %>
+    Inherits="Accs.Web.usercontrol.DashBoardControl" EnableViewState="False" %>
 <div class="ListViewContainer">
     <div class="userBox" style="clear: both">
         <asp:Label ID="lbSessionInfo" runat="server" Text=""></asp:Label>
@@ -437,7 +437,7 @@
             <tr>
                 <td class="brCellWidth">
                     <span class="brCellMaxWidth">
-                        <%#Eval("BranchName")%></span>
+                        <%#ShowGroupName()%></span>
                 </td>
                 <td class="brDataCellCWidth">
                     <span class="brDataCellCMaxWidth">
@@ -622,7 +622,7 @@
         <asp:HyperLink ID="hpInwardRetMismatch" runat="server" Target="_blank" CssClass="linkClass">
             InwardRetMismatch(<asp:Label ID="lbInwardRetMismatch" runat="server" Text=""></asp:Label>)</asp:HyperLink>
     </div>
-    <div style="margin: 0 auto; width: 800px; padding: 10px">
-        <asp:PlaceHolder runat="server" ID="phCurrencyWiseList"></asp:PlaceHolder>
+    <div style="margin:0 auto; width: 800px; padding: 10px">
+        <asp:PlaceHolder runat="server" ID="phCurrencyWiseList" EnableViewState="False"></asp:PlaceHolder>
     </div>
 </div>

@@ -36,8 +36,13 @@
             <uc:brlist ID="branchList" runat="server" AutoPostBackOnChange="True" IsAdmin="True"
                 OnOnAutoPostBackControl="selectedindexchanged" includeBureau="True" selectLoginBranch="True" />
         </asp:PlaceHolder>
+        <asp:DropDownList runat="server" ID="ddlItemFilter" AutoPostBack="True" OnSelectedIndexChanged="ddlItemFilter_OnSelectedIndexChanged">
+            <asp:ListItem Value="0" Text="All Item"></asp:ListItem>
+            <asp:ListItem Value="1" Text="Unprocessed" Selected="True"></asp:ListItem>
+            <asp:ListItem Value="2" Text="Processed"></asp:ListItem>
+        </asp:DropDownList>
         <asp:Button ID="btnGetBatch" class="afprocess" runat="server" Text="Get Cheques" OnClick="btnGetBatch_Click" />
-        <a href="/Admin/ViewGroupItemBranch.aspx?bid=<%= UserProfile.BranchId %>" target="_blank">Return Marked</a>
+        
         
     </div>
     <%--</ContentTemplate>

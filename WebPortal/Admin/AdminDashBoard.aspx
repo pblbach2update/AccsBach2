@@ -1,11 +1,10 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/master.Master" AutoEventWireup="True"
-    CodeBehind="AdminDashBoard.aspx.cs" Inherits="Accs.Web.Admin.AdminDashBoard" Culture="bn-BD"
-    UICulture="bn-BD" %>
+    CodeBehind="AdminDashBoard.aspx.cs" Inherits="Accs.Web.Admin.AdminDashBoard"  %>
 
 <%@ Register TagPrefix="uc" TagName="CheckInfo" Src="~/usercontrol/DashBoardControl.ascx" %>
 <%@ Register TagPrefix="uc" TagName="clrTypeInfo" Src="~/usercontrol/DropdownClearingType.ascx" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
-    <%--<meta http-equiv="refresh" content="30" />--%>
+    <meta http-equiv="refresh" content="30" />
     <style>
         #column-right-box
         {
@@ -111,6 +110,13 @@
         <div style="float: left">
             <uc:clrTypeInfo ID="clrtype" runat="server" AutoPostBackOnChange="True" Type="0"
                 OndropDownChanging="loadinfo"></uc:clrTypeInfo>
+            
+            
+            <asp:DropDownList runat="server" ID="ddlCurrencyType" Font-Names="Trebuchet MS" Font-Size="9pt" AutoPostBack="True" 
+                OnSelectedIndexChanged="FilterCurrencyInNetSettlement" AppendDataBoundItems="True">
+                <asp:ListItem Text="All Currency" Value="-1"></asp:ListItem>
+            </asp:DropDownList>
+
             <asp:HyperLink ID="hpReport" runat="server" Target="_blank"></asp:HyperLink>
         </div>
         <div style="float: left; margin-left: 200px; padding-top: 10px">

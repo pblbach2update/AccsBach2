@@ -22,6 +22,8 @@
             <asp:ListItem Text="InwardRetNormal" Value="31"></asp:ListItem>
             <asp:ListItem Text="InwardRetHighvalue" Value="39"></asp:ListItem>
         </asp:DropDownList>
+        
+        CurrencyType : <asp:DropDownList runat="server" ID="ddlCurrencyType" Font-Names="Trebuchet MS" Font-Size="9pt" AutoPostBack="True" OnSelectedIndexChanged="FilterCurrencyInGroupItem"/>
         <hr />
     </div>
     <div style="width: 800px; margin: 0 auto">
@@ -35,16 +37,16 @@
                 <%# AddGroupingRowIfSupplierHasChanged() %>
                 <tr>
                     <td>
-                        <%# Eval("ChequeSeqNo")%>
+                        <%# Eval("ChequeSequence")%>
                     </td>
                     <td>
-                        <%# Eval("issuingRt")%>
+                        <%# Eval("IssuingRoutingNumber")%>
                     </td>
                     <td>
-                        <%# Eval("ChequeAccNo")%>
+                        <%# Eval("ChequeAccount")%>
                     </td>
                     <td>
-                        <%# Eval("tranCode")%>
+                        <%# Eval("TransactionCode")%>
                     </td>
                     <%# AddReturnResaonIfRequired() %>
                     <td>

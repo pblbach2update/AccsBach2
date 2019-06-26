@@ -334,7 +334,9 @@
 
     function nextChequeInfo() {
         if (_curIndex + 1 >= chqid.length) {
-            alert("No more chequeinfos.");
+            __doPostBack('ctl00$ctl00$ContentPlaceHolder1$OutwardBody$btnShowAll', '');
+
+            //alert("No more chequeinfos.");
         }
         else {
             _curIndex++;

@@ -22,6 +22,7 @@
         cheque: {
             dbid: $("#cu_dbid"),
             currencyCode: $("#cu_itemCurrency"),
+            
             rejection_reason: $("#rejection_reason"),
             auto_rejection_reason: $("#auto_reject_reason"),
             log_details: $("#chequeinfo_cheque_log_details"),
@@ -166,6 +167,10 @@
                 DOM.cbs.account.focus();
             } else {
                 DOM.cbs.payee.val(ws_rsp.data.name);
+                if (typeof LoadCbsAdditionalInfo === "function") {
+                    LoadCbsAdditionalInfo(ws_rsp.data);
+                    // safe to use the function
+                }
             }
         } else {
             alert("Could Not Load account");
@@ -230,7 +235,8 @@
     });
     function ValidateAmount(amount) {
         amount = StripComma(amount);
-        if (!isValidAmount(amount) || parseFloat(amount) <= 0) {
+       var selSessionType = $("#hvSelectedClearingType").val();
+       if (!isValidAmount(amount) || parseFloat(amount) <= 0 || (selSessionType == "9" && amount < 500000)) {
             DOM.cbs.inWord.text("");
             DOM.cbs.error.amount.show();
             return false;
@@ -263,7 +269,7 @@
         if (keyCode == 13 || keyCode == 9) {
 
             var amount = $(this).val();
-            if (DOM.cheque.currencyCode.val() != Accs.OutwardWebServiceObject.WSCurrencyType.BDT || amount < 500000) {
+            if (DOM.cheque.currencyCode.val() != Accs.OutwardWebServiceObject.WSCurrencyType.BDT || amount < 50000) {
                 DOM.cheque.isChargeApplicable.attr("checked", true);
                 $("#remarks").css("display", "block");
 
@@ -377,6 +383,12 @@
                     DOM.img.date.attr("src", _curObj.img);
                     DOM.img.payer.attr("src", _curObj.img);
                     DOM.img.amount.attr("src", _curObj.img);
+
+
+
+
+
+
                     DOM.cheque.currencyCode.val(_curObj.CurrencyType);
 
                     //if (_curObj.CurrencyType == ACCS.Outward.WSCurrencyType.BDT) {
@@ -398,15 +410,16 @@
                     //    _curObj.account = "0000000000000";
 
                     //console.log(useDefaultAccount);
-
+                    _curObj.account = defaultAccountPrefix;
                     if (useDefaultAccount === true) {
-                        _curObj.account = "0000000000000";
+                        //_curObj.account = "0000000000000";
                         DOM.cbs.amount.focus();
                         
                     } else {
+
                         DOM.cbs.account.focus();
                     }
-
+                    
                     DOM.cbs.account.attr("value", _curObj.account);
 
                     //DOM.cbs.account.attr("value", "00");
@@ -502,7 +515,11 @@
 
     function nextChequeInfo() {
         if (_curIndex + 1 >= chqid.length) {
-            alert("No more chequeinfos.");
+            showDBModal("Updating List. Please Wait...");
+
+
+            __doPostBack('ctl00$ctl00$ContentPlaceHolder1$OutwardBody$btnShowAll', '');
+            //alert("No more chequeinfos.");
         }
         else {
             _curIndex++;
@@ -546,7 +563,7 @@
 
         //Amount Validation
         var amount = StripComma(DOM.cbs.amount.val());
-        if (!isValidAmount(amount) || parseFloat(amount) <= 0) {
+        if (!ValidateAmount(amount)) {
             li_autoValidation += "<li>Amount not Valid!</li>";
         }
 
@@ -578,7 +595,7 @@
                 if (dateIssuing != null) {
                     var dateNow = new Date(DOM.today.val());
                     var dateNowPlus3 = dateNow;
-                    dateNowPlus3.addDays(7);
+                    dateNowPlus3.addDays(futureBusinessDaysAllowed);
 
                     var date6Prev = new Date(DOM.today.val());
 
@@ -594,7 +611,7 @@
 
                     if (dateIssuing > dateNowPlus3) {
                         //alert("Future Dated Cheque.");
-                        li_autoValidation += "<li>Future Dated chequeinfo.</li>";
+                        li_autoValidation += "<li>Future Dated cheque not permitted.</li>";
                     }
                     else if (dateIssuing < date6Prev) {
                         //alert("Cheque is more than 6 months back.");

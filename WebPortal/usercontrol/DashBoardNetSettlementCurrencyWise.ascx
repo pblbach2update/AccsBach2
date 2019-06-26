@@ -1,18 +1,17 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="DashBoardNetSettlementCurrencyWise.ascx.cs" Inherits="Accs.Web.usercontrol.DashBoardNetSettlementCurrencyWise" %>
 
-<div style="padding: 10px;float: left">
-        <asp:ListView ID="lvBankSummary" ItemPlaceholderID="bsummary" runat="server"
-           OnDataBound="lvBankSummary_OnDataBound">
+<div >
+        <asp:ListView ID="lvBankSummary" ItemPlaceholderID="bsummary" runat="server">
             <LayoutTemplate>
                 <table class="ctable">
-                    <tr>
+                    <%--<tr>
                         <th colspan="10" style="text-align: center">
                             <asp:Label runat="server" ID="lbCurrencyName"></asp:Label>
                         </th>
-                    </tr>
+                    </tr>--%>
                     <tr>
                         <th>
-                            Name
+                            Currency
                         </th>
                         <th colspan="2">
                             Instrument sent

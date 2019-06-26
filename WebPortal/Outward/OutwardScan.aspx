@@ -1,4 +1,5 @@
 <%@ Page Title="" Language="C#" MasterPageFile="/Outward/Outward.Master" AutoEventWireup="true" CodeBehind="OutwardScan.aspx.cs" Inherits="Accs.Web.Outward.OutwardScan" ValidateRequest="false" ClientIDMode="Static"%>
+<%@ Import Namespace="Accs.Core.Common" %>
 
 <%@ MasterType VirtualPath="/Outward/Outward.Master" %>
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="cc1" %>
@@ -59,7 +60,7 @@
                                 <td>
                                     <select id="clearing_type" style="font-family: 'Trebuchet MS'; font-size: 12px">
                                         <option value="0">Choose Clearing Type</option>
-                                        <option value="1">Normal</option>
+                                        <option value="1">Regular Value</option>
                                         <option value="9">High Value</option>
                                     </select>
                                 </td>
@@ -415,7 +416,7 @@
     <script type="text/javascript">
 
         var stopscan=<%= Stopscan %>;
-
+        var futureBusinessDaysAllowed = <%= PublicSettings.FutureDayPermittedInDays %>;
         $(document).ready(function() {
             $("#modal-overlay").css("opacity", 0.60);
             if(stopscan==1)

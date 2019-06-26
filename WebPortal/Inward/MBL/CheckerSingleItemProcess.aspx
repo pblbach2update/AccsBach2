@@ -1,7 +1,5 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="CheckerSingleItemProcess.aspx.cs" Inherits="Accs.Web.Inward.MBL.CheckerSingleItemProcess" %>
 
-<%@ Register TagPrefix="cc1" Namespace="AjaxControlToolkit" Assembly="AjaxControlToolkit, Version=3.0.30512.17815, Culture=neutral, PublicKeyToken=28f01b0e84b6d53e" %>
-
 <!DOCTYPE html>
 
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -10,7 +8,7 @@
     <script src="/Script/jquery-1.10.1.min.js"></script>
     <script src="/Script/jquery-migrate-1.1.1.js"></script>
     <script src="/Script/3.6/bootstrap.min.js"></script>
-
+    <script src="/Script/jquery.zoom.min.js"></script>
     <link href="/Style/3.6/bootstrap.min.css" rel="stylesheet" />
     <script type="text/javascript">
 
@@ -30,14 +28,16 @@
                 $("#rrNumber").val($("#dropdownrreason").val());
                 $("#rrNumber").removeAttr("disabled").focus();
             }
-
+            $('#ex1').zoom();
+            $('#ex2').zoom();
+            $('#ex3').zoom();
+            $('#ex4').zoom();
 
             $("#nextSigCard").on("click", function (e) {
                 var curIndex = $("#curImgIndex").val();
 
                 curIndex = 1 + parseInt(curIndex);
 
-                console.log(curIndex);
                 var stringFormat = $("#hdImageUrlTemplate").val();
 
                 var imgUrl = String.format(stringFormat, curIndex);
@@ -119,6 +119,31 @@
         @-ms-viewport {
             width: auto !important;
         }
+
+        .zoom {
+            display: inline-block;
+            position: relative;
+        }
+
+            /* magnifying glass icon */
+            .zoom:after {
+                content: '';
+                display: block;
+                width: 33px;
+                height: 33px;
+                position: absolute;
+                top: 0;
+                right: 0;
+                background: url(/media/images/iron.png);
+            }
+
+            .zoom img {
+                display: block;
+            }
+
+                .zoom img::selection {
+                    background-color: transparent;
+                }
     </style>
 </head>
 <body>
@@ -187,10 +212,9 @@
                                     <td>
                                         <asp:Label ID="pbankname" runat="server" Text=""></asp:Label></td>
                                 </tr>
-                                
+
                                 <tr>
-                                    <td>
-                                        Status
+                                    <td>Status
                                     </td>
                                     <td>
                                         <asp:Label runat="server" ID="lbItemStatusInBach"></asp:Label>
@@ -243,9 +267,10 @@
                     <div class="panel panel-default">
                         <div class="panel-heading">Front</div>
                         <div class="panel-body">
-
-                            <asp:Image runat="server" ID="chqfront" AlternateText="No Front Image Found" ToolTip="Cheque Front Image"
-                                BorderColor="#3C516A" BorderStyle="Solid" BorderWidth="3px" Height="238px" Width="100%"></asp:Image>
+                            <span class='zoom' id='ex1'>
+                                <asp:Image runat="server" ID="chqfront" AlternateText="No Front Image Found" ToolTip="Cheque Front Image"
+                                    BorderColor="#3C516A" BorderStyle="Solid" BorderWidth="3px" Height="238px" Width="100%"></asp:Image>
+                            </span>
                         </div>
 
                     </div>
@@ -257,9 +282,10 @@
                     <div class="panel panel-default">
                         <div class="panel-heading">Back</div>
                         <div class="panel-body">
-
-                            <asp:Image runat="server" ID="chqrear" AlternateText="No Rear Image Found" ToolTip="Cheque Rear Image"
-                                BorderColor="#3C516A" BorderStyle="Solid" BorderWidth="3px" Height="238px" Width="100%"></asp:Image>
+                            <span class='zoom' id='ex2'>
+                                <asp:Image runat="server" ID="chqrear" AlternateText="No Rear Image Found" ToolTip="Cheque Rear Image"
+                                    BorderColor="#3C516A" BorderStyle="Solid" BorderWidth="3px" Height="238px" Width="100%"></asp:Image>
+                            </span>
                         </div>
 
                     </div>
@@ -273,9 +299,10 @@
                     <div class="panel panel-default">
                         <div class="panel-heading">CBS Card</div>
                         <div class="panel-body">
-
-                            <asp:Image runat="server" ID="cbsImage" AlternateText="Card Data not available" ToolTip="Cheque Front Image"
-                                BorderColor="#3C516A" BorderStyle="Solid" BorderWidth="3px" Height="238px" Width="100%"></asp:Image>
+                            <span class='zoom' id='ex3'>
+                                <asp:Image runat="server" ID="cbsImage" AlternateText="Card Data not available" ToolTip="Cheque Front Image"
+                                    BorderColor="#3C516A" BorderStyle="Solid" BorderWidth="3px" Height="238px" Width="100%"></asp:Image>
+                            </span>
                             <div>
                                 <a href="#" id="prevSigCard">Prev</a> <a href="#" id="nextSigCard" style="float: right">Next</a>
                                 <input type="hidden" id="curImgIndex" value="1" />
@@ -291,9 +318,10 @@
                     <div class="panel panel-default">
                         <div class="panel-heading">Customer Signature</div>
                         <div class="panel-body">
-
-                            <asp:Image runat="server" ID="imgsigInCheque" AlternateText="No Front Image Found" ToolTip="Cheque Front Image"
-                                BorderColor="#3C516A" BorderStyle="Solid" BorderWidth="3px" Height="238px" Width="100%"></asp:Image>
+                            <span class='zoom' id='ex4'>
+                                <asp:Image runat="server" ID="imgsigInCheque" AlternateText="No Front Image Found" ToolTip="Cheque Front Image"
+                                    BorderColor="#3C516A" BorderStyle="Solid" BorderWidth="3px" Height="238px" Width="100%"></asp:Image>
+                            </span>
                         </div>
 
                     </div>
@@ -304,17 +332,18 @@
 
 
             <div class="row">
-                <div class="col-md-6 col-md-offset-3" style="font-size: 20px;margin-bottom: 10px">
-                    
+                <div class="col-md-6 col-md-offset-3" style="font-size: 20px; margin-bottom: 10px">
+
                     <asp:Label runat="server" ID="lbCbsFtNo"></asp:Label>
 
                 </div>
             </div>
-            
+
 
             <div class="row">
                 <div class="col-md-5 col-md-offset-3">
                     <asp:Button ID="accept" runat="server" Text="Authorize" OnClick="OnInwardCheckerAcceptClicked" />
+                    <asp:Button ID="btRemake" runat="server" Text="Remake" OnClick="OnInwardCheckerRemakeClicked" />
                     <asp:Button ID="prev" runat="server" Text="Prev" OnClick="userAction" Visible="false" />
                     <asp:Button ID="unlock" runat="server" Text="Next Batch" OnClick="userAction" TabIndex="2"
                         Visible="false" />

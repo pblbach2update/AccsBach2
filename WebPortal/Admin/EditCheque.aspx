@@ -1,5 +1,6 @@
 <%@ Page Title="" Language="C#" MasterPageFile="/Admin/ControlPanel.Master" AutoEventWireup="true"
     CodeBehind="EditCheque.aspx.cs" Inherits="Accs.Web.Admin.EditCheque" %>
+
 <%@ Import Namespace="Accs.Core.Common" %>
 <%@ Register TagPrefix="uc" TagName="brlist" Src="/usercontrol/BranchListNew.ascx" %>
 <%@ Register TagPrefix="uc" TagName="blist" Src="/usercontrol/BankListNew.ascx" %>
@@ -149,11 +150,10 @@
             </script>
             <asp:Label ID="errLabel" runat="server" Text="No Date is provided" Font-Bold="True"
                 ForeColor="#FF3300" Visible="False"></asp:Label>
-            <%--<asp:UpdatePanel ID="UpdatePanel1" runat="server" ChildrenAsTriggers="True" >
-                <ContentTemplate>--%>
+            
             <table cellpadding="3" cellspacing="3" style="width: 960px;">
                 <tr>
-                    <td style="width: 100%; border-style: double; border-color: #C0C0C0; padding: 3px"
+                  <td style="width: 100%; border-style: double; border-color: #C0C0C0; padding: 3px"
                         valign="top" colspan="2">
                         <table style="width: 100%">
                             <tr>
@@ -319,339 +319,226 @@
                                     </asp:DropDownList>
                                     <asp:DropDownList ID="dropdownrreason" runat="server" Visible="false" Width="200px">
                                     </asp:DropDownList>
-        </div>
-        </td>
-                                        <td>
-                                            <asp:Button ID="btChangeStatus" runat="server" OnClick="btChangeStatus_Click" Text="Change" />
-                                            <asp:Button ID="delcheque" runat="server" Text="Delete" Width="63px" OnClick="delcheque_Click" />
-                                        </td>
-        </tr>
-                                    <%--<tr>
+
+                                </td>
+                                
                                     <td>
-                                        Batch
+                                        <asp:Button ID="btChangeStatus" runat="server" OnClick="btChangeStatus_Click" Text="Change" />
+                                        <asp:Button ID="delcheque" runat="server" Text="Delete" Width="63px" OnClick="delcheque_Click" />
                                     </td>
-                                    <td>
-                                        <asp:DropDownList ID="ddChangeBatchStatus" Width="150px" runat="server" Font-Names="Trebuchet MS"
-                                            Font-Size="9pt">
-                                            <asp:ListItem Text="outward_maker_ready" Value="1"></asp:ListItem>
-                                            <asp:ListItem Text="outward_checker_ready" Value="3"></asp:ListItem>
-                                            <asp:ListItem Text="outward_ready_to_send" Value="4"></asp:ListItem>
-                                            <asp:ListItem Text="inward_checker_ready" Value="8"></asp:ListItem>
-                                            <asp:ListItem Text="inward_ready_to_send" Value="9"></asp:ListItem>
-                                        </asp:DropDownList>
-                                    </td>
-                                    <td>
-                                        <asp:Button ID="btChangeBatchStatus" runat="server" OnClick="btChangeBatchStatus_Click"
-                                            Text="Change" />
-                                    </td>
-                                </tr>--%>
-        <tr>
-            <td>Present
-            </td>
-            <td>
-                <asp:DropDownList ID="ddPresentment" runat="server" Font-Size="9pt" Width="50px">
-                    <asp:ListItem Text="0" Value="0"></asp:ListItem>
-                    <asp:ListItem Text="1" Value="1"></asp:ListItem>
-                    <asp:ListItem Text="2" Value="2"></asp:ListItem>
-                </asp:DropDownList>
-            </td>
-            <td>
-                <asp:Button ID="btPresentment" runat="server" OnClick="btPresentment_Click" Text="Change" />
-            </td>
-        </tr>
-        <%--<tr>
-                                    <td>
-                                        Benef. Br</td>
-                                    <td>
-                                        <asp:DropDownList ID="DropDownList1" runat="server" Font-Size="9pt" 
-                                            Width="120px" />
-                                    </td>
-                                    <td>
-                                        <asp:Button ID="btBranchChange" runat="server" OnClick="btBranchChange_Click" 
-                                            Text="Change" />
-                                    </td>
-                                </tr>--%>
-        <tr>
-            <td>Type
-            </td>
-            <td>
-                <asp:DropDownList ID="ddlClearType" runat="server" 
-                    Font-Names="Trebuchet MS" Font-Size="10pt">
-                </asp:DropDownList>
-            </td>
-            <td>
-                <asp:Button ID="btClearingChange" runat="server" OnClick="btClearingChange_Click"
-                    Text="Change" />
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <asp:Label ID="Label1" runat="server" Text="File:"></asp:Label>
-            </td>
-            <td>
-                <asp:Label ID="lbFileName" runat="server"></asp:Label>
-            </td>
-            <td style="margin-left: 40px">
-                <asp:Button ID="btRemoveFile" runat="server" OnClick="btRemoveFile_Click" Text="Remove" />
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <asp:Label ID="chargeApplicable" runat="server" Text="Charge Not Applicable"></asp:Label>
-            </td>
-            <td>
-                <asp:CheckBox runat="server" ID="cbApplyCharge" />
-            </td>
-            <td style="margin-left: 40px">
-                <asp:Button ID="btChargeApply" runat="server" Text="Change" OnClick="btChargeApply_Click" />
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <asp:Label ID="lbBenifAccount" runat="server" Text="Benif A/C"></asp:Label>
-            </td>
-            <td colspan="">
-                <div>
-                    <asp:TextBox ID="tbeditable" CssClass="eselect" runat="server" drpvalue="<%# ClearingChargeInfo.KrishiOwnAccount %>"></asp:TextBox>
-                </div>
-            </td>
-            <td style="margin-left: 40px">
-                <asp:Button ID="btChangeBenifAccount" runat="server" Text="Change" OnClick="btChangeBenifAccount_Click" />
-            </td>
-        </tr>
-        <tr>
-            <td colspan="3">
-                <asp:Label ID="lbResult" runat="server" Font-Bold="True" Font-Size="10pt" ForeColor="#096023"></asp:Label>
-            </td>
-        </tr>
-        <tr>
-            <td colspan="3">
-                <asp:Button ID="btnFlip" runat="server" OnClick="btnFlip_Click" Text="Flip Image" />
-            </td>
-        </tr>
-        </table>
-                            </td>
-                            <td style="width: 520px; display: none" runat="server" id="chkimage">
-                                <asp:Image ID="chqfront" runat="server" AlternateText="No Front Image Found" BorderColor="#3C516A"
-                                    BorderStyle="Solid" BorderWidth="3px" ToolTip="Front Image" Width="520px" />
-                            </td>
-        </tr>
-                        <%-- <tr id="trdelbatch" style="display: none" runat="server">
-                        <td colspan="2">
-                            <asp:Panel GroupingText="Batch Information" runat="server">
-                                <table>
-                                    <tr>
-                                        <td>
-                                            <asp:Label ID="lbBatchStat" runat="server" Text="" Font-Bold="True" Font-Size="10pt"
-                                                ForeColor="#096023"></asp:Label>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            Batch No :
-                                        </td>
-                                        <td>
-                                            <asp:Label ID="lbdelBatchNo" runat="server" Text=""></asp:Label>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            Batch Type :
-                                        </td>
-                                        <td>
-                                            <asp:Label ID="lbBatchType" runat="server" Text=""></asp:Label>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            Creation Date :
-                                        </td>
-                                        <td>
-                                            <asp:Label ID="lbCDate" runat="server" Text=""></asp:Label>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            Total Cheque Count :
-                                        </td>
-                                        <td>
-                                            <asp:Label ID="lbChequeCount" runat="server" Text=""></asp:Label>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            UnProcessed :
-                                        </td>
-                                        <td>
-                                            <asp:Label ID="lbUnprocessed" runat="server" Text=""></asp:Label>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            Accept :
-                                        </td>
-                                        <td>
-                                            <asp:Label ID="lbAccept" runat="server" Text=""></asp:Label>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            Reject :
-                                        </td>
-                                        <td>
-                                            <asp:Label ID="lbReject" runat="server" Text=""></asp:Label>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            Remake :
-                                        </td>
-                                        <td>
-                                            <asp:Label ID="lbRemake" runat="server" Text=""></asp:Label>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <asp:Button ID="Button1" runat="server" Text="Delete This Batch" OnClick="Button1_Click" />&nbsp
-                                            <asp:Button ID="btClose" runat="server" Text="Close" OnClick="btClose_Click" />
-                                        </td>
-                                    </tr>
-                                </table>
-                            </asp:Panel>
-                        </td>
-                    </tr>--%>
-        <tr id="trdelbatch" style="display: none" runat="server">
-            <td colspan="2">
-                <asp:Panel ID="Panel2" GroupingText="Batch Information" runat="server" Width="100%">
-                    <table>
-                        <tr>
-                            <td>
-                                <asp:Label ID="lbBatchStat" runat="server" Text="" Font-Bold="True" Font-Size="10pt"
-                                    ForeColor="#096023"></asp:Label>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>Batch No :
-                            </td>
-                            <td>
-                                <asp:Label ID="lbdelBatchNo" runat="server" Text=""></asp:Label>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>Batch Type :
-                            </td>
-                            <td>
-                                <asp:Label ID="lbBatchType" runat="server" Text=""></asp:Label>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>Batch Status :
-                            </td>
-                            <td>
-                                <div style="float: left" runat="server" id="dvChangeBatch">
-                                    <asp:Label ID="lb_BatchStatus" runat="server" Text=""></asp:Label>
-                                    &nbsp
-                                <asp:LinkButton ID="lbeditBatchStatus" runat="server" OnClick="lbeditBatchStatus_Click">Edit</asp:LinkButton>
-                                </div>
-                                <div id="dvEditBatch" style="float: left" runat="server" visible="false">
-                                    <asp:DropDownList ID="ddlBatch_stat" Width="180px" runat="server" Font-Names="Trebuchet MS"
-                                        Font-Size="9pt">
+                               </tr> 
+                            <tr>
+                                <td>Present
+                                </td>
+                                <td>
+                                    <asp:DropDownList ID="ddPresentment" runat="server" Font-Size="9pt" Width="50px">
+                                        <asp:ListItem Text="0" Value="0"></asp:ListItem>
+                                        <asp:ListItem Text="1" Value="1"></asp:ListItem>
+                                        <asp:ListItem Text="2" Value="2"></asp:ListItem>
                                     </asp:DropDownList>
-                                    &nbsp;
+                                </td>
+                                <td>
+                                    <asp:Button ID="btPresentment" runat="server" OnClick="btPresentment_Click" Text="Change" />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Type
+                                </td>
+                                <td>
+                                    <asp:DropDownList ID="ddlClearType" runat="server"
+                                        Font-Names="Trebuchet MS" Font-Size="10pt">
+                                    </asp:DropDownList>
+                                </td>
+                                <td>
+                                    <asp:Button ID="btClearingChange" runat="server" OnClick="btClearingChange_Click"
+                                        Text="Change" />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <asp:Label ID="Label1" runat="server" Text="File:"></asp:Label>
+                                </td>
+                                <td>
+                                    <asp:Label ID="lbFileName" runat="server"></asp:Label>
+                                </td>
+                                <td style="margin-left: 40px">
+                                    <asp:Button ID="btRemoveFile" runat="server" OnClick="btRemoveFile_Click" Text="Remove" />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <asp:Label ID="chargeApplicable" runat="server" Text="Charge Not Applicable"></asp:Label>
+                                </td>
+                                <td>
+                                    <asp:CheckBox runat="server" ID="cbApplyCharge" />
+                                </td>
+                                <td style="margin-left: 40px">
+                                    <asp:Button ID="btChargeApply" runat="server" Text="Change" OnClick="btChargeApply_Click" />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <asp:Label ID="lbBenifAccount" runat="server" Text="Benif A/C"></asp:Label>
+                                </td>
+                                <td colspan="">
+                                    <div>
+                                        <asp:TextBox ID="tbeditable" CssClass="eselect" runat="server" drpvalue="<%# ClearingChargeInfo.KrishiOwnAccount %>"></asp:TextBox>
+                                    </div>
+                                </td>
+                                <td style="margin-left: 40px">
+                                    <asp:Button ID="btChangeBenifAccount" runat="server" Text="Change" OnClick="btChangeBenifAccount_Click" />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="3">
+                                    <asp:Label ID="lbResult" runat="server" Font-Bold="True" Font-Size="10pt" ForeColor="#096023"></asp:Label>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="3">
+                                    <asp:Button ID="btnFlip" runat="server" OnClick="btnFlip_Click" Text="Flip Image" />
+                                    &nbsp
+                                    <asp:PlaceHolder runat="server" ID="phInwardItemResender">
+                                        <asp:Button ID="btMakrInwardDisHonResending" runat="server" OnClick="btMakrInwardDisHonResending_OnClick" Text="Mark Item for Resending" />
+                                    </asp:PlaceHolder>
+                                </td>
+                            </tr>
+                         </table>
+                    </td>
+                    <td style="width: 520px; display: none" runat="server" id="chkimage">
+                        <asp:Image ID="chqfront" runat="server" AlternateText="No Front Image Found" BorderColor="#3C516A"
+                            BorderStyle="Solid" BorderWidth="3px" ToolTip="Front Image" Width="520px" />
+                    </td>
+                </tr>
+                <tr id="trdelbatch" style="display: none" runat="server">
+                    <td colspan="2">
+                        <asp:Panel ID="Panel2" GroupingText="Batch Information" runat="server" Width="100%">
+                            <table>
+                                <tr>
+                                    <td>
+                                        <asp:Label ID="lbBatchStat" runat="server" Text="" Font-Bold="True" Font-Size="10pt"
+                                            ForeColor="#096023"></asp:Label>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Batch No :
+                                    </td>
+                                    <td>
+                                        <asp:Label ID="lbdelBatchNo" runat="server" Text=""></asp:Label>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Batch Type :
+                                    </td>
+                                    <td>
+                                        <asp:Label ID="lbBatchType" runat="server" Text=""></asp:Label>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Batch Status :
+                                    </td>
+                                    <td>
+                                        <div style="float: left" runat="server" id="dvChangeBatch">
+                                            <asp:Label ID="lb_BatchStatus" runat="server" Text=""></asp:Label>
+                                            &nbsp
+                                <asp:LinkButton ID="lbeditBatchStatus" runat="server" OnClick="lbeditBatchStatus_Click">Edit</asp:LinkButton>
+                                        </div>
+                                        <div id="dvEditBatch" style="float: left" runat="server" visible="false">
+                                            <asp:DropDownList ID="ddlBatch_stat" Width="180px" runat="server" Font-Names="Trebuchet MS"
+                                                Font-Size="9pt">
+                                            </asp:DropDownList>
+                                            &nbsp;
                                 <asp:Button ID="changeStatus" runat="server" Text="Save" OnClientClick="return confirm('Are you sure to make the change?.This will overwrite all the previous changes.')"
                                     OnClick="changeStatus_Click" />
-                                    &nbsp;
+                                            &nbsp;
                                 <asp:Button runat="server" Text="Cancel" ID="btCancelBatchStatusEdit" OnClick="btCancelBatchStatusEdit_Click" />
-                                </div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>Creation Date :
-                            </td>
-                            <td>
-                                <div runat="server" id="dvChangeClearingDate" style="float: left">
-                                    <asp:Label ID="lbCDate" runat="server" Text=""></asp:Label>&nbsp;
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Creation Date :
+                                    </td>
+                                    <td>
+                                        <div runat="server" id="dvChangeClearingDate" style="float: left">
+                                            <asp:Label ID="lbCDate" runat="server" Text=""></asp:Label>&nbsp;
                                 <asp:LinkButton ID="lbEditClearingDate" runat="server" OnClick="lbEditClearingDate_Click">Edit</asp:LinkButton>
-                                </div>
-                                <div runat="server" id="dvEditClrDate" style="float: left" visible="false">
-                                    <asp:TextBox ID="tbClearingDate" runat="server" Font-Names="Trebuchet MS" Font-Size="12px"
-                                        BorderColor="#667C9D" BorderStyle="Solid" BorderWidth="1px" Height="18px" Width="80px"></asp:TextBox>
-                                    <asp:CalendarExtender ID="clChangeClrDate" runat="server" PopupButtonID="imgcalendar"
-                                        TargetControlID="tbClearingDate" Format="dd-MM-yyyy">
-                                    </asp:CalendarExtender>
-                                    &nbsp
+                                        </div>
+                                        <div runat="server" id="dvEditClrDate" style="float: left" visible="false">
+                                            <asp:TextBox ID="tbClearingDate" runat="server" Font-Names="Trebuchet MS" Font-Size="12px"
+                                                BorderColor="#667C9D" BorderStyle="Solid" BorderWidth="1px" Height="18px" Width="80px"></asp:TextBox>
+                                            <asp:CalendarExtender ID="clChangeClrDate" runat="server" PopupButtonID="imgcalendar"
+                                                TargetControlID="tbClearingDate" Format="dd-MM-yyyy">
+                                            </asp:CalendarExtender>
+                                            &nbsp
                                 <asp:Image ID="imgcalendar" runat="server" Height="15px" ImageUrl="/media/images/calendar.gif" />
-                                    &nbsp
+                                            &nbsp
                                 <asp:Button ID="btSaveClrDate" runat="server" Text="Save" OnClientClick="return confirm('Are you sure to make the change?.This will overwrite previous changes.')"
                                     OnClick="btSaveClrDate_Click" />
-                                    &nbsp;
+                                            &nbsp;
                                 <asp:Button runat="server" Text="Cancel" ID="btCancelEditClearing" OnClick="btCancelEditClearing_Click" />
-                                </div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>Total Cheque Count :
-                            </td>
-                            <td>
-                                <asp:Label ID="lbChequeCount" runat="server" Text=""></asp:Label>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>UnProcessed :
-                            </td>
-                            <td>
-                                <asp:Label ID="lbUnprocessed" runat="server" Text=""></asp:Label>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>Accept :
-                            </td>
-                            <td>
-                                <asp:Label ID="lbAccept" runat="server" Text=""></asp:Label>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>Reject :
-                            </td>
-                            <td>
-                                <asp:Label ID="lbReject" runat="server" Text=""></asp:Label>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>Remake :
-                            </td>
-                            <td>
-                                <asp:Label ID="lbRemake" runat="server" Text=""></asp:Label>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td colspan="2">
-                                <asp:Label ID="lbUpdateStaus" runat="server" Font-Bold="True" Font-Size="10pt" ForeColor="#096023"></asp:Label>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <asp:Button ID="btDeleteBatch" runat="server" Text="Delete This Batch" OnClick="btDeleteBatch_Click" />&nbsp
-                            <asp:Button ID="btClose" runat="server" Text="Close" OnClick="btClose_Click" />
-                            </td>
-                        </tr>
-                    </table>
-                </asp:Panel>
-            </td>
-        </tr>
-        </table>
-                    <%--<asp:UpdateProgress ID="actionProgress" runat="server" DisplayAfter="50">
-                        <ProgressTemplate>
-                            <asp:Panel ID="p1" CssClass="overlay" runat="server">
-                                <asp:Panel ID="p2" CssClass="loader" runat="server" Style="margin-top: 0px">
-                                    loading.......
-                                <img src="/media/images/busy.gif" />
-                                </asp:Panel>
-                            </asp:Panel>
-                        </ProgressTemplate>
-                    </asp:UpdateProgress>--%>
-        <%--</ContentTemplate>
-            </asp:UpdatePanel>--%>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Total Cheque Count :
+                                    </td>
+                                    <td>
+                                        <asp:Label ID="lbChequeCount" runat="server" Text=""></asp:Label>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>UnProcessed :
+                                    </td>
+                                    <td>
+                                        <asp:Label ID="lbUnprocessed" runat="server" Text=""></asp:Label>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Accept :
+                                    </td>
+                                    <td>
+                                        <asp:Label ID="lbAccept" runat="server" Text=""></asp:Label>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Reject :
+                                    </td>
+                                    <td>
+                                        <asp:Label ID="lbReject" runat="server" Text=""></asp:Label>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Remake :
+                                    </td>
+                                    <td>
+                                        <asp:Label ID="lbRemake" runat="server" Text=""></asp:Label>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="2">
+                                        <asp:Label ID="lbUpdateStaus" runat="server" Font-Bold="True" Font-Size="10pt" ForeColor="#096023"></asp:Label>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <asp:Button ID="btDeleteBatch" runat="server" Text="Delete This Batch" OnClick="btDeleteBatch_Click" />
+                                        &nbsp
+                                        <asp:PlaceHolder runat="server" ID="phShowResendButton" Visible="False">
+                                            <asp:Button ID="btMarkBatchForResending" runat="server" Text="Mark for Resnding" OnClick="btMarkForResending_Click" />
+                                        </asp:PlaceHolder>&nbsp
+                                        <asp:Button ID="btClose" runat="server" Text="Close" OnClick="btClose_Click" />
+                                    </td>
+                                </tr>
+                                <tr>
+                                <td colspan="2">
+                                    <asp:Label ID="lbBatchUpdateResult" runat="server" Font-Bold="True" Font-Size="10pt" ForeColor="#096023"></asp:Label>
+                                </td>
+                            </tr>
+                            </table>
+                        </asp:Panel>
+                    </td>
+                </tr>
+            </table>
         </div>
     </form>
     <div id="dialog" title="Image View" style="display: none; width: 500px; height: 250px;">

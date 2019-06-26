@@ -118,19 +118,19 @@
                                             <asp:CheckBox runat="server" Checked="True" ID="chkboxSelectAll" ClientIDMode="Static" />
                                         </td>
                                     </asp:PlaceHolder>
-
-
-                                    <td>Bank Name</td>
-                                    <td>Branch Name</td>
-                                    <td>Clearing Type</td>
+                                    <td>Br_Code</td>
+                                    <td>Br_Name</td>
+                                    <td>Ben A/C</td>
+                                    <td>Ben A/C Name</td>
                                     <td>Settlement Date</td>
+                                    <td>Bank Name</td>
                                     <td>Cheque No</td>
-                                    <td>Payer Account No</td>
-                                    <td>Transaction Code</td>
                                     <td>Amount</td>
                                     <td>Currency</td>
                                     <td>IsChargeApplcable</td>
-                                    <td>Issue Date</td>
+                                    <td>FT No</td>
+                                    <td>CC No</td>
+                                    <td>Remarks</td>
                                     <td>Error Message</td>
 
                                 </tr>
@@ -151,32 +151,32 @@
                                         <asp:CheckBox runat="server" ID="chkBoxItem" Checked="true"></asp:CheckBox>
                                     </td>
                                 </asp:PlaceHolder>
-
-                                <td>
-                                    <%# Item.IssuingBankShortName %>
+                                
+                                 <td>
+                                    <%# Item.InternalBranchCode %>
                                 </td>
+                               
                                 <td >
                                     <span style="width: 300px" ><%# Item.BOFDBranchName %></span>
                                 </td>
                                 <td>
-                                    <%# Item.ClrTypeString %>
+                                    <%# Item.BenificiaryAccount %>
+                                </td>
+                                
+                                <td>
+                                    <%# Item.BenifName %>
                                 </td>
 
                                 <td>
                                     <%# Item.SettlementDateString %>
                                 </td>
-
+                                 <td>
+                                    <%# Item.IssuingBankShortName %>
+                                </td>
                                 <td>
                                     <%# Item.ChequeSequence %>
                                 </td>
-
-                                <td>
-                                    <%# Item.ChequeAccount %>
-                                </td>
-
-                                <td>
-                                    <%# Item.TransactionCode %>
-                                </td>
+                                
                                 <td>
                                     <%# Item.Amount %>
                                 </td>
@@ -186,11 +186,15 @@
                                 <td>
                                     <%# Item.isChargeApplicable %>
                                 </td>
+                               <td>
+                                    <%# Item.OutwardFtNo %>
+                               </td>
                                 <td>
-                                    <%# Item.IssueDate!=null?Item.IssueDate.Value.ToString("dd/MM/yyyy"):"N/A"%>
-
-                                </td>
-
+                                    <%# Item.OutwardCcNo %>
+                               </td>
+                                 <td>
+                                    <%# Item.IsItemCleared?"Honor":"Return" %>
+                               </td>
                                 <td>
                                     <%# Item.CbsErrorMessage %>
                                 </td>

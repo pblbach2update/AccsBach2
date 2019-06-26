@@ -1,5 +1,5 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="/Admin/ControlPanel.Master" AutoEventWireup="true"
-    CodeBehind="User.aspx.cs" Inherits="Accs.Web.Admin.User1"  %>
+    CodeBehind="User.aspx.cs" Inherits="Accs.Web.Admin.User1" %>
 
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="asp" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="headControlPanel" runat="server">
@@ -150,6 +150,14 @@
 
                                                             </td>
                                                         </tr>
+                                                        <tr>
+                                                            <td align="right">Machine Ip
+                                                            </td>
+                                                            <td>
+                                                                <asp:TextBox ID="tbMachineIp" runat="server" Width="160px"></asp:TextBox>
+                                                            </td>
+
+                                                        </tr>
 
                                                         <tr>
                                                             <td align="right">
@@ -171,6 +179,36 @@
                                                     </table>
                                                 </td>
                                             </tr>
+                                            <tr>
+                                                <td colspan="3">Assigned Roles
+                                                    <hr />
+
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td colspan="3">
+
+                                                    <asp:DataList ID="rptRoles" runat="server"  RepeatDirection="Horizontal"
+                                                        RepeatColumns="4">
+                                                        <HeaderTemplate>
+                                                        </HeaderTemplate>
+                                                        <ItemTemplate>
+                                                            <table cellpadding="4" style="font-size: 12px; font-weight: bold;">
+                                                                <tr>
+                                                                    <td>
+                                                                        <%# Eval("RoleName") %> 
+                                                                    </td>
+                                                                </tr>
+                                                            </table>
+                                                        </ItemTemplate>
+                                                        <FooterTemplate>
+                                                        </FooterTemplate>
+                                                    </asp:DataList>
+
+                                                </td>
+
+                                            </tr>
+
                                         </table>
                                         <br />
                                         <table style="width: 100%;">
