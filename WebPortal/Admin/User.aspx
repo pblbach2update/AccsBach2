@@ -234,6 +234,9 @@
                                                             </asp:BoundField>
                                                             <asp:BoundField DataField="Designation" HeaderText="Designation">
                                                                 <ItemStyle HorizontalAlign="Center" />
+                                                            </asp:BoundField> 
+                                                            <asp:BoundField DataField="Description" HeaderText="Description">
+                                                                <ItemStyle HorizontalAlign="Center" />
                                                             </asp:BoundField>
                                                             <asp:TemplateField HeaderText="Branch">
                                                                 <EditItemTemplate>
