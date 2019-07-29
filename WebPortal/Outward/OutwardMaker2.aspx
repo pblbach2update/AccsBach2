@@ -799,6 +799,7 @@
                 var useDefaultAccount = <%= PublicSettings.UseDefaultAccountNumberInOutwardMaker.ToString().ToLower() %>;
                 var defaultAccountPrefix = '<%= PublicSettings.DefaultAccountPrefix %>';
                 var futureBusinessDaysAllowed = <%= PublicSettings.FutureDayPermittedInDays %>;
+                
                 <% generateListId(); %>
                 <%=generateJSClientId() %>
             </script>

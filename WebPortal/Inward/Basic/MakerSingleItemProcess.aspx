@@ -190,6 +190,14 @@
 
                                     </td>
                                 </tr>
+                                <tr>
+                                    <td>
+                                        Random Number
+                                    </td>
+                                    <td>
+                                        <asp:TextBox runat="server" ID="tbBasicRandomNumber" BorderWidth="1px" Width="100px" BorderStyle="Solid" Font-Names="Trebuchet MS" Font-Size="12px"></asp:TextBox>
+                                    </td>
+                                </tr>
                                <%-- <tr>
                                     <td>Cheque Type
                                     </td>
@@ -334,18 +342,7 @@
                </div>
                 
             </div>
-            <div class="row">
-                <div class="col-md-5 col-md-offset-3">
-                    <table>
-                        <tr >
-                            <td >Debit Instruction</td>
-                            <td style="padding-left: 20px">
-                                <asp:TextBox runat="server" ID="tbDebitInstruction" Columns="30"></asp:TextBox>
-                            </td>
-                        </tr>
-                    </table>
-                </div>
-            </div>
+            
 
             <div class="row">
                 <div class="col-md-5 col-md-offset-3">

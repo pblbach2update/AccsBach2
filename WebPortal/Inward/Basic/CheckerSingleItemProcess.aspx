@@ -182,6 +182,14 @@
                                     </td>
                                 </tr>
                                 <tr>
+                                    <td>
+                                        Random Number
+                                    </td>
+                                    <td>
+                                        <asp:Label runat="server" ID="lbBasicRandomNumber" ></asp:Label>
+                                    </td>
+                                </tr>
+                                <tr>
                                     <td>Presenting Bank Name
                                     </td>
                                     <td>
