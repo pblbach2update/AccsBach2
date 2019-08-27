@@ -309,6 +309,10 @@
                     DOM.iqa.skew.text(_curObj.skew);
                     DOM.iqa.brightness.text(_curObj.brightness);
                     DOM.iqa.dimension.text(_curObj.size);
+                    if (typeof LoadCbsAdditionalInfo === "function") {
+                        LoadCbsAdditionalInfo(_curObj);
+                        // safe to use the function
+                    }
                 } else {
                     alert("Error Loading Cheque Data.\n" + ws_rsp.data);
                 }

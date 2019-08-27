@@ -17,7 +17,7 @@
                         Outward Process</div>
                     
                     <div id="menu9">
-                        <%getLeftMenuString(); %>
+                        <%GetLeftMenuString(); %>
                     </div>
                 </td>
                 <td valign="top">

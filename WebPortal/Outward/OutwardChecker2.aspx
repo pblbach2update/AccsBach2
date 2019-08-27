@@ -332,7 +332,7 @@
                 </label>
                 <input type="hidden" name="cu_dbid" id="cu_dbid" value="" tabindex="1000" />
                 <input type="hidden" name="cu_itemCurrency" id="cu_itemCurrency" value="" tabindex="1001" />
-                <div style="width: 940px; height: 490px; float: left;">
+                <div style="width: 940px; height: 510px; float: left;">
                     <div id="stylized" class="outward_form" style="width: 930px;">
                         <table id="header_table" style="width: 100%;" cellpadding="0" cellspacing="0" border="0">
                             <tr>
@@ -365,6 +365,7 @@
                                              <textarea name="cu_account_holder_name" id="cu_payee" tabindex="1"  
                                                     style="width: 195px; vertical-align: top;overflow-x: hidden"  rows="2" readonly="readonly"></textarea>
                                         </div>
+                                        <asp:PlaceHolder runat="server" ID="phCbsAdditionalInfo"></asp:PlaceHolder>
                                         <div>
                                             <span style="padding-right: 13px">Branch</span>
                                             <asp:DropDownList runat="server" ID="ddlMPBranchList" Width="190px" ClientIDMode="Static" Enabled="False">
@@ -540,6 +541,7 @@
                                         <br />
                                         <span id="cu_date_p" class="invalid_entry" style="display: none;">(Date Invalid)</span>
                                     </div>--%>
+                                    
                                     &nbsp;
                                 </td>
                                 <td></td>
@@ -567,6 +569,7 @@
                                         <input style="display: none;" type="text" name="cu_payee" id="cu_payee" tabindex="4"
                                             readonly="readonly" />
                                     </div>--%>
+                                    
                                     &nbsp;
                                 </td>
                                 <td></td>
@@ -602,6 +605,7 @@
                                         <div type="text" id="cu_benif_address" tabindex="1000" style="width: 210px; padding: 5px;">
                                         </div>
                                     </div>
+                                    <asp:PlaceHolder runat="server" ID="phCbsAdditionalInfoBottom"></asp:PlaceHolder>
                                 </td>
                                 <td></td>
                                 <td class="chkInfo">

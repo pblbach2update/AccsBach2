@@ -58,6 +58,10 @@
                 <div id="div1" class="userBox" style="width: 600px; margin-left: 5px;">
                     <table>
                         <tr>
+                            <%--<td>
+                                <asp:TextBox runat="server" ID="tbUserFinder" style="width: 100px"></asp:TextBox>
+                                <asp:ImageButton ID="ibSearch" runat="server" OnClick="ImbuttonSearchUser" ImageUrl="/media/images/QuickFind.png" style="width: 20px" />
+                            </td>--%>
                             <td>Select Branch
                             </td>
                             <td>
@@ -65,7 +69,7 @@
                                     AutoPostBack="True" Font-Names="Trebuchet MS" Font-Size="10pt">
                                 </asp:DropDownList>
                             </td>
-                            <td style="padding-left: 50px;">Status
+                            <td style="padding-left: 10px;">Status
                             </td>
                             <td>
                                 <asp:DropDownList ID="ddlOption" Font-Names="Trebuchet MS" Font-Size="10pt" runat="server"

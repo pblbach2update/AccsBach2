@@ -203,8 +203,8 @@ div#modal-content
 {
     z-index: 200;
     width: 960px;
-    height: 570px;
-    margin-top: -280px;
+    height: 580px;
+    margin-top: -325px;
     margin-left: -480px;
     background: #000000 none repeat scroll 0 0;
     border: 0px;
@@ -214,8 +214,8 @@ div#modal-content
 {
     z-index: 201;
     width: 940px;
-    height: 550px;
-    margin-top: -270px;
+    height: 570px;
+    margin-top: -325px;
     margin-left: -470px;
     background: #EBF4FB none repeat scroll 0 0;
     border: 0px solid #99BBE8;

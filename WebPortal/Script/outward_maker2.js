@@ -171,6 +171,13 @@
                     LoadCbsAdditionalInfo(ws_rsp.data);
                     // safe to use the function
                 }
+
+                if (typeof FormatAndDisplayAccountNo === "function") {
+                    FormatAndDisplayAccountNo(DOM.cbs.account,ws_rsp.data);
+                    // safe to use the function
+                }
+
+
             }
         } else {
             alert("Could Not Load account");
@@ -215,8 +222,16 @@
 
         var keyCode = e.which || e.keyCode;
         if (keyCode == 13 || keyCode == 9) {
-            DOM.cbs.amount.focus();
-            DOM.cbs.amount.select();
+
+            if (typeof focusAfterGettingsAccountInfo === "function") {
+                focusAfterGettingsAccountInfo();
+                // safe to use the function
+            } else {
+                DOM.cbs.amount.focus();
+                DOM.cbs.amount.select();
+                
+            }
+            
             clearAccountInfo();
             if (ValidateAccount(DOM.cbs.account.val())) {
                 //Webservice Call
@@ -410,10 +425,11 @@
                     //    _curObj.account = "0000000000000";
 
                     //console.log(useDefaultAccount);
-                    _curObj.account = defaultAccountPrefix;
+                    
                     if (useDefaultAccount === true) {
                         //_curObj.account = "0000000000000";
                         DOM.cbs.amount.focus();
+                        _curObj.account = defaultAccountPrefix;
                         
                     } else {
 
@@ -489,6 +505,12 @@
                     DOM.iqa.skew.text(_curObj.skew);
                     DOM.iqa.brightness.text(_curObj.brightness);
                     DOM.iqa.dimension.text(_curObj.size);
+
+
+
+                    if (typeof showCbsExtraInfo === "function") {
+                        showCbsExtraInfo(_curObj);
+                    }
 
                 } else {
                     alert("Error Loading Cheque Data.\n" + ws_rsp.data);
@@ -703,6 +725,9 @@
             ws_request.data.payee_usability = payee_usability;
             ws_request.data.date_usability = date_usability;
             ws_request.data.benef_ac_usability = benef_ac_usability;
+            if (typeof fillCbsExtraInfo === "function") {
+                fillCbsExtraInfo(ws_request.data);
+            }
             showDBModal("Processing...");
             //Webservice Call
             Accs.Web.Outward.OutwardService.UpdateChequeInfo(ws_request,
@@ -930,7 +955,14 @@
         var keyCode = e.which || e.keyCode;
         if (keyCode == 13 || keyCode == 9) {
             //DOM.cbs.payee.focus();
-            $("#yes").focus();
+
+            if (typeof GetJQobjFirstInputBoxOfOtherPanel === "function") {
+                var nextObj = GetJQobjFirstInputBoxOfOtherPanel();
+                nextObj.focus();
+                nextObj.select();
+            } else 
+                $("#yes").focus();
+            e.preventDefault();
             return false;
         }
     });

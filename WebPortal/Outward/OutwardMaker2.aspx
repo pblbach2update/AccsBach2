@@ -340,7 +340,7 @@
                 <input type="hidden" name="cu_dbid" id="cu_dbid" value="" tabindex="1000" />
                 <input type="hidden" name="cu_itemCurrency" id="cu_itemCurrency" value="" tabindex="1001" />
                 <input type="hidden" name="cu_itemSession" id="cu_itemSession" value="" tabindex="1001" />
-                <div style="width: 940px; height: 490px; float: left;">
+                <div style="width: 940px; height: 510px; float: left;">
                     <div id="stylized" class="outward_form" style="width: 930px;">
                         <table id="header_table" style="width: 100%;" cellpadding="0" cellspacing="0" border="0">
                             <tr>
@@ -399,8 +399,7 @@
                                 <td class="chkInfo">
                                     <div id="grp_img_endorsement" class="no_notification">
                                         <label>
-                                            <input class="check_label" id="benif_ac_usability" type="checkbox" checked="checked"
-                                                tabindex="100" /></label>
+                                            <input class="check_label" id="benif_ac_usability" type="checkbox" checked="checked" tabindex="100" /></label>
                                         <div id="div_img_endorsement" class="image_input" style="height: 100px; width: 256px; padding: 0; margin-left: 25px;">
                                             <img class="chq" id="img_endorsement" src="" style="position: absolute; height: 100px; width: 256px"
                                                 alt="User Endorsement" />
@@ -502,6 +501,8 @@
                                                         id="txtOutofChargeReason" />
                                                 </div>
                                             </div>
+                                            
+                                            
                                         </fieldset>
                                     </div>
                                 </td>
@@ -527,7 +528,7 @@
                                 </td>
                             </tr>
                             <tr>
-                                <td class="dataEntry">&nbsp;
+                                <td class="dataEntry">
                                 </td>
                                 <td></td>
                                 <td class="chkInfo">
@@ -595,7 +596,7 @@
                                         <div type="text" id="cu_benif_address" tabindex="4" style="width: 210px; padding: 5px;">
                                         </div>
                                     </div>--%>
-                                    &nbsp;
+                                    <asp:PlaceHolder runat="server" ID="phCbsAdditionalInfoBottom"></asp:PlaceHolder>
                                 </td>
                                 <td></td>
                                 <td class="chkInfo">
@@ -699,9 +700,9 @@
                         </div>
                     </div>
                 </div>
-                <br />
-                <br />
-                <br />
+                
+                <br/>
+                <br/>
                 <div style="clear: both; height: 32px;">
                     <div class="buttons">
                         <button type="button" class="positive" id="yes" name="yes" tabindex="5">

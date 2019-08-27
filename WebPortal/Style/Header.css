@@ -64,13 +64,15 @@
 	background-color:#f6f6f6;
 	height: 30px;
 	list-style: none;
+    text-align: center
 	
 }
 
 .glossymenu li{
-	float:right;
+	/*float:right;*/
 	/*border-left: solid 1px #aaa;
 	border-right: solid 1px #888;*/
+    display: inline-block;
 }
 
 .glossymenu li a{

@@ -182,7 +182,8 @@
                                     </td>
                                     <td>
                                         <asp:TextBox ID="tbIssuedate" runat="server" BorderColor="#888888" BorderStyle="Solid"
-                                            BorderWidth="1px" Width="100px" Font-Names="Trebuchet MS" Font-Size="12px" Visible="true"></asp:TextBox>
+                                            BorderWidth="1px" Width="100px" Font-Names="Trebuchet MS" Font-Size="12px" Visible="true" ></asp:TextBox>
+                                        (dd/mm/yyyy)
                                         <cc1:CalendarExtender ID="CalendarExtender1" runat="server" PopupButtonID="Image1"
                                             TargetControlID="tbIssuedate" Format="dd/MM/yyyy" OnClientShown="calendarShown">
                                         </cc1:CalendarExtender>
@@ -192,10 +193,11 @@
                                 </tr>
                                 <tr>
                                     <td>
-                                        Random Number
+                                        Random Number(Pin)
                                     </td>
                                     <td>
-                                        <asp:TextBox runat="server" ID="tbBasicRandomNumber" BorderWidth="1px" Width="100px" BorderStyle="Solid" Font-Names="Trebuchet MS" Font-Size="12px"></asp:TextBox>
+                                        <asp:TextBox runat="server" ID="tbBasicRandomNumber" MaxLength="3" TextMode="SingleLine" BorderColor="#888888"  BorderWidth="1px" Width="100px" BorderStyle="Solid" Font-Names="Trebuchet MS" Font-Size="12px"></asp:TextBox>
+                                        <cc1:FilteredTextBoxExtender runat="server" TargetControlID="tbBasicRandomNumber" FilterType="Numbers" />
                                     </td>
                                 </tr>
                                <%-- <tr>

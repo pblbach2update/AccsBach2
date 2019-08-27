@@ -7,6 +7,7 @@
     <link type="text/css" rel="Stylesheet" href="Style/Header.css" />
 
     <asp:ContentPlaceHolder ID="head" runat="server">
+        
     </asp:ContentPlaceHolder>
 </head>
 <body style="margin: 0px; padding: 0px;">
@@ -61,10 +62,11 @@
     <div>
 
         <ul class="glossymenu" style="clear: both;">
-            <%GenerateTopMenu(); %>
-            <%--<li><iframe width="100px" height="30px" scrolling="no" frameborder="0"  src="http://localhost:1500/showtime.aspx"  ></iframe></li>--%>
             <li style="margin-top: 5px; font-weight: bold">
                 <img height="18px" src="/media/images/clock2.png" /><span id="lbServerTime"><%= DateTime.Now.ToString("HH:mm") %></span></li>
+            <%GenerateTopMenu(); %>
+            
+            
         </ul>
 
 

@@ -333,6 +333,7 @@
             <div class="row">
                 <div class="col-md-5 col-md-offset-3">
                     <asp:Button ID="accept" runat="server" Text="Authorize" OnClick="OnInwardCheckerAcceptClicked" />
+                    <asp:Button ID="Remake" runat="server" Text="Remake" OnClick="OnInwardCheckerRemakeClicked" />
                     <asp:Button ID="prev" runat="server" Text="Prev" OnClick="userAction" Visible="false" />
                     <asp:Button ID="unlock" runat="server" Text="Next Batch" OnClick="userAction" TabIndex="2"
                         Visible="false" />
