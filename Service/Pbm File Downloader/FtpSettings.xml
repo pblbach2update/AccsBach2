@@ -1,87 +1,27 @@
 <?xml version="1.0"?>
 <ArrayOfFtpDownloadSettings xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <FtpDownloadSettings>
-    <Host>10.240.38.6</Host>
+    <Host>localhost</Host>
     <UserName>bach</UserName>
     <Password>123456</Password>
-    <FtpSourceDir>BANKPBM/Inward</FtpSourceDir>
+    <FtpSourceDir>PBMExport/Inward</FtpSourceDir>
     <LocalDestinationDir>D:\XmlClearingFile\Inward\Queued\Regular</LocalDestinationDir>
-    <FtpBackUpDir>BANKPBM/Inward/Backup</FtpBackUpDir>
+    <FtpBackUpDir>PBMExport/Inward/Backup</FtpBackUpDir>
     <CommaSeparatedFileExt>.img,.xml</CommaSeparatedFileExt>
     <JobName>ACCS Inward Regular</JobName>
   </FtpDownloadSettings>
   <FtpDownloadSettings>
-    <Host>10.240.38.6</Host>
+    <Host>localhost</Host>
     <UserName>bach</UserName>
     <Password>123456</Password>
-    <FtpSourceDir>BANKPBM/InwardHV</FtpSourceDir>
+    <FtpSourceDir>PBMExport/InwardHv</FtpSourceDir>
     <LocalDestinationDir>D:\XmlClearingFile\Inward\Queued\HighValue</LocalDestinationDir>
-    <FtpBackUpDir>BANKPBM/InwardHV/Backup</FtpBackUpDir>
+    <FtpBackUpDir>PBMExport/InwardHV/Backup</FtpBackUpDir>
     <CommaSeparatedFileExt>.img,.xml</CommaSeparatedFileExt>
     <JobName>ACCS Inward HighValue</JobName>
   </FtpDownloadSettings>
-  <FtpDownloadSettings>
-    <Host>10.240.38.6</Host>
-    <UserName>bach</UserName>
-    <Password>123456</Password>
-    <FtpSourceDir>BANKPBM/InwardReturn</FtpSourceDir>
-    <LocalDestinationDir>D:\XmlClearingFile\InwardRetrun\Queued\Regular</LocalDestinationDir>
-    <FtpBackUpDir>BANKPBM/InwardReturn/Backup</FtpBackUpDir>
-    <CommaSeparatedFileExt>.xml</CommaSeparatedFileExt>
-    <JobName>ACCS Inward Return Regular</JobName>
-  </FtpDownloadSettings>
-  <FtpDownloadSettings>
-    <Host>10.240.38.6</Host>
-    <UserName>bach</UserName>
-    <Password>123456</Password>
-    <FtpSourceDir>BANKPBM/InwardReturnHV</FtpSourceDir>
-    <LocalDestinationDir>D:\XmlClearingFile\InwardReturnHV\Queued\HighValue</LocalDestinationDir>
-    <FtpBackUpDir>BANKPBM/InwardReturnHV/Backup</FtpBackUpDir>
-    <CommaSeparatedFileExt>.xml</CommaSeparatedFileExt>
-    <JobName>ACCS Inward Return HighValue</JobName>
-  </FtpDownloadSettings>
-   <FtpDownloadSettings>
-    <Host>10.240.38.6</Host>
-    <UserName>bach</UserName>
-    <Password>123456</Password>
-    <FtpSourceDir>BANKPBM/Outward</FtpSourceDir>
-    <LocalDestinationDir>D:\XmlClearingFile\Ack\Queued\Regular</LocalDestinationDir>
-    <FtpBackUpDir>BANKPBM/Outward/Backup</FtpBackUpDir>
-    <CommaSeparatedFileExt>.ack</CommaSeparatedFileExt>
-    <JobName>ACCS Outward Regular Ack</JobName>
-  </FtpDownloadSettings>
-   <FtpDownloadSettings>
-    <Host>10.240.38.6</Host>
-    <UserName>bach</UserName>
-    <Password>123456</Password>
-    <FtpSourceDir>BANKPBM/OutwardHV</FtpSourceDir>
-    <LocalDestinationDir>D:\XmlClearingFile\Ack\Queued\Regular</LocalDestinationDir>
-    <FtpBackUpDir>BANKPBM/OutwardHV/Backup</FtpBackUpDir>
-    <CommaSeparatedFileExt>.ack</CommaSeparatedFileExt>
-    <JobName>ACCS Outward HighValue Ack</JobName>
-  </FtpDownloadSettings> 
-  <FtpDownloadSettings>
-    <Host>10.240.38.6</Host>
-    <UserName>bach</UserName>
-    <Password>123456</Password>
-    <FtpSourceDir>BANKPBM/OutwardReturn</FtpSourceDir>
-    <LocalDestinationDir>D:\XmlClearingFile\Ack\Queued\Regular</LocalDestinationDir>
-    <FtpBackUpDir>BANKPBM/OutwardReturn/Backup</FtpBackUpDir>
-    <CommaSeparatedFileExt>.ack</CommaSeparatedFileExt>
-    <JobName>ACCS Outward Return Regular Ack</JobName>
-  </FtpDownloadSettings>
-   <FtpDownloadSettings>
-    <Host>10.240.38.6</Host>
-    <UserName>bach</UserName>
-    <Password>123456</Password>
-    <FtpSourceDir>BANKPBM/OutwardReturnHV</FtpSourceDir>
-    <LocalDestinationDir>D:\XmlClearingFile\Ack\Queued\Regular</LocalDestinationDir>
-    <FtpBackUpDir>BANKPBM/OutwardReturnHV/Backup</FtpBackUpDir>
-    <CommaSeparatedFileExt>.ack</CommaSeparatedFileExt>
-    <JobName>ACCS Outward Return HighValue Ack</JobName>
-  </FtpDownloadSettings>
-  <FtpDownloadSettings>
-    <Host>10.240.38.6</Host>
+<FtpDownloadSettings>
+    <Host>localhost</Host>
     <UserName>bach</UserName>
     <Password>123456</Password>
     <FtpSourceDir>BANKPBM/Reports</FtpSourceDir>
@@ -91,18 +31,6 @@
     <JobName>Bach Reports</JobName>
 	<PbmInwardFileType>2</PbmInwardFileType>
 	<ShouldCreateDateWiseDir>1</ShouldCreateDateWiseDir>
-  </FtpDownloadSettings>
-  <FtpDownloadSettings>
-    <Host>10.240.38.6</Host>
-    <UserName>bach</UserName>
-    <Password>123456</Password>
-    <FtpSourceDir>Data/Common/Broadcast/Latest</FtpSourceDir>
-    <LocalDestinationDir>D:\BachTemp\BroadCasts\Latest</LocalDestinationDir>
-    <FtpBackUpDir>Data/Common/Broadcast/Latest/Backup</FtpBackUpDir>
-    <CommaSeparatedFileExt>.txt</CommaSeparatedFileExt>
-    <JobName>Broadcast</JobName>
-    <PbmInwardFileType>1</PbmInwardFileType>
-    <CommaSeparatedFileNamePattern>ReadMe</CommaSeparatedFileNamePattern>
-	
+	<FilePathResolverClassName>PbmFileDownloader.BachReportFilePathResolver</FilePathResolverClassName>
   </FtpDownloadSettings>
 </ArrayOfFtpDownloadSettings>
