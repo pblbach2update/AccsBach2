@@ -79,10 +79,6 @@
                                     <ItemTemplate>
                                         <asp:CheckBox ID="chkbox" runat="server" Checked="True" AutoPostBack="False" />
                                         <asp:HiddenField ID="hidchequeid" runat="server" Value='<%# Eval("ChequeID") %>' />
-                                        <asp:HiddenField ID="hdClrType" runat="server" Value='<%# Eval("clrType") %>' />
-                                        <asp:HiddenField ID="hdsetlementdate" runat="server" Value='<%# Eval("SettlementDate","{0:dd/MM/yyyy HH:mm }") %>' />
-                                        <asp:HiddenField ID="hdirout" runat="server" Value='<%# Eval("IssuingRoutingNumber") %>' />
-                                        <asp:HiddenField ID="hidbunid" runat="server" Value='<%# Eval("BundleId") %>' />
                                     </ItemTemplate>
                                 </asp:TemplateField>
                                 <asp:BoundField DataField="IssuingBranchName" HeaderText="Branch Name"></asp:BoundField>
@@ -95,9 +91,9 @@
                                 </asp:BoundField>
                                 <asp:BoundField DataField="Amount" HeaderText="Amount" />
                                 <asp:BoundField DataField="ChequeAccount" HeaderText="A/C" />
-                                <asp:BoundField DataField="OREFileName" HeaderText="File">
+                                <%--<asp:BoundField DataField="OREFileName" HeaderText="File">
                                     <ItemStyle Width="30%" />
-                                </asp:BoundField>
+                                </asp:BoundField>--%>
                                 <asp:BoundField DataField="ClrTypeString" HeaderText="Type" />
                             </Columns>
                             <EmptyDataTemplate>

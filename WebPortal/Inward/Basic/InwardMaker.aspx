@@ -3,6 +3,7 @@
 
 
 <%@ Register TagPrefix="uc" TagName="brlist" Src="~/usercontrol/BranchListNew.ascx" %>
+<%@ Register TagPrefix="uc" TagName="blist" Src="/usercontrol/BankListNew.ascx" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="headInward" runat="server">
     <script src="/Script/jquery-1.10.1.min.js" type="text/javascript"></script>
     <script src="/Script/ach.js" type="text/javascript"></script>
@@ -19,29 +20,30 @@
         <asp:Label ID="errormsg" runat="server" Text="Label" Visible="False" Font-Size="12px"
             ForeColor="Red"></asp:Label></asp:Panel>
     <div class="userBox" style="width: 900px">
-        &nbsp;&nbsp;&nbsp;
-        <asp:TextBox ID="batchDate" runat="server" BorderColor="#888888" BorderStyle="Solid"
-            BorderWidth="1px" Width="100px" Font-Names="Trebuchet MS" Font-Size="12px" Visible="false"></asp:TextBox>
-       
+      
        &nbsp;&nbsp; Clearing Type&nbsp;&nbsp;
         <asp:DropDownList ID="ddlClearType" runat="server" AppendDataBoundItems="True" Font-Names="Trebuchet MS" Font-Size="10pt">
             <asp:ListItem Text="All" Value="0"></asp:ListItem>
         </asp:DropDownList>
-        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Account Type&nbsp;&nbsp;
+        &nbsp;&nbsp;Account Type&nbsp;&nbsp;
         <asp:DropDownList ID="ddlAccountType" runat="server" Font-Names="Trebuchet MS" Font-Size="10pt" AppendDataBoundItems="True">
             <asp:ListItem Value="0" Text="All"></asp:ListItem>
         </asp:DropDownList>
-        &nbsp;&nbsp;&nbsp;&nbsp;
+        &nbsp;&nbsp;
         <asp:PlaceHolder runat="server" ID="phbrlist">
-            <uc:brlist ID="branchList" runat="server" AutoPostBackOnChange="True" IsAdmin="True"
-                OnOnAutoPostBackControl="selectedindexchanged" includeBureau="True" selectLoginBranch="True" />
+          Branch &nbsp;&nbsp; <uc:brlist ID="branchList" runat="server" AutoPostBackOnChange="True" IsAdmin="True"
+                OnOnAutoPostBackControl="selectedindexchanged" includeBureau="True" selectLoginBranch="True" />&nbsp;&nbsp;
         </asp:PlaceHolder>
-        
-         <asp:DropDownList runat="server" ID="ddlItemFilter" AutoPostBack="True" OnSelectedIndexChanged="ddlItemFilter_OnSelectedIndexChanged">
+        Bank &nbsp;&nbsp;<uc:blist ID="bankList" runat="server" IncludeOwnBank="False"></uc:blist>&nbsp;&nbsp;
+        Currency &nbsp;&nbsp;<asp:DropDownList runat="server" ID="ddlCurrency"  AppendDataBoundItems="True">
+            <asp:ListItem Text="All Currency" Value="-1"></asp:ListItem>
+        </asp:DropDownList>&nbsp &nbsp;
+
+         Status &nbsp;&nbsp; <asp:DropDownList runat="server" ID="ddlItemFilter" AutoPostBack="True" OnSelectedIndexChanged="ddlItemFilter_OnSelectedIndexChanged">
             <asp:ListItem Value="0" Text="All Item"></asp:ListItem>
             <asp:ListItem Value="1" Text="Unprocessed" Selected="True" ></asp:ListItem>
             <asp:ListItem Value="2" Text="Processed"></asp:ListItem>
-        </asp:DropDownList>
+        </asp:DropDownList>&nbsp;&nbsp;
         
         <asp:Button ID="btnGetBatch" class="afprocess" runat="server" Text="Get Cheques" OnClick="btnGetBatch_Click" />
         
