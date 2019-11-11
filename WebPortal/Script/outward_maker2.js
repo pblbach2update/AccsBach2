@@ -215,29 +215,36 @@
     //        //Webservice Call
     //      lookupAccount(DOM.cbs.account.val());
     //    }
+    //    alert(1);
     //});
 
-    DOM.cbs.account.keydown(function (e) {
+    // DOM.cbs.account.keydown(function (e) {
+    DOM.cbs.account.on("focus", function(e) {
+        $(this).data('done', false);
+    });
+    DOM.cbs.account.bind("blur keydown",function (e) {
 
 
         var keyCode = e.which || e.keyCode;
-        if (keyCode == 13 || keyCode == 9) {
+        if (e.type == 'blur' || keyCode == 13 || keyCode == 9) {
+            if (!$(this).data('done')) {
+                $(this).data('done', true);
+                if (typeof focusAfterGettingsAccountInfo === "function") {
+                    focusAfterGettingsAccountInfo();
+                    // safe to use the function
+                } else {
+                    DOM.cbs.amount.focus();
+                    DOM.cbs.amount.select();
 
-            if (typeof focusAfterGettingsAccountInfo === "function") {
-                focusAfterGettingsAccountInfo();
-                // safe to use the function
-            } else {
-                DOM.cbs.amount.focus();
-                DOM.cbs.amount.select();
-                
+                }
+
+                clearAccountInfo();
+                if (ValidateAccount(DOM.cbs.account.val())) {
+                    //Webservice Call
+                    lookupAccount(DOM.cbs.account.val());
+                }
+                e.preventDefault();
             }
-            
-            clearAccountInfo();
-            if (ValidateAccount(DOM.cbs.account.val())) {
-                //Webservice Call
-                lookupAccount(DOM.cbs.account.val());
-            }
-            e.preventDefault();
         }
     });
 

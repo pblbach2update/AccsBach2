@@ -99,7 +99,7 @@
                 <asp:ScriptReference Path="/Script/jquery.maskedinput-1.2.2.js" />
                 <asp:ScriptReference Path="/Script/json.jquery.js" />
                 <asp:ScriptReference Path="/Script/outward_makecheck.js" />
-                <asp:ScriptReference Path="/Script/outward_maker2.js" />
+                <asp:ScriptReference Path="/Script/outward_maker2.js?v=1.0" />
                 <asp:ScriptReference Path="/Script/UserInterface.js" />
                 <asp:ScriptReference Path="/Script/amount.js" />
                 <asp:ScriptReference Path="/Script/Tokenizer.js" />
@@ -370,7 +370,7 @@
 
                                                 <%-- <input type="text" name="cu_account_holder_name" id="cu_payee" tabindex="1"  style="width: 195px" />--%>
                                                 <textarea name="cu_account_holder_name" id="cu_payee" tabindex="1"
-                                                    style="width: 195px; vertical-align: top; overflow-x: hidden" rows="2"></textarea>
+                                                    style="width: 195px; vertical-align: top; overflow-x: hidden" rows="2" ></textarea>
 
                                             </div>
                                             <asp:PlaceHolder runat="server" ID="phCbsAdditionalInfo">

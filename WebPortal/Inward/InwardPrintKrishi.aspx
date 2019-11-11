@@ -17,7 +17,7 @@
     <form runat="server" style="padding: 10px;">
         <asp:ScriptManager ID="ScriptManager1" runat="server">
         </asp:ScriptManager>
-       <table style="width: 850px" cellpadding="0" cellspacing="0">
+        <table style="width: 850px" cellpadding="0" cellspacing="0">
             <tr>
                 <td>
                     <span class="headText2" style="margin-left: 0px;">Select Options</span>
@@ -31,18 +31,20 @@
                         <uc:brlist ID="branchList" runat="server" AutoPostBackOnChange="false" IsAdmin="True"
                             includeBureau="True" selectLoginBranch="True" />
                         &nbsp;&nbsp;
-                        <asp:TextBox ID="batchDate" runat="server" BorderColor="#888888" BorderStyle="Solid"
-                            BorderWidth="1px" Width="100px" Font-Names="Trebuchet MS" Font-Size="12px" Visible="true"></asp:TextBox>
-                        <cc1:CalendarExtender ID="CalendarExtender1" runat="server" PopupButtonID="Image1"
-                            TargetControlID="batchDate" Format="dd/MM/yyyy">
-                        </cc1:CalendarExtender>
-                        <asp:Image ID="Image1" runat="server" Height="15px" ImageUrl="~/media/images/calendar.gif" />
+                        
                     </asp:PlaceHolder>
                         &nbsp;&nbsp;
-                    
-                    
-                    
-                    &nbsp;&nbsp; Clearing Type&nbsp;&nbsp;
+                     <asp:PlaceHolder runat="server" ID="phShowDatePicker">
+                         <asp:TextBox ID="batchDate" runat="server" BorderColor="#888888" BorderStyle="Solid"
+                             BorderWidth="1px" Width="100px" Font-Names="Trebuchet MS" Font-Size="12px" Visible="true"></asp:TextBox>
+                         <cc1:CalendarExtender ID="CalendarExtender1" runat="server" PopupButtonID="Image1"
+                             TargetControlID="batchDate" Format="dd/MM/yyyy">
+                         </cc1:CalendarExtender>
+                         <asp:Image ID="Image1" runat="server" Height="15px" ImageUrl="~/media/images/calendar.gif" />
+                     </asp:PlaceHolder>
+
+
+                        &nbsp;&nbsp; Clearing Type&nbsp;&nbsp;
                     <asp:DropDownList ID="ddlClearType" runat="server" DataTextField="name" DataValueField="value"
                         Font-Names="Trebuchet MS" Font-Size="10pt">
                     </asp:DropDownList>

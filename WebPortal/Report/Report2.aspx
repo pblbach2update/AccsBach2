@@ -55,9 +55,22 @@
                              $('.tbdate').val(start.format('DD/MM/YYYY') + ' - ' + end.format('DD/MM/YYYY'));
                          }
                       );
+
+            var reportControlId = "#ctl00_ContentPlaceHolder1_ReportViewer1_ctl05_ctl04_ctl00_Menu";
+
+            if ($(reportControlId) != null
+        && $(reportControlId) != undefined) {
+                //$('#rptScheduledClinicsReport_ctl06_ctl04_ctl00_Menu').find('div').first().remove();
+                //$("#rptScheduledClinicsReport_ctl06_ctl04_ctl00_Menu").prepend("<div style='border:1px transparent Solid;'><a onclick='ExportExcelReport();' href='javascript:void(0)' style='color:#3366CC;font-family:Verdana;font-size:8pt;padding:3px 8px 3px 8px;display:block;white-space:nowrap;text-decoration:none;'>Excel</a></div>");
+                $(reportControlId).append("<div style='border:1px transparent Solid;'><a onclick='ExportCSVReport();' href='javascript:void(0)' style='color:#3366CC;font-family:Verdana;font-size:8pt;padding:3px 8px 3px 8px;display:block;white-space:nowrap;text-decoration:none;'>CSV</a></div>");
+            }
             //Set the initial state of the picker label
             //$('.tbdate').val(moment().format('DD/MM/YYYY') + ' - ' + moment().format('DD/MM/YYYY'));
         });
+
+        function ExportCSVReport() {
+            __doPostBack("<%=btnGenReportCsv.UniqueID%>", "");
+        }
     </script>
     <style type="text/css">
         .styleheader {
@@ -124,7 +137,7 @@
             </div>
             <div>
                 <asp:DropDownList ID="ddlReportName" runat="server" AppendDataBoundItems="true" AutoPostBack="false" Font-Names="Trebuchet MS" Font-Size="10pt">
-                       <asp:ListItem Value="-1" Text="Select a report"></asp:ListItem>                    
+                    <asp:ListItem Value="-1" Text="Select a report"></asp:ListItem>
                 </asp:DropDownList>
                 <asp:TextBox ID="tbdateRange" runat="server" class='tbdate' value='' Style="width: 150px"></asp:TextBox>
                 <asp:DropDownList ID="ddlClrType" runat="server" DataTextField="name" DataValueField="value"
@@ -138,14 +151,15 @@
                 <asp:PlaceHolder runat="server" ID="phbrlist">
                     <uc:brlist ID="branchList" runat="server" AutoPostBackOnChange="False" OnOnAutoPostBackControl="selectedindexchanged" includeBureau="True" selectLoginBranch="True" />
                 </asp:PlaceHolder>
-                
-                <asp:DropDownList runat="server" ID="ddlCurrency" AutoPostBack="true" OnSelectedIndexChanged="ddlCurrency_OnSelectedIndexChanged"/>
+
+                <asp:DropDownList runat="server" ID="ddlCurrency" AutoPostBack="true" OnSelectedIndexChanged="ddlCurrency_OnSelectedIndexChanged" />
 
                 <asp:DropDownList ID="ddlAccountType" runat="server" AutoPostBack="false" Width="100px" Font-Names="Trebuchet MS" Font-Size="10pt" AppendDataBoundItems="True">
                     <asp:ListItem Value="0" Text="All"></asp:ListItem>
                 </asp:DropDownList>
                 <uc:blist ID="bankList" runat="server" IncludeOwnBank="False"></uc:blist>
                 <asp:Button ID="btnGenReport" runat="server" Text="Generate Report" OnClick="btnGenReport_Click" />
+                <asp:Button ID="btnGenReportCsv" runat="server" Text="Generate Report Csv" OnClick="btnGenReportCsv_Click" style="display: none" />
             </div>
             <div style="padding: 10px; border: 1px solid #c5c5c0; background-color: #fafafa; overflow: auto; height: 470px">
                 <rsweb:ReportViewer BackColor="#e9e9e9" Font-Names="Verdana" Font-Size="8pt" Height="469px"
@@ -157,5 +171,5 @@
             </div>
         </div>
     </form>
-    
+
 </asp:Content>

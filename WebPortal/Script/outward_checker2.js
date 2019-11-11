@@ -383,10 +383,10 @@
         //    li_autoValidation += "<li>Account not Valid!</li>";
 
         //Amount Validation
-        //var amount = StripComma(DOM.cbs.amount.text());
-        //if (!isValidAmount(amount) || parseFloat(amount) <= 0) {
-        //    li_autoValidation += "<li>Amount not Valid!</li>";
-        //}
+        var amount = StripComma(DOM.cbs.amount.text());
+        if (!isValidAmount(amount) || parseFloat(amount) <= 0) {
+            li_autoValidation += "<li>Amount not Valid!</li>";
+        }
 
         //MICR Validation
         var micr = new MICR();

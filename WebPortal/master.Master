@@ -13,7 +13,7 @@
 <body style="margin: 0px; padding: 0px;">
     <script type="text/javascript">
         
-        var curDate = new Date();
+        var curDate = new Date('<%= DateTime.Now.ToString("yyyy-MM-ddTHH:mm:ss")%>');
         function ShowServerClock() {
             curDate.setSeconds(curDate.getSeconds() + 1);
             var h = curDate.getHours();
