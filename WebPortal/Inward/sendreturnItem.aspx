@@ -65,7 +65,7 @@
                 <td colspan="3">
                     <div class="userBox" style="">
                         <div>
-                            <asp:LinkButton ID="lbSendAll" runat="server" Font-Size="14px" OnClick="SendAllToPbmNew">Send All To Pbm</asp:LinkButton>
+                            <asp:LinkButton ID="lbSendAll" runat="server" Font-Size="14px" OnClick="SendAllToPbmNew" OnClientClick="return confirm('Are you sure to send file(s) in PBM Server?')">Send All To Pbm</asp:LinkButton>
                         </div>
                         <asp:GridView ID="gvSendList" Style="text-align: center; width: 100%" runat="server"
                             AutoGenerateColumns="False" CssClass="OW_GridViewStyle" PagerStyle-CssClass="OW_PagerStyle"

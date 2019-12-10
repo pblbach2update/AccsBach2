@@ -87,12 +87,12 @@
                                 <td>
                                     <asp:PlaceHolder runat="server" ID="phbrlist">
                                         <uc:brlist ID="branchList" runat="server" AutoPostBackOnChange="True" IsAdmin="True"
-                                            OnOnAutoPostBackControl="selectedindexchanged" includeBureau="True" />
+                                            OnOnAutoPostBackControl="Selectedindexchanged" includeBureau="True" />
                                     </asp:PlaceHolder>
                                 </td>
                                 <td>
                                     <uc:clrTypeInfo ID="clType" runat="server" AutoPostBackOnChange="True" Type="0"
-                                        OnDropDownChanging="loadinfo"></uc:clrTypeInfo>
+                                        OnDropDownChanging="Loadinfo"></uc:clrTypeInfo>
                                 </td>
                                 <td>
                                     <asp:DropDownList runat="server" ID="ddlCurrencyType" Font-Names="Trebuchet MS" Font-Size="9pt" AutoPostBack="True"
@@ -172,7 +172,7 @@
                             <tr>
                                 <td>
                                     <asp:Button runat="server" ID="btSendAllFilesToPBM" Text="Send All To PBM" Style="padding: 3px"
-                                        OnClick="sendAllToPBMNew" />
+                                        OnClick="SendAllToPbmNew" />
                                 </td>
                             </tr>
                             <tr>

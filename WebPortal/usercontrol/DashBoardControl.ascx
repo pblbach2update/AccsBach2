@@ -1,5 +1,5 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="DashBoardControl.ascx.cs"
-    Inherits="Accs.Web.usercontrol.DashBoardControl" EnableViewState="False" %>
+    Inherits="Accs.Web.usercontrol.DashBoardControl" EnableViewState="False"     %>
 <div class="ListViewContainer">
     <div class="userBox" style="clear: both">
         <asp:Label ID="lbSessionInfo" runat="server" Text=""></asp:Label>

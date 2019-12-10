@@ -1,6 +1,4 @@
-<%@ Page Language="C#" MasterPageFile="~/Outward/Outward.Master" AutoEventWireup="true"
-    CodeBehind="OutwardChecker2.aspx.cs" Inherits="Accs.Web.Outward.OutwardChecker2"
-    ValidateRequest="false" %>
+<%@ Page Language="C#" MasterPageFile="~/Outward/Outward.Master" AutoEventWireup="true" CodeBehind="OutwardChecker2.aspx.cs" Inherits="Accs.Web.Outward.OutwardChecker2" ValidateRequest="false" %>
 
 <%@ MasterType VirtualPath="~/Outward/Outward.Master" %>
 <%@ Register TagPrefix="uc" TagName="brlist" Src="/usercontrol/BranchListNew.ascx" %>

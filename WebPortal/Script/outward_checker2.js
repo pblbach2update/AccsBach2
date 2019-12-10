@@ -383,7 +383,9 @@
         //    li_autoValidation += "<li>Account not Valid!</li>";
 
         //Amount Validation
-        var amount = StripComma(DOM.cbs.amount.text());
+        
+        var amount = StripComma(DOM.cbs.amount.val());
+        
         if (!isValidAmount(amount) || parseFloat(amount) <= 0) {
             li_autoValidation += "<li>Amount not Valid!</li>";
         }

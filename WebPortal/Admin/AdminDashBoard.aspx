@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/master.Master" AutoEventWireup="True" CodeBehind="AdminDashBoard.aspx.cs" Inherits="Accs.Web.Admin.AdminDashBoard"  %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/master.Master" AutoEventWireup="True" CodeBehind="AdminDashBoard.aspx.cs" Inherits="Accs.Web.Admin.AdminDashBoard" Culture="bn-BD" UICulture="bn-BD" %>
 
 <%@ Register TagPrefix="uc" TagName="CheckInfo" Src="~/usercontrol/DashBoardControl.ascx" %>
 <%@ Register TagPrefix="uc" TagName="clrTypeInfo" Src="~/usercontrol/DropdownClearingType.ascx" %>

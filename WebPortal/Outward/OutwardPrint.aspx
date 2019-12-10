@@ -17,7 +17,7 @@
     <form runat="server" style="padding: 10px;">
         <asp:ScriptManager ID="ScriptManager1" runat="server">
         </asp:ScriptManager>
-        <table style="width: 850px" cellpadding="0" cellspacing="0">
+        <table style="width: 950px" cellpadding="0" cellspacing="0">
             <tr>
                 <td>
                     <span class="headText2" style="margin-left: 0px;">Select Options</span>
@@ -51,8 +51,15 @@
                         &nbsp;&nbsp;
                     <asp:DropDownList runat="server" ID="ddlCurrency" AutoPostBack="true" OnSelectedIndexChanged="ddlCurrency_OnSelectedIndexChanged" />
 
+                    <asp:DropDownList runat="server" ID="ddlChequeStatusFilter" >
+                        <asp:ListItem Text="All Cheque" Value="0"></asp:ListItem>
+                        <asp:ListItem Text="Honored" Value="131,153"></asp:ListItem>
+                        <asp:ListItem Text="Dishonored" Value="152"></asp:ListItem>
+                        
+                    </asp:DropDownList>
+
                         <asp:DropDownList ID="ddlAccountType" runat="server" AutoPostBack="false" Width="100px" Font-Names="Trebuchet MS" Font-Size="10pt" AppendDataBoundItems="True">
-                            <asp:ListItem Value="0" Text="All"></asp:ListItem>
+                            <asp:ListItem Value="0" Text="All TC"></asp:ListItem>
                         </asp:DropDownList>&nbsp;&nbsp;
                     <asp:Button ID="btnGetBatch" runat="server" Text="Print" OnClick="btnGetBatch_Click" />
                     </div>

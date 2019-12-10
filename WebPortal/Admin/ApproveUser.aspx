@@ -212,7 +212,7 @@
 
                     <div class="modal-footer">
 
-                        <asp:Button ID="btUpdateAndRetry" Text="ActivateUser" CssClass="btn btn-primary" runat="server" OnClick="btActivate_OnClick" />
+                        <asp:Button ID="btUpdateAndRetry" Text="Approve" CssClass="btn btn-primary" runat="server" OnClick="btActivate_OnClick" />
 
                         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
 
